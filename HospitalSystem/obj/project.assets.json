@@ -453,9 +453,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Programming\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
-      "projectName": "HospitalSystem",
-      "projectPath": "C:\\Programming\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
+      "projectUniqueName": "C:\\Programming\\HospitalSystem\\HospitalSystem\\HospitalSystem.API.csproj",
+      "projectName": "HospitalSystem.API",
+      "projectPath": "C:\\Programming\\HospitalSystem\\HospitalSystem\\HospitalSystem.API.csproj",
       "packagesPath": "C:\\Users\\DellUser\\.nuget\\packages\\",
       "outputPath": "C:\\Programming\\HospitalSystem\\HospitalSystem\\obj\\",
       "projectStyle": "PackageReference",
