@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace HospitalSystem.API.Models;
+
+public partial class Person
+{
+    public int PersonId { get; set; }
+
+    public string FirstName { get; set; } = null!;
+
+    public string LastName { get; set; } = null!;
+
+    public string Phone { get; set; } = null!;
+
+    public string? Email { get; set; }
+
+    public byte Gender { get; set; }
+
+    public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
+
+    public virtual ICollection<Patient> Patients { get; set; } = new List<Patient>();
+}

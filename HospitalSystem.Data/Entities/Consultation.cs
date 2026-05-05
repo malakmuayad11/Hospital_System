@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace HospitalSystem.API.Models;
+
+public partial class Consultation
+{
+    public int ConsultationId { get; set; }
+
+    public string ConsultationName { get; set; } = null!;
+
+    public decimal ConsultationFee { get; set; }
+
+    public string Specialty { get; set; } = null!;
+
+    public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
+}

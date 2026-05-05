@@ -1,0 +1,15 @@
+C:\Programming\HospitalSystem\HospitalSystem.Data\bin\Debug\net8.0\HospitalSystem.Data.deps.json
+C:\Programming\HospitalSystem\HospitalSystem.Data\bin\Debug\net8.0\HospitalSystem.Data.runtimeconfig.json
+C:\Programming\HospitalSystem\HospitalSystem.Data\bin\Debug\net8.0\HospitalSystem.Data.dll
+C:\Programming\HospitalSystem\HospitalSystem.Data\bin\Debug\net8.0\HospitalSystem.Data.pdb
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.csproj.AssemblyReference.cache
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.AssemblyInfoInputs.cache
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.AssemblyInfo.cs
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.csproj.CoreCompileInputs.cache
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.sourcelink.json
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.dll
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\refint\HospitalSystem.Data.dll
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.pdb
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.genruntimeconfig.cache
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\ref\HospitalSystem.Data.dll
