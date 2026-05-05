@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using HospitalSystem.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace HospitalSystem.API.Models;
+namespace HospitalSystem.Data.Data;
 
 public partial class HospitalSystemContext : DbContext
 {

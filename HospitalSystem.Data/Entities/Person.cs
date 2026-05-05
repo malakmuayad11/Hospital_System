@@ -15,6 +15,9 @@ public partial class Person
 
     public string? Email { get; set; }
 
+    /// <summary>
+    /// 0 -> Male, 1 -> Female
+    /// </summary>
     public byte Gender { get; set; }
 
     public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();

@@ -22,6 +22,7 @@ public partial class User
 
     public virtual ICollection<AuditTrail> AuditTrails { get; set; } = new List<AuditTrail>();
 
+
     public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
 
     public virtual ICollection<PasswordLog> PasswordLogs { get; set; } = new List<PasswordLog>();

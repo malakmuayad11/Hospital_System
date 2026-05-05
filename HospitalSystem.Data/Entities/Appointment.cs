@@ -18,10 +18,11 @@ public partial class Appointment
     public string ReasonForVisit { get; set; } = null!;
 
     /// <summary>
-    /// 1- Scheduled. 2- 
+    /// 1- Scheduled. 2- Rescheduled. 3- Cancelled. 4- Completed.
     /// </summary>
     public byte Status { get; set; }
 
+    // Bool flag for the reminder service
     public bool? IsReminderSent { get; set; }
 
     public virtual ICollection<AppointmentAuditTrail> AppointmentAuditTrails { get; set; } = new List<AppointmentAuditTrail>();
