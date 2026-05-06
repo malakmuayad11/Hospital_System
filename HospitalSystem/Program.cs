@@ -1,3 +1,8 @@
+using HospitalSystem.Data.Data;
+using HospitalSystem.Repository;
+using HospitalSystem.Service;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// DbContext
+builder.Services.AddDbContext<HospitalSystemContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("HospitalDB")));
+
+// Repository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Service
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

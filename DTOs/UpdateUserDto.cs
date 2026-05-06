@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HospitalSystem.DTOs
+{
+    public class UpdateUserDto
+    {
+        public int UserId { get; set; }
+
+        public string Username { get; set; }
+
+        public byte Role { get; set; }
+
+        public int Permissions { get; set; }
+
+    }
+}

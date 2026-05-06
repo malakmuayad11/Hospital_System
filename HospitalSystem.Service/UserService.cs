@@ -1,0 +1,60 @@
+﻿using HospitalSystem.API.Models;
+using HospitalSystem.DTOs;
+using HospitalSystem.Repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HospitalSystem.Service
+{
+    public class UserService : IUserService
+    {
+        private readonly IUserRepository _UserRepository;
+
+        public UserService(IUserRepository UserRepository)
+        {
+            this._UserRepository = UserRepository;
+        }
+        public async Task<List<UserDto>> GetAllUsersAsync()
+        {
+            List<UserDto> UserDtos = new List<UserDto>();
+
+            foreach(User User in await _UserRepository.GetAllUsersAsync())
+            {
+                UserDtos.Add(new UserDto(
+                    User.UserId,
+                    User.Username,
+                    User.Role,
+                    User.LastLoginDate,
+                    User.Permissions));
+            }
+            return UserDtos;
+        }
+
+        public async Task<int> GetUsersCountAsync() => await _UserRepository.GetUsersCountAsync();
+
+        public async Task<bool> AddUserAsync(AddUserDto addUserDto)
+        {
+            User user = new User
+            {
+                Username = addUserDto.Username,
+                Password = addUserDto.Password,
+                Role = addUserDto.Role,
+                Permissions = addUserDto.Permissions
+            };
+
+            return await _UserRepository.AddUserAsync(user);
+        }
+
+        public async Task<bool> UpdateUserAsync(UpdateUserDto userDto) =>
+            await _UserRepository.UpdateUserAsync(new User
+            {
+                UserId = userDto.UserId,
+                Username = userDto.Username,
+                Role = userDto.Role,
+                Permissions = userDto.Permissions
+            });
+    }
+}

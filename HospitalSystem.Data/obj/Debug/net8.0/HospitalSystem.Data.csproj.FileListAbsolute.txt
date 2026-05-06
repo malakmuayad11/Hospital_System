@@ -13,3 +13,6 @@ C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\refint\Hospit
 C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.pdb
 C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\HospitalSystem.Data.genruntimeconfig.cache
 C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\ref\HospitalSystem.Data.dll
+C:\Programming\HospitalSystem\HospitalSystem.Data\bin\Debug\net8.0\HospitalSystem.DTOs.dll
+C:\Programming\HospitalSystem\HospitalSystem.Data\bin\Debug\net8.0\HospitalSystem.DTOs.pdb
+C:\Programming\HospitalSystem\HospitalSystem.Data\obj\Debug\net8.0\Hospital.62C7B19F.Up2Date

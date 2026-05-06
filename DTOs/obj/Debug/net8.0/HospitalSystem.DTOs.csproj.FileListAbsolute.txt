@@ -1,0 +1,12 @@
+C:\Programming\HospitalSystem\DTOs\bin\Debug\net8.0\HospitalSystem.DTOs.deps.json
+C:\Programming\HospitalSystem\DTOs\bin\Debug\net8.0\HospitalSystem.DTOs.dll
+C:\Programming\HospitalSystem\DTOs\bin\Debug\net8.0\HospitalSystem.DTOs.pdb
+C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\HospitalSystem.DTOs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\HospitalSystem.DTOs.AssemblyInfoInputs.cache
+C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\HospitalSystem.DTOs.AssemblyInfo.cs
+C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\HospitalSystem.DTOs.csproj.CoreCompileInputs.cache
+C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\HospitalSystem.DTOs.sourcelink.json
+C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\HospitalSystem.DTOs.dll
+C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\refint\HospitalSystem.DTOs.dll
+C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\HospitalSystem.DTOs.pdb
+C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\ref\HospitalSystem.DTOs.dll

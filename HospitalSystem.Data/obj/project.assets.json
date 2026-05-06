@@ -1477,6 +1477,16 @@
             "rid": "win"
           }
         }
+      },
+      "HospitalSystem.DTOs/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/HospitalSystem.DTOs.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HospitalSystem.DTOs.dll": {}
+        }
       }
     }
   },
@@ -4006,10 +4016,16 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "HospitalSystem.DTOs/1.0.0": {
+      "type": "project",
+      "path": "../DTOs/HospitalSystem.DTOs.csproj",
+      "msbuildProject": "../DTOs/HospitalSystem.DTOs.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "HospitalSystem.DTOs >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.0"
@@ -4047,7 +4063,11 @@
         "net8.0": {
           "framework": "net8.0",
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Programming\\HospitalSystem\\DTOs\\HospitalSystem.DTOs.csproj": {
+              "projectPath": "C:\\Programming\\HospitalSystem\\DTOs\\HospitalSystem.DTOs.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

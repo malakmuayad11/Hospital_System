@@ -13,3 +13,8 @@ C:\Programming\HospitalSystem\HospitalSystem.Repository\obj\Debug\net8.0\refint\
 C:\Programming\HospitalSystem\HospitalSystem.Repository\obj\Debug\net8.0\HospitalSystem.Repository.pdb
 C:\Programming\HospitalSystem\HospitalSystem.Repository\obj\Debug\net8.0\HospitalSystem.Repository.genruntimeconfig.cache
 C:\Programming\HospitalSystem\HospitalSystem.Repository\obj\Debug\net8.0\ref\HospitalSystem.Repository.dll
+C:\Programming\HospitalSystem\HospitalSystem.Repository\bin\Debug\net8.0\HospitalSystem.Data.dll
+C:\Programming\HospitalSystem\HospitalSystem.Repository\bin\Debug\net8.0\HospitalSystem.DTOs.dll
+C:\Programming\HospitalSystem\HospitalSystem.Repository\bin\Debug\net8.0\HospitalSystem.Data.pdb
+C:\Programming\HospitalSystem\HospitalSystem.Repository\bin\Debug\net8.0\HospitalSystem.DTOs.pdb
+C:\Programming\HospitalSystem\HospitalSystem.Repository\obj\Debug\net8.0\Hospital.76C7B694.Up2Date

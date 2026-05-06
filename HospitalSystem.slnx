@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="DTOs/HospitalSystem.DTOs.csproj" Id="1d001ecd-b0af-4593-a5fa-5af63025e678" />
   <Project Path="HospitalSystem.Data/HospitalSystem.Data.csproj" Id="2c594b57-89fc-42ae-aa0d-29f8519a56c0" />
   <Project Path="HospitalSystem.Repository/HospitalSystem.Repository.csproj" Id="88af895a-5f5a-4dd1-ac1b-8d65f51ae7b4" />
   <Project Path="HospitalSystem.Service/HospitalSystem.Service.csproj" Id="8ce3ac24-96e6-4796-a40a-2b2368c561aa" />

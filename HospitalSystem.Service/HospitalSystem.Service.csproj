@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DTOs\HospitalSystem.DTOs.csproj" />
+    <ProjectReference Include="..\HospitalSystem.Repository\HospitalSystem.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
