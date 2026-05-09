@@ -1,9 +1,4 @@
 ﻿using HospitalSystem.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Service
 {
@@ -19,6 +14,12 @@ namespace HospitalSystem.Service
 
         public Task<bool> ChangePasswordAsync(ChangePasswordDto changePasswordDto);
 
-        public Task<UserDto> Find(int UserId);
+        public Task<UserDto> FindAsync(int UserId);
+
+        public Task<UserDto> FindAsync(FindUserDto findUserDto);
+
+        public Task<bool> IsUsernameUsedAsync(string Username);
+
+        public Task<bool> DeleteUserAsync(int UserId);
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -63,10 +64,28 @@ namespace HospitalSystem.Repository
             return await _Context.SaveChangesAsync() == 1;
         }
 
-        public async Task<User> Find(int UserId)
-        {
-            return await _Context.Users
+        public async Task<User> FindAsync(int UserId) =>
+            await _Context.Users
                 .FindAsync(UserId);
+
+        public async Task<User> FindAsyc(string Username, string Password) =>
+            await _Context.Users
+                .SingleOrDefaultAsync(u => u.Username == Username && u.Password == Password);
+
+        public async Task<bool> IsUsernameUsedAsync(string Username) =>
+            await _Context.Users
+            .AnyAsync(u => u.Username == Username);
+
+        public async Task<bool> DeleteUserAsync(int UserId)
+        {
+            User user = await _Context.Users
+                .FindAsync(UserId);
+
+            if (user == null)
+                return false;
+
+            _Context.Users.Remove(user);
+            return await _Context.SaveChangesAsync() == 1;
         }
     }
 }

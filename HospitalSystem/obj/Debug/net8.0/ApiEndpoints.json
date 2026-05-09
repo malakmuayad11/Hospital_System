@@ -31,7 +31,7 @@
   },
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
-    "Method": "AddNewUser",
+    "Method": "AddNewUserAsync",
     "RelativePath": "api/users",
     "HttpMethod": "POST",
     "IsController": true,
@@ -108,7 +108,7 @@
   },
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
-    "Method": "Find",
+    "Method": "FindAsync",
     "RelativePath": "api/users/{UserId}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -149,7 +149,57 @@
         "StatusCode": 200
       }
     ],
-    "EndpointName": "GetUserByID"
+    "EndpointName": "FindUserById"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.UsersController",
+    "Method": "DeleteUserAsync",
+    "RelativePath": "api/users/{UserId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      }
+    ],
+    "EndpointName": "DeleteUser"
   },
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
@@ -221,5 +271,86 @@
       }
     ],
     "EndpointName": "GetUsersCount"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.UsersController",
+    "Method": "FindAsync",
+    "RelativePath": "api/users/find",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "findUserDto",
+        "Type": "HospitalSystem.DTOs.FindUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "HospitalSystem.DTOs.UserDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "FindUserByCredentials"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.UsersController",
+    "Method": "IsUsernameUsedAsync",
+    "RelativePath": "api/users/isUsernameUsed/{Username}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Username",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "IsUsernameUsed"
   }
 ]

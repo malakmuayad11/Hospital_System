@@ -10,20 +10,23 @@ namespace HospitalSystem.API.Validation
 
         private static bool _ValidatePermissions(int Permissions) => Permissions != 0 && Permissions >= -1;
 
+        public static bool ValidateUsername(string Username) => !string.IsNullOrEmpty(Username);
         public static bool ValidateAddUserInput(AddUserDto addUserDto) =>
-            !string.IsNullOrEmpty(addUserDto.Username) &&
+            ValidateUsername(addUserDto.Username) &&
             !string.IsNullOrEmpty(addUserDto.Password) &&
             _ValidateRole(addUserDto.Role) &&
             _ValidatePermissions(addUserDto.Permissions);
 
         public static bool ValidateUpdateUserInput(UpdateUserDto updateUserDto) =>
             ValidateUserId(updateUserDto.UserId) &&
-            !string.IsNullOrEmpty(updateUserDto.Username) &&
+            ValidateUsername(updateUserDto.Username) &&
             _ValidateRole(updateUserDto.Role) &&
             _ValidatePermissions(updateUserDto.Permissions);
 
         public static bool ValidateChangePasswordInput(ChangePasswordDto changePasswordDto) =>
            ValidateUserId(changePasswordDto.UserId) && !string.IsNullOrEmpty(changePasswordDto.Password);
 
+        public static bool ValidateFindUserInput(FindUserDto findUserDto) =>
+            ValidateUsername(findUserDto.Username) && !string.IsNullOrEmpty(findUserDto.Password);
     }
 }

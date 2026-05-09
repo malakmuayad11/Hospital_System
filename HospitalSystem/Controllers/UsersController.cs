@@ -50,7 +50,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<UserDto>> AddNewUser(AddUserDto addUserDto)
+        public async Task<ActionResult<UserDto>> AddNewUserAsync(AddUserDto addUserDto)
         {
             if (!UserValidation.ValidateAddUserInput(addUserDto))
                 return BadRequest("Please validate your input.");
@@ -93,21 +93,65 @@ namespace HospitalSystem.API.Controllers
             return Ok("Password changed successfully.");
         }
 
-        [HttpGet("{UserId}", Name = "GetUserByID")]
+        [HttpGet("{UserId}", Name = "FindUserById")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<UserDto>> Find(int UserId)
+        public async Task<ActionResult<UserDto>> FindAsync(int UserId)
         {
             if(!UserValidation.ValidateUserId(UserId))
                 return BadRequest("Please validate your input.");
 
-            UserDto user = await _UserService.Find(UserId);
+            UserDto user = await _UserService.FindAsync(UserId);
 
             if (user == null)
                 return NotFound($"User with id: {UserId} is not found.");
 
             return Ok(user);
+        }
+
+        [HttpPost("find", Name = "FindUserByCredentials")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<UserDto>> FindAsync(FindUserDto findUserDto)
+        {
+            if (!UserValidation.ValidateFindUserInput(findUserDto))
+                return BadRequest("Please validate your input.");
+
+            UserDto user = await _UserService.FindAsync(findUserDto);
+
+            if (user == null)
+                return NotFound($"User with username: {findUserDto.Username} is not found.");
+
+            return Ok(user);
+        }
+
+        [HttpGet("isUsernameUsed/{Username}", Name = "IsUsernameUsed")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<bool>> IsUsernameUsedAsync(string Username)
+        {
+            if (!UserValidation.ValidateUsername(Username))
+                return BadRequest("Please validate your input.");
+
+            return Ok(await _UserService.IsUsernameUsedAsync(Username));
+        }
+
+        [HttpDelete("{UserId}", Name = "DeleteUser")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<bool>> DeleteUserAsync(int UserId)
+        {
+            if (!UserValidation.ValidateUserId(UserId))
+                return BadRequest("Please validate your input.");
+
+            if (!await _UserService.DeleteUserAsync(UserId))
+                return NotFound($"User with id: {UserId} is not found.");
+
+            return Ok("User deleted successfully.");
         }
     }
 }

@@ -20,6 +20,12 @@ namespace HospitalSystem.Repository
 
         public Task<bool> ChangePasswordAsync(int UserId, string newPassword);
 
-        public Task<User> Find(int UserId);
+        public Task<User> FindAsync(int UserId);
+
+        public Task <User> FindAsyc (string Username, string password);
+
+        public Task<bool> IsUsernameUsedAsync(string Username);
+
+        public Task<bool> DeleteUserAsync(int UserId);
     }
 }

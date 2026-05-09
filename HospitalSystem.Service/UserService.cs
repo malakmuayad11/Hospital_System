@@ -61,9 +61,9 @@ namespace HospitalSystem.Service
         public async Task<bool> ChangePasswordAsync(ChangePasswordDto changePasswordDto) =>
             await _UserRepository.ChangePasswordAsync(changePasswordDto.UserId, changePasswordDto.Password);
 
-        public async Task<UserDto> Find(int UserId)
+        public async Task<UserDto> FindAsync(int UserId)
         {
-            User user = await _UserRepository.Find(UserId);
+            User user = await _UserRepository.FindAsync(UserId);
 
             if (user == null)
                 return null;
@@ -75,5 +75,26 @@ namespace HospitalSystem.Service
                     user.LastLoginDate,
                     user.Permissions);
         }
+
+        public async Task<UserDto> FindAsync(FindUserDto findUserDto)
+        {
+            User user = await _UserRepository.FindAsyc(findUserDto.Username, findUserDto.Password);
+
+            if (user == null)
+                return null;
+
+            return new UserDto(
+                    user.UserId,
+                    user.Username,
+                    user.Role,
+                    user.LastLoginDate,
+                    user.Permissions);
+        }
+
+        public async Task<bool> IsUsernameUsedAsync(string Username) =>
+            await _UserRepository.IsUsernameUsedAsync(Username);
+
+        public async Task<bool> DeleteUserAsync(int UserId) =>
+            await _UserRepository.DeleteUserAsync(UserId);
     }
 }

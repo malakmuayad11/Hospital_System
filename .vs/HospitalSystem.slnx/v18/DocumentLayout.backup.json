@@ -7,36 +7,28 @@
       "RelativeMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|solutionrelative:hospitalsystem\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|c:\\programming\\hospitalsystem\\hospitalsystem\\validation\\uservalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|solutionrelative:hospitalsystem\\validation\\uservalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.service\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|solutionrelative:hospitalsystem.service\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|solutionrelative:hospitalsystem.service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.service\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|solutionrelative:hospitalsystem.service\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{88AF895A-5F5A-4DD1-AC1B-8D65F51AE7B4}|HospitalSystem.Repository\\HospitalSystem.Repository.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.repository\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88AF895A-5F5A-4DD1-AC1B-8D65F51AE7B4}|HospitalSystem.Repository\\HospitalSystem.Repository.csproj|solutionrelative:hospitalsystem.repository\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{88AF895A-5F5A-4DD1-AC1B-8D65F51AE7B4}|HospitalSystem.Repository\\HospitalSystem.Repository.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{88AF895A-5F5A-4DD1-AC1B-8D65F51AE7B4}|HospitalSystem.Repository\\HospitalSystem.Repository.csproj|solutionrelative:hospitalsystem.repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{88AF895A-5F5A-4DD1-AC1B-8D65F51AE7B4}|HospitalSystem.Repository\\HospitalSystem.Repository.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.repository\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{88AF895A-5F5A-4DD1-AC1B-8D65F51AE7B4}|HospitalSystem.Repository\\HospitalSystem.Repository.csproj|solutionrelative:hospitalsystem.repository\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|c:\\programming\\hospitalsystem\\hospitalsystem\\validation\\uservalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|solutionrelative:hospitalsystem\\validation\\uservalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.DTOs.csproj|c:\\programming\\hospitalsystem\\dtos\\changepassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.DTOs.csproj|solutionrelative:dtos\\changepassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.DTOs.csproj|c:\\programming\\hospitalsystem\\dtos\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.DTOs.csproj|solutionrelative:dtos\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.DTOs.csproj|c:\\programming\\hospitalsystem\\dtos\\adduserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.DTOs.csproj|solutionrelative:dtos\\adduserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.DTOs.csproj|c:\\programming\\hospitalsystem\\dtos\\finduserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.DTOs.csproj|solutionrelative:dtos\\finduserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2C594B57-89FC-42AE-AA0D-29F8519A56C0}|HospitalSystem.Data\\HospitalSystem.Data.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.data\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,22 +46,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IUserService.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\IUserService.cs",
-              "RelativeDocumentMoniker": "HospitalSystem.Service\\IUserService.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\IUserService.cs",
-              "RelativeToolTip": "HospitalSystem.Service\\IUserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T10:58:55.866Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -78,7 +56,7 @@
               "RelativeDocumentMoniker": "HospitalSystem.Service\\UserService.cs",
               "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\UserService.cs",
               "RelativeToolTip": "HospitalSystem.Service\\UserService.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAA+wEIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFIAAAAAAAAAAADwv2EAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-06T10:59:14.838Z",
               "IsPinned": true,
@@ -86,15 +64,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ChangePasswordDto.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\DTOs\\ChangePasswordDto.cs",
-              "RelativeDocumentMoniker": "DTOs\\ChangePasswordDto.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\DTOs\\ChangePasswordDto.cs",
-              "RelativeToolTip": "DTOs\\ChangePasswordDto.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAAnAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\IUserService.cs",
+              "RelativeDocumentMoniker": "HospitalSystem.Service\\IUserService.cs",
+              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\IUserService.cs",
+              "RelativeToolTip": "HospitalSystem.Service\\IUserService.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAgwBYAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-09T09:52:32.357Z",
+              "WhenOpened": "2026-05-09T11:29:44.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FindUserDto.cs",
+              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\DTOs\\FindUserDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\FindUserDto.cs",
+              "ToolTip": "C:\\Programming\\HospitalSystem\\DTOs\\FindUserDto.cs",
+              "RelativeToolTip": "DTOs\\FindUserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T11:20:43.886Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "HospitalSystem\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\UsersController.cs*",
+              "RelativeToolTip": "HospitalSystem\\Controllers\\UsersController.cs*",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAwJAAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T11:06:18.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserValidation.cs",
+              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Validation\\UserValidation.cs",
+              "RelativeDocumentMoniker": "HospitalSystem\\Validation\\UserValidation.cs",
+              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Validation\\UserValidation.cs",
+              "RelativeToolTip": "HospitalSystem\\Validation\\UserValidation.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAQwB0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T11:48:08.8Z",
               "EditorCaption": ""
             },
             {
@@ -105,77 +122,27 @@
               "RelativeDocumentMoniker": "HospitalSystem.Repository\\UserRepository.cs",
               "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem.Repository\\UserRepository.cs",
               "RelativeToolTip": "HospitalSystem.Repository\\UserRepository.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAIwEUAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAywFYAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-06T10:42:27.719Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "HospitalSystem\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "HospitalSystem\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAAAGIAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T11:06:18.868Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem.Repository\\IUserRepository.cs",
               "RelativeDocumentMoniker": "HospitalSystem.Repository\\IUserRepository.cs",
               "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem.Repository\\IUserRepository.cs",
               "RelativeToolTip": "HospitalSystem.Repository\\IUserRepository.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAiwBIAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAA6wBwAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-06T10:41:26.914Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserValidation.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Validation\\UserValidation.cs",
-              "RelativeDocumentMoniker": "HospitalSystem\\Validation\\UserValidation.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Validation\\UserValidation.cs",
-              "RelativeToolTip": "HospitalSystem\\Validation\\UserValidation.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABrAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T11:48:08.8Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "UpdateUserDto.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\DTOs\\UpdateUserDto.cs",
-              "RelativeDocumentMoniker": "DTOs\\UpdateUserDto.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\DTOs\\UpdateUserDto.cs",
-              "RelativeToolTip": "DTOs\\UpdateUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T13:01:39.045Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AddUserDto.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\DTOs\\AddUserDto.cs",
-              "RelativeDocumentMoniker": "DTOs\\AddUserDto.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\DTOs\\AddUserDto.cs",
-              "RelativeToolTip": "DTOs\\AddUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T12:49:26.01Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem.Data\\Entities\\User.cs",
               "RelativeDocumentMoniker": "HospitalSystem.Data\\Entities\\User.cs",
@@ -187,7 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Program.cs",
               "RelativeDocumentMoniker": "HospitalSystem\\Program.cs",
