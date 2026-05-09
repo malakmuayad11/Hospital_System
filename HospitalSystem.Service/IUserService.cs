@@ -10,9 +10,9 @@ namespace HospitalSystem.Service
 
         public Task<bool> AddUserAsync(AddUserDto userDto);
 
-        public Task<bool> UpdateUserAsync(UpdateUserDto userDto);
+        public Task<bool?> UpdateUserAsync(UpdateUserDto userDto);
 
-        public Task<bool> ChangePasswordAsync(ChangePasswordDto changePasswordDto);
+        public Task<bool?> ChangePasswordAsync(ChangePasswordDto changePasswordDto);
 
         public Task<UserDto> FindAsync(int UserId);
 
@@ -20,6 +20,6 @@ namespace HospitalSystem.Service
 
         public Task<bool> IsUsernameUsedAsync(string Username);
 
-        public Task<bool> DeleteUserAsync(int UserId);
+        public Task<bool?> DeleteUserAsync(int UserId);
     }
 }

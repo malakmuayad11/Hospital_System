@@ -16,9 +16,9 @@ namespace HospitalSystem.Repository
 
         public Task<bool> AddUserAsync(User user);
 
-        public Task<bool> UpdateUserAsync(User updatedUser);
+        public Task<bool?> UpdateUserAsync(User updatedUser);
 
-        public Task<bool> ChangePasswordAsync(int UserId, string newPassword);
+        public Task<bool?> ChangePasswordAsync(int UserId, string newPassword);
 
         public Task<User> FindAsync(int UserId);
 
@@ -26,6 +26,6 @@ namespace HospitalSystem.Repository
 
         public Task<bool> IsUsernameUsedAsync(string Username);
 
-        public Task<bool> DeleteUserAsync(int UserId);
+        public Task<bool?> DeleteUserAsync(int UserId);
     }
 }

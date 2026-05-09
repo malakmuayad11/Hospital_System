@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
-    //[Route("api/[controller]")]
     [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -67,30 +66,46 @@ namespace HospitalSystem.API.Controllers
         [HttpPut(Name = "UpdateUser")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<bool>> UpdateUserAsync(UpdateUserDto updateUserDto)
         {
             if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
                 return BadRequest("Please validate your input.");
 
-            if (!await _UserService.UpdateUserAsync(updateUserDto))
+            bool? result = await _UserService.UpdateUserAsync(updateUserDto);
+
+             if (result == null)
                 return NotFound($"User with id: {updateUserDto.UserId} is not found.");
 
-            return Ok("User updated successfully.");
+             if (result == false)
+                return StatusCode(StatusCodes.Status500InternalServerError,
+             new { message = "An error occurred while updating the user." });
+
+           return Ok("User updated successfully.");
+
         }
 
         [HttpPatch("changePassword", Name = "changePassword")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<bool>> ChangePasswordAsync(ChangePasswordDto changePasswordDto)
         {
             if (!UserValidation.ValidateChangePasswordInput(changePasswordDto))
                 return BadRequest("Please validate your input.");
 
-            if (!await _UserService.ChangePasswordAsync(changePasswordDto))
+            bool? result = await _UserService.ChangePasswordAsync(changePasswordDto);
+
+             if (result == null)
                 return NotFound($"User with id: {changePasswordDto.UserId} is not found.");
 
-            return Ok("Password changed successfully.");
+             if (result == false)
+                return StatusCode(StatusCodes.Status500InternalServerError,
+             new { message = "An error occurred while changing the password." });
+
+            return Ok("Password is changed successfully.");
         }
 
         [HttpGet("{UserId}", Name = "FindUserById")]
@@ -148,8 +163,14 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateUserId(UserId))
                 return BadRequest("Please validate your input.");
 
-            if (!await _UserService.DeleteUserAsync(UserId))
-                return NotFound($"User with id: {UserId} is not found.");
+            bool? result = await _UserService.DeleteUserAsync(UserId);
+
+            if(result == null)
+                    return NotFound($"User with id: {UserId} is not found.");
+
+            if (result == false)
+                return StatusCode(StatusCodes.Status500InternalServerError,
+             new { message = "An error occurred while deleting the user." });
 
             return Ok("User deleted successfully.");
         }

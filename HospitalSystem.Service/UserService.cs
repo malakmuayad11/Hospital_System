@@ -30,6 +30,11 @@ namespace HospitalSystem.Service
                     User.LastLoginDate,
                     User.Permissions));
             }
+
+            // Indicates that there are no users in the database
+            if (UserDtos.Count == 0)
+                return null;
+
             return UserDtos;
         }
 
@@ -48,7 +53,7 @@ namespace HospitalSystem.Service
             return await _UserRepository.AddUserAsync(user);
         }
 
-        public async Task<bool> UpdateUserAsync(UpdateUserDto userDto) =>
+        public async Task<bool?> UpdateUserAsync(UpdateUserDto userDto) =>
             await _UserRepository.UpdateUserAsync(new User
             {
                 UserId = userDto.UserId,
@@ -58,7 +63,7 @@ namespace HospitalSystem.Service
             });
 
         // Must implement hashing 
-        public async Task<bool> ChangePasswordAsync(ChangePasswordDto changePasswordDto) =>
+        public async Task<bool?> ChangePasswordAsync(ChangePasswordDto changePasswordDto) =>
             await _UserRepository.ChangePasswordAsync(changePasswordDto.UserId, changePasswordDto.Password);
 
         public async Task<UserDto> FindAsync(int UserId)
@@ -94,7 +99,7 @@ namespace HospitalSystem.Service
         public async Task<bool> IsUsernameUsedAsync(string Username) =>
             await _UserRepository.IsUsernameUsedAsync(Username);
 
-        public async Task<bool> DeleteUserAsync(int UserId) =>
+        public async Task<bool?> DeleteUserAsync(int UserId) =>
             await _UserRepository.DeleteUserAsync(UserId);
     }
 }

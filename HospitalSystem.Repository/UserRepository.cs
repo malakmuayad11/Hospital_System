@@ -39,13 +39,13 @@ namespace HospitalSystem.Repository
             return await _Context.SaveChangesAsync() == 1;
         }
 
-        public async Task<bool> UpdateUserAsync(User updatedUser)
+        public async Task<bool?> UpdateUserAsync(User updatedUser)
         {
             User user = await _Context.Users
                 .FindAsync(updatedUser.UserId);
 
             if (user == null)
-                return false;
+                return null;
 
             user.Username = updatedUser.Username;
             user.Role = updatedUser.Role;
@@ -54,12 +54,14 @@ namespace HospitalSystem.Repository
             return await _Context.SaveChangesAsync() == 1;
         }
 
-        public async Task<bool> ChangePasswordAsync(int UserId, string newPassword)
+        public async Task<bool?> ChangePasswordAsync(int UserId, string newPassword)
         {
             User user = await _Context.Users
                 .FindAsync(UserId);
+
             if (user == null)
-                return false;
+                return null;
+
             user.Password = newPassword;
             return await _Context.SaveChangesAsync() == 1;
         }
@@ -76,13 +78,13 @@ namespace HospitalSystem.Repository
             await _Context.Users
             .AnyAsync(u => u.Username == Username);
 
-        public async Task<bool> DeleteUserAsync(int UserId)
+        public async Task<bool?> DeleteUserAsync(int UserId)
         {
             User user = await _Context.Users
                 .FindAsync(UserId);
 
             if (user == null)
-                return false;
+                return null;
 
             _Context.Users.Remove(user);
             return await _Context.SaveChangesAsync() == 1;
