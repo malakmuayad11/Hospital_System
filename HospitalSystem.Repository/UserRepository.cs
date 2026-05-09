@@ -20,18 +20,12 @@ namespace HospitalSystem.Repository
             this._Context = Context;
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
-        {
-            return await _Context.Users
+        public async Task<List<User>> GetAllUsersAsync() =>
+            await _Context.Users
                 .AsNoTracking()
                 .ToListAsync();
-        }
 
-        public async Task<int> GetUsersCountAsync()
-        {
-            return await _Context.Users
-                .CountAsync();
-        }
+        public async Task<int> GetUsersCountAsync() => await _Context.Users.CountAsync();
 
         public async Task<bool> AddUserAsync(User user)
         {
@@ -87,6 +81,35 @@ namespace HospitalSystem.Repository
                 return null;
 
             _Context.Users.Remove(user);
+            return await _Context.SaveChangesAsync() == 1;
+        }
+
+        public async Task<bool?> UpdateUserLastLoginDateAsync(int UserId)
+        {
+            User user = await _Context.Users
+                .FindAsync(UserId);
+
+            if (user == null)
+                return null;
+
+            user.LastLoginDate = DateTime.UtcNow;
+            return await _Context.SaveChangesAsync() == 1;
+        }
+
+        public async Task<bool?> AddAsCurrentUserAsync(int UserId)
+        {
+            if (!await _Context.Users
+                .AnyAsync(u => u.UserId == UserId))
+                return null;
+
+            SystemSetting systemSetting = await _Context.SystemSettings
+                .FindAsync(1);
+
+            if (systemSetting == null)
+                return false;
+
+            systemSetting.CurrentUserId = UserId;
+
             return await _Context.SaveChangesAsync() == 1;
         }
     }

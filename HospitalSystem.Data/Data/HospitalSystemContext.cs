@@ -356,7 +356,7 @@ public partial class HospitalSystemContext : DbContext
 
         modelBuilder.Entity<SystemSetting>(entity =>
         {
-            entity.HasNoKey();
+            entity.HasKey(e => e.Id);
 
             entity.Property(e => e.CurrentUserId).HasColumnName("CurrentUserID");
 

@@ -101,5 +101,11 @@ namespace HospitalSystem.Service
 
         public async Task<bool?> DeleteUserAsync(int UserId) =>
             await _UserRepository.DeleteUserAsync(UserId);
+
+        public async Task<bool?> UpdateUserLastLoginDateAsync(int UserId) =>
+            await _UserRepository.UpdateUserLastLoginDateAsync(UserId);
+
+        public async Task<bool?> AddAsCurrentUserAsync(int UserId) =>
+            await _UserRepository.AddAsCurrentUserAsync(UserId);
     }
 }

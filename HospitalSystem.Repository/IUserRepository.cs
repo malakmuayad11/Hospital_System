@@ -27,5 +27,9 @@ namespace HospitalSystem.Repository
         public Task<bool> IsUsernameUsedAsync(string Username);
 
         public Task<bool?> DeleteUserAsync(int UserId);
+
+        public Task<bool?> AddAsCurrentUserAsync(int UserId);
+
+        public Task<bool?> UpdateUserLastLoginDateAsync(int UserId);
     }
 }
