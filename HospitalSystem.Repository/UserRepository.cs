@@ -52,5 +52,21 @@ namespace HospitalSystem.Repository
 
             return await _Context.SaveChangesAsync() == 1;
         }
+
+        public async Task<bool> ChangePasswordAsync(int UserId, string newPassword)
+        {
+            User user = await _Context.Users
+                .FindAsync(UserId);
+            if (user == null)
+                return false;
+            user.Password = newPassword;
+            return await _Context.SaveChangesAsync() == 1;
+        }
+
+        public async Task<User> Find(int UserId)
+        {
+            return await _Context.Users
+                .FindAsync(UserId);
+        }
     }
 }

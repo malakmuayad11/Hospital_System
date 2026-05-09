@@ -16,5 +16,9 @@ namespace HospitalSystem.Service
         public Task<bool> AddUserAsync(AddUserDto userDto);
 
         public Task<bool> UpdateUserAsync(UpdateUserDto userDto);
+
+        public Task<bool> ChangePasswordAsync(ChangePasswordDto changePasswordDto);
+
+        public Task<UserDto> Find(int UserId);
     }
 }

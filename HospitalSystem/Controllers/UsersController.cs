@@ -19,7 +19,7 @@ namespace HospitalSystem.API.Controllers
             this._UserService = UserService;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetAllUsers")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsersAsync()
@@ -32,21 +32,21 @@ namespace HospitalSystem.API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("count")]
+        [HttpGet("count", Name = "GetUsersCount")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<int>> GetUsersCountAsync()
         {
             int UsersCount = await _UserService.GetUsersCountAsync();
 
-            if(UsersCount == null|| UsersCount < 0)
+            if (UsersCount == null || UsersCount < 0)
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while counting users." });
 
             return Ok(UsersCount);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "AddNewUser")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -55,7 +55,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateAddUserInput(addUserDto))
                 return BadRequest("Please validate your input.");
 
-            if(!await _UserService.AddUserAsync(addUserDto))
+            if (!await _UserService.AddUserAsync(addUserDto))
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new user." });
 
@@ -64,18 +64,50 @@ namespace HospitalSystem.API.Controllers
         }
 
         // may fix it after creating a find user method
-        [HttpPut]
+        [HttpPut(Name = "UpdateUser")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<bool>>UpdateUserAsync(UpdateUserDto updateUserDto)
+        public async Task<ActionResult<bool>> UpdateUserAsync(UpdateUserDto updateUserDto)
         {
             if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
                 return BadRequest("Please validate your input.");
 
-            if(!await _UserService.UpdateUserAsync(updateUserDto))
+            if (!await _UserService.UpdateUserAsync(updateUserDto))
                 return NotFound($"User with id: {updateUserDto.UserId} is not found.");
 
             return Ok("User updated successfully.");
+        }
+
+        [HttpPatch("changePassword", Name = "changePassword")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<bool>> ChangePasswordAsync(ChangePasswordDto changePasswordDto)
+        {
+            if (!UserValidation.ValidateChangePasswordInput(changePasswordDto))
+                return BadRequest("Please validate your input.");
+
+            if (!await _UserService.ChangePasswordAsync(changePasswordDto))
+                return NotFound($"User with id: {changePasswordDto.UserId} is not found.");
+
+            return Ok("Password changed successfully.");
+        }
+
+        [HttpGet("{UserId}", Name = "GetUserByID")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<UserDto>> Find(int UserId)
+        {
+            if(!UserValidation.ValidateUserId(UserId))
+                return BadRequest("Please validate your input.");
+
+            UserDto user = await _UserService.Find(UserId);
+
+            if (user == null)
+                return NotFound($"User with id: {UserId} is not found.");
+
+            return Ok(user);
         }
     }
 }

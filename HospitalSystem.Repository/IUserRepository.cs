@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HospitalSystem.API.Models;
+using HospitalSystem.DTOs;
 
 namespace HospitalSystem.Repository
 {
@@ -16,5 +17,9 @@ namespace HospitalSystem.Repository
         public Task<bool> AddUserAsync(User user);
 
         public Task<bool> UpdateUserAsync(User updatedUser);
+
+        public Task<bool> ChangePasswordAsync(int UserId, string newPassword);
+
+        public Task<User> Find(int UserId);
     }
 }

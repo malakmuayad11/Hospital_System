@@ -26,7 +26,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "GetAllUsers"
   },
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
@@ -66,7 +67,8 @@
         "MediaTypes": [],
         "StatusCode": 500
       }
-    ]
+    ],
+    "EndpointName": "AddNewUser"
   },
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
@@ -101,7 +103,98 @@
         ],
         "StatusCode": 404
       }
-    ]
+    ],
+    "EndpointName": "UpdateUser"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.UsersController",
+    "Method": "Find",
+    "RelativePath": "api/users/{UserId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "HospitalSystem.DTOs.UserDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetUserByID"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.UsersController",
+    "Method": "ChangePasswordAsync",
+    "RelativePath": "api/users/changePassword",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changePasswordDto",
+        "Type": "HospitalSystem.DTOs.ChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "changePassword"
   },
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
@@ -126,6 +219,7 @@
         "MediaTypes": [],
         "StatusCode": 500
       }
-    ]
+    ],
+    "EndpointName": "GetUsersCount"
   }
 ]

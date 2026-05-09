@@ -21,7 +21,7 @@ namespace HospitalSystem.Service
         {
             List<UserDto> UserDtos = new List<UserDto>();
 
-            foreach(User User in await _UserRepository.GetAllUsersAsync())
+            foreach (User User in await _UserRepository.GetAllUsersAsync())
             {
                 UserDtos.Add(new UserDto(
                     User.UserId,
@@ -56,5 +56,24 @@ namespace HospitalSystem.Service
                 Role = userDto.Role,
                 Permissions = userDto.Permissions
             });
+
+        // Must implement hashing 
+        public async Task<bool> ChangePasswordAsync(ChangePasswordDto changePasswordDto) =>
+            await _UserRepository.ChangePasswordAsync(changePasswordDto.UserId, changePasswordDto.Password);
+
+        public async Task<UserDto> Find(int UserId)
+        {
+            User user = await _UserRepository.Find(UserId);
+
+            if (user == null)
+                return null;
+
+            return new UserDto(
+                    user.UserId,
+                    user.Username,
+                    user.Role,
+                    user.LastLoginDate,
+                    user.Permissions);
+        }
     }
 }
