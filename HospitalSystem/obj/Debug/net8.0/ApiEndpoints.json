@@ -1,5 +1,46 @@
 [
   {
+    "ContainingType": "HospitalSystem.API.Controllers.PrescriptionsController",
+    "Method": "AddNewPrescriptionAsync",
+    "RelativePath": "api/prescription",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addPrescriptionDto",
+        "Type": "HospitalSystem.DTOs.AddPrescriptionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      },
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 201
+      }
+    ],
+    "EndpointName": "AddNewPrescription"
+  },
+  {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
     "Method": "GetAllUsersAsync",
     "RelativePath": "api/users",

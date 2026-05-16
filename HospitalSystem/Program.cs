@@ -18,9 +18,11 @@ builder.Services.AddDbContext<HospitalSystemContext>(options =>
 
 // Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 
 // Service
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
 
 var app = builder.Build();
 
