@@ -10,5 +10,9 @@ namespace HospitalSystem.Service
     public interface IPrescriptionService
     {
         public Task<bool> AddNewPrescriptionAsync(AddPrescriptionDto addPrescriptionDto);
+
+        public Task<PrescriptionDto> GetPrescriptionByPrescriptionIdAsync(int PrescriptionId);
+
+        public Task<PrescriptionDto> GetPrescriptionByAppointmentIdAsync(int AppointmentId);
     }
 }

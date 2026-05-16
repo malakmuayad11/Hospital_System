@@ -11,5 +11,9 @@ namespace HospitalSystem.Repository
     public interface IPrescriptionRepository
     {
         public Task<bool> AddNewPrescriptionAsync(Prescription prescription);
+
+        public Task<Prescription> GetPrescriptionByPrescriptionIdAsync(int PrescriptionId);
+
+        public Task<Prescription> GetPrescriptionByAppointmentIdAsync(int AppointmentId);
     }
 }

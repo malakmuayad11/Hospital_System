@@ -1,4 +1,5 @@
-﻿using HospitalSystem.API.Validation;
+﻿using HospitalSystem.API.Models;
+using HospitalSystem.API.Validation;
 using HospitalSystem.DTOs;
 using HospitalSystem.Service;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +30,41 @@ namespace HospitalSystem.API.Controllers
              new { message = "An error occurred while adding the new user." });
 
             return Ok();
-            // but the new route here
+            //return CreatedAtRoute("FindPrescriptionById", new { PrescriptionId = user.UserID }, user.userDTO);
+        }
+
+        [HttpGet("{PrescriptionId}", Name = "FindPrescriptionById")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<PrescriptionDto>> GetPrescriptionByPrescriptionIdAsync(int PrescriptionId)
+        {
+            if (!PrescriptionValidation.ValidatePrescriptionId(PrescriptionId))
+                return BadRequest("Please validate your input");
+
+            PrescriptionDto prescriptionDto = await _prescriptionService.GetPrescriptionByPrescriptionIdAsync(PrescriptionId);
+
+            if (prescriptionDto == null)
+                return NotFound($"Prescription with id: {PrescriptionId} is not found");
+
+            return Ok(prescriptionDto);
+        }
+
+        [HttpGet("findByAppointmentId/{AppointmentId}", Name = "FindPrescriptionByAppointmentId")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<PrescriptionDto>> GetPrescriptionByAppointmentIdAsync(int AppointmentId)
+        {
+            if (!PrescriptionValidation.ValidateAppointmentId(AppointmentId))
+                return BadRequest("Please validate your input");
+
+            PrescriptionDto prescriptionDto = await _prescriptionService.GetPrescriptionByAppointmentIdAsync(AppointmentId);
+
+            if (prescriptionDto == null)
+                return NotFound($"Prescription with appointment id: {AppointmentId} is not found");
+
+            return Ok(prescriptionDto);
         }
     }
 }

@@ -41,6 +41,96 @@
     "EndpointName": "AddNewPrescription"
   },
   {
+    "ContainingType": "HospitalSystem.API.Controllers.PrescriptionsController",
+    "Method": "GetPrescriptionByPrescriptionIdAsync",
+    "RelativePath": "api/prescription/{PrescriptionId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PrescriptionId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "HospitalSystem.DTOs.PrescriptionDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "FindPrescriptionById"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.PrescriptionsController",
+    "Method": "GetPrescriptionByAppointmentIdAsync",
+    "RelativePath": "api/prescription/findByAppointmentId/{AppointmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "AppointmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "HospitalSystem.DTOs.PrescriptionDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "FindPrescriptionByAppointmentId"
+  },
+  {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
     "Method": "GetAllUsersAsync",
     "RelativePath": "api/users",
