@@ -1,7 +1,6 @@
 ﻿using HospitalSystem.API.Validation;
 using HospitalSystem.DTOs;
-using HospitalSystem.Service;
-using Microsoft.AspNetCore.Http;
+using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
@@ -47,6 +46,27 @@ namespace HospitalSystem.API.Controllers
                 return NotFound($"Person with id: {personId} is not found.");
 
             return Ok(personDto);
+        }
+
+        [HttpPut(Name = "UpdatePerson")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<bool?>> updateAsync(UpdatePersonDto updatePersonDto)
+        {
+            if (!PersonValidation.validateUpdatePersonDto(updatePersonDto))
+                return BadRequest("Please validate your input.");
+
+            bool? result = await _personService.updateAsync(updatePersonDto);
+
+            if (result == null)
+                return NotFound($"Person with id: {updatePersonDto.PersonId} is not found.");
+
+            if (result == false)
+                return StatusCode(StatusCodes.Status500InternalServerError,
+             new { message = "An error occurred while updating the person." });
+
+            return Ok("Person is updated successfully.");
         }
     }
 }

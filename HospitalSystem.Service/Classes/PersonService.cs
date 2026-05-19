@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using HospitalSystem.Data;
 using HospitalSystem.API.Models;
-using HospitalSystem.Repository;
 using Microsoft.Extensions.Logging.Abstractions;
+using HospitalSystem.Repository.Interfaces;
+using HospitalSystem.Service.Interfaces;
 
-namespace HospitalSystem.Service
+namespace HospitalSystem.Service.Classes
 {
     public class PersonService : IPersonService
     {
@@ -47,5 +48,16 @@ namespace HospitalSystem.Service
                 Gender = person.Gender
             };
         }
+
+        public async Task<bool?> updateAsync(UpdatePersonDto updatePersonDto) =>
+            await _personRepository.UpdateAsync(new Person
+            {
+                PersonId = updatePersonDto.PersonId,
+                FirstName = updatePersonDto.FirstName,
+                LastName = updatePersonDto.LastName,
+                Phone = updatePersonDto.Phone,
+                Email = updatePersonDto.Email,
+                Gender = updatePersonDto.Gender
+            });
     }
 }

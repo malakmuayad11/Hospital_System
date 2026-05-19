@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HospitalSystem.API.Models;
 using HospitalSystem.DTOs;
 
-namespace HospitalSystem.Repository
+namespace HospitalSystem.Repository.Interfaces
 {
     public interface IUserRepository
     {

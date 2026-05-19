@@ -1,6 +1,8 @@
 using HospitalSystem.Data.Data;
-using HospitalSystem.Repository;
-using HospitalSystem.Service;
+using HospitalSystem.Repository.Classes;
+using HospitalSystem.Repository.Interfaces;
+using HospitalSystem.Service.Classes;
+using HospitalSystem.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

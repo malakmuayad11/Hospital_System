@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 using HospitalSystem.Data;
 using HospitalSystem.Data.Data;
 using Microsoft.EntityFrameworkCore;
+using HospitalSystem.Repository.Interfaces;
 
-namespace HospitalSystem.Repository
+namespace HospitalSystem.Repository.Classes
 {
     public class PrescriptionRepository : IPrescriptionRepository
     {

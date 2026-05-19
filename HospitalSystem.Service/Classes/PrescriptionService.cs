@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using HospitalSystem.API.Models;
 using HospitalSystem.DTOs;
-using HospitalSystem.Repository;
+using HospitalSystem.Repository.Interfaces;
+using HospitalSystem.Service.Interfaces;
 
-namespace HospitalSystem.Service
+namespace HospitalSystem.Service.Classes
 {
     public class PrescriptionService : IPrescriptionService
     {

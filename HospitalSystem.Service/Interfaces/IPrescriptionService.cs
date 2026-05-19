@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalSystem.Service
+namespace HospitalSystem.Service.Interfaces
 {
     public interface IPrescriptionService
     {

@@ -1,7 +1,7 @@
 ﻿using HospitalSystem.API.Models;
 using HospitalSystem.API.Validation;
 using HospitalSystem.DTOs;
-using HospitalSystem.Service;
+using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +23,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsersAsync()
         {
-            List<UserDto> users = await _UserService.GetAllUsersAsync();
+            List<UserDto> users = await _UserService.getAllUsersAsync();
 
             if (users == null || users.Count == 0)
                 return NotFound("Users are not found");
@@ -36,7 +36,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<int>> GetUsersCountAsync()
         {
-            int UsersCount = await _UserService.GetUsersCountAsync();
+            int UsersCount = await _UserService.getUsersCountAsync();
 
             if (UsersCount == null || UsersCount < 0)
                 return StatusCode(StatusCodes.Status500InternalServerError,
@@ -54,7 +54,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateAddUserInput(addUserDto))
                 return BadRequest("Please validate your input.");
 
-            if (!await _UserService.AddUserAsync(addUserDto))
+            if (!await _UserService.addUserAsync(addUserDto))
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new user." });
 
@@ -72,7 +72,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.UpdateUserAsync(updateUserDto);
+            bool? result = await _UserService.updateUserAsync(updateUserDto);
 
             if (result == null)
                 return NotFound($"User with id: {updateUserDto.UserId} is not found.");
@@ -95,7 +95,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateChangePasswordInput(changePasswordDto))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.ChangePasswordAsync(changePasswordDto);
+            bool? result = await _UserService.changePasswordAsync(changePasswordDto);
 
             if (result == null)
                 return NotFound($"User with id: {changePasswordDto.UserId} is not found.");
@@ -116,7 +116,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateUserId(UserId))
                 return BadRequest("Please validate your input.");
 
-            UserDto user = await _UserService.FindAsync(UserId);
+            UserDto user = await _UserService.findAsync(UserId);
 
             if (user == null)
                 return NotFound($"User with id: {UserId} is not found.");
@@ -133,7 +133,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateFindUserInput(findUserDto))
                 return BadRequest("Please validate your input.");
 
-            UserDto user = await _UserService.FindAsync(findUserDto);
+            UserDto user = await _UserService.findAsync(findUserDto);
 
             if (user == null)
                 return NotFound($"User with username: {findUserDto.Username} is not found.");
@@ -149,7 +149,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateUsername(Username))
                 return BadRequest("Please validate your input.");
 
-            return Ok(await _UserService.IsUsernameUsedAsync(Username));
+            return Ok(await _UserService.isUsernameUsedAsync(Username));
         }
 
         [HttpDelete("{UserId}", Name = "DeleteUser")]
@@ -162,7 +162,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateUserId(UserId))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.DeleteUserAsync(UserId);
+            bool? result = await _UserService.deleteUserAsync(UserId);
 
             if (result == null)
                 return NotFound($"User with id: {UserId} is not found.");
@@ -184,7 +184,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateUserId(UserId))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.UpdateUserLastLoginDateAsync(UserId);
+            bool? result = await _UserService.updateUserLastLoginDateAsync(UserId);
 
             if (result == null)
                 return NotFound($"User with id: {UserId} is not found.");
@@ -206,7 +206,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateUserId(UserId))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.AddAsCurrentUserAsync(UserId);
+            bool? result = await _UserService.addAsCurrentUserAsync(UserId);
 
             if (result == null)
                 return NotFound($"User with id: {UserId} is not found.");

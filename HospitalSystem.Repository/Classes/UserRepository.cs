@@ -1,6 +1,7 @@
 ﻿using HospitalSystem.API.Models;
 using HospitalSystem.Data.Data;
 using HospitalSystem.DTOs;
+using HospitalSystem.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalSystem.Repository
+namespace HospitalSystem.Repository.Classes
 {
     public class UserRepository : IUserRepository
     {
