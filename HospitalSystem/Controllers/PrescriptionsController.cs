@@ -20,17 +20,17 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<bool>> AddNewPrescriptionAsync(AddPrescriptionDto addPrescriptionDto)
+        public async Task<ActionResult<PrescriptionDto>> AddNewPrescriptionAsync(AddPrescriptionDto addPrescriptionDto)
         {
             if (!PrescriptionValidation.ValidateAddPrescriptionDto(addPrescriptionDto))
                 return BadRequest("Please validate your input.");
 
             if(!await _prescriptionService.AddNewPrescriptionAsync(addPrescriptionDto))
                 return StatusCode(StatusCodes.Status500InternalServerError,
-             new { message = "An error occurred while adding the new user." });
+             new { message = "An error occurred while adding the new prescription." });
 
             return Ok();
-            //return CreatedAtRoute("FindPrescriptionById", new { PrescriptionId = user.UserID }, user.userDTO);
+            //return CreatedAtRoute("FindPrescriptionByAppointmentId", new { AppointmentId = addPrescriptionDto.AppointmentId }, addPrescriptionDto);
         }
 
         [HttpGet("{PrescriptionId}", Name = "FindPrescriptionById")]

@@ -1,5 +1,91 @@
 [
   {
+    "ContainingType": "HospitalSystem.API.Controllers.PeopleController",
+    "Method": "AddNewPersonAsync",
+    "RelativePath": "api/people",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addPersonDto",
+        "Type": "HospitalSystem.DTOs.AddPersonDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      },
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 201
+      }
+    ],
+    "EndpointName": "AddNewPerson"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.PeopleController",
+    "Method": "FindAsync",
+    "RelativePath": "api/people/{personId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "personId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "HospitalSystem.DTOs.PersonDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "FindById"
+  },
+  {
     "ContainingType": "HospitalSystem.API.Controllers.PrescriptionsController",
     "Method": "AddNewPrescriptionAsync",
     "RelativePath": "api/prescription",
@@ -29,7 +115,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "System.Boolean",
+        "Type": "HospitalSystem.DTOs.PrescriptionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
