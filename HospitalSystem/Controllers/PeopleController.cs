@@ -16,7 +16,7 @@ namespace HospitalSystem.API.Controllers
         [HttpPost(Name = "AddNewPerson")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<bool>> AddNewPersonAsync(AddPersonDto addPersonDto)
         {
             if (!PersonValidation.validateAddPersonDto(addPersonDto))
@@ -28,7 +28,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new person." });
 
-            return Ok(personId); // change to the getPerson route
+            return Ok(personId); 
         }
 
         [HttpGet("{personId}", Name = "FindById")]

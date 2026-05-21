@@ -67,7 +67,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<bool>> UpdateUserAsync(UpdateUserDto updateUserDto)
+        public async Task<ActionResult> UpdateUserAsync(UpdateUserDto updateUserDto)
         {
             if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
                 return BadRequest("Please validate your input.");

@@ -279,7 +279,7 @@ public partial class HospitalSystemContext : DbContext
 
         modelBuilder.Entity<Patient>(entity =>
         {
-            entity.HasKey(e => e.PatientId).HasName("PK__Patients__970EC346C468B3CC");
+            //entity.HasKey(e => e.PatientId).HasName("PK__Patients__970EC346C468B3CC");
 
             entity.HasIndex(e => e.NationalNo, "UQ__Patients__E9AA1A651ECDC414").IsUnique();
 
