@@ -179,7 +179,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<bool>> UpdateUserLastLoginDateAsync(int UserId)
+        public async Task<ActionResult> UpdateUserLastLoginDateAsync(int UserId)
         {
             if (!UserValidation.ValidateUserId(UserId))
                 return BadRequest("Please validate your input.");
