@@ -42,7 +42,8 @@
               "RelativeToolTip": "HospitalSystem.Repository\\Interfaces\\IAppointmentRepository.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAowB4AAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T14:26:51.172Z"
+              "WhenOpened": "2026-06-02T14:26:51.172Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -54,7 +55,8 @@
               "RelativeToolTip": "HospitalSystem.Repository\\Classes\\AppointmentRepository.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAQwD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T13:33:12.759Z"
+              "WhenOpened": "2026-05-21T13:33:12.759Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -66,7 +68,8 @@
               "RelativeToolTip": "HospitalSystem.Service\\Interfaces\\IAppointmentService.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAYwB4AAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T13:33:54.951Z"
+              "WhenOpened": "2026-05-21T13:33:54.951Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -78,7 +81,8 @@
               "RelativeToolTip": "HospitalSystem.Service\\Classes\\AppointmentService.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAA4wEwAAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T13:34:39.548Z"
+              "WhenOpened": "2026-05-21T13:34:39.548Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -88,7 +92,7 @@
               "RelativeDocumentMoniker": "HospitalSystem\\Controllers\\AppointmentsController.cs",
               "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\AppointmentsController.cs",
               "RelativeToolTip": "HospitalSystem\\Controllers\\AppointmentsController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAwA0AAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-21T13:35:08.856Z",
               "EditorCaption": ""

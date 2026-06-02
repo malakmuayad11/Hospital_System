@@ -1,12 +1,13 @@
-﻿namespace HospitalSystem.DTOs
+﻿namespace HospitalSystem.DTOs.Prescriptions
 {
-    public class PrescriptionDto
+    public class AddPrescriptionDto
     {
-        public int PrescriptionId { get; set; }
         public int AppointmentId { get; set; }
         public string MedicationName { get; set; }
-        public string Dosage { get; set; }
+        public string Dosage {  get; set; }
+
         public byte DurationDays { get; set; }
+
         public byte DurationMonths { get; set; }
     }
 }

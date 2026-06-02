@@ -1,4 +1,4 @@
-﻿namespace HospitalSystem.DTOs
+﻿namespace HospitalSystem.DTOs.Patients
 {
     public class UpdatePatientDto 
     {

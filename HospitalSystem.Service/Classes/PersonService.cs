@@ -1,5 +1,4 @@
-﻿using HospitalSystem.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +8,7 @@ using HospitalSystem.API.Models;
 using Microsoft.Extensions.Logging.Abstractions;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
+using HospitalSystem.DTOs.People;
 
 namespace HospitalSystem.Service.Classes
 {

@@ -1,4 +1,4 @@
-﻿using HospitalSystem.DTOs;
+﻿using HospitalSystem.DTOs.Users;
 
 namespace HospitalSystem.Service.Interfaces
 {

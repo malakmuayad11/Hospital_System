@@ -1,4 +1,4 @@
-﻿namespace HospitalSystem.DTOs
+﻿namespace HospitalSystem.DTOs.People
 {
     public class AddPersonDto
     {

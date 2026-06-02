@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalSystem.DTOs
+namespace HospitalSystem.DTOs.People
 {
     public class PersonDto
     {

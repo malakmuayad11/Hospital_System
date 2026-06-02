@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HospitalSystem.API.Models;
-using HospitalSystem.DTOs;
+using HospitalSystem.DTOs.Prescriptions;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
 

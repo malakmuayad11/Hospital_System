@@ -1,5 +1,5 @@
 ﻿using HospitalSystem.API.Models;
-using HospitalSystem.DTOs;
+using HospitalSystem.DTOs.Appointments;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
 using System;

@@ -1,4 +1,4 @@
-﻿namespace HospitalSystem.DTOs
+﻿namespace HospitalSystem.DTOs.Appointments
 {
     public class UpdateAppointmentStatusDto
     {

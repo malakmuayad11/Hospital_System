@@ -1,4 +1,4 @@
-﻿using HospitalSystem.DTOs;
+﻿using HospitalSystem.DTOs.Prescriptions;
 
 namespace HospitalSystem.API.Validation
 {

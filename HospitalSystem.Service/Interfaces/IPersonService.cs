@@ -1,4 +1,4 @@
-﻿using HospitalSystem.DTOs;
+﻿using HospitalSystem.DTOs.People;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,5 +1,4 @@
-﻿using HospitalSystem.DTOs;
-using HospitalSystem.Repository.Interfaces;
+﻿using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
 using HospitalSystem.API.Models;
 using System;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HospitalSystem.DTOs.MedicalRecords;
 
 namespace HospitalSystem.Service.Classes
 {

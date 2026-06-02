@@ -1,4 +1,4 @@
-﻿namespace HospitalSystem.DTOs
+﻿namespace HospitalSystem.DTOs.MedicalRecords
 {
     public class AddMedicalRecordDto
     {

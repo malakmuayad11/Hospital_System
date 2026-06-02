@@ -4,19 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalSystem.DTOs
+namespace HospitalSystem.DTOs.Appointments
 {
-    public class AppointmentDto
+    public class FindAppointmentDto
     {
-        public int AppointmentId {  get; set; }
-    
-        public string PatientName { get; set; }
-        public string NationalNo { get; set; }
-        public string DoctorName { get; set;  }
+        public int AppointmentId { get; set; }
+        public int DoctorId { get; set; }
+        public int PatientId { get; set; }
         public DateOnly AppointmentDate { get; set; }
         public TimeOnly AppointmentTime { get; set; }
+        public string ReasonForVisit { get; set; }
         public byte Status { get; set; }
-
-    
     }
 }

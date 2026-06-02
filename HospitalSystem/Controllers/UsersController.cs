@@ -1,6 +1,6 @@
 ﻿using HospitalSystem.API.Models;
 using HospitalSystem.API.Validation;
-using HospitalSystem.DTOs;
+using HospitalSystem.DTOs.Users;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
