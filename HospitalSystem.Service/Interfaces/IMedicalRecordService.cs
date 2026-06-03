@@ -11,5 +11,11 @@ namespace HospitalSystem.Service.Interfaces
     public interface IMedicalRecordService
     {
         public Task<bool> AddNewMedicalRecordAsync(AddMedicalRecordDto addMedicalRecordDto);
+
+        public Task<List<MedicalRecordDto>> GetAllMedicalRecordsAsync();
+
+        public Task<MedicalRecordDto> FindAsync(int medicalRecordId);
+
+        public Task<MedicalRecordDto> FindByAppointmentIdAsync(int appointmentId);
     }
 }

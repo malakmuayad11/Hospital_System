@@ -4,10 +4,12 @@ namespace HospitalSystem.API.Validation
 {
     public class MedicalRecordValidation
     {
+        public static bool ValidateMedicalRecordId(int medicalRecordId) => medicalRecordId > 0;
+
+        public static bool ValidateAppointmentId(int appointmentId) => appointmentId > 0;
         public static bool ValidateAddMedicalRecordDto(AddMedicalRecordDto addMedicalRecordDto) =>
-            addMedicalRecordDto.AppointmentId > 0
+            ValidateAppointmentId(addMedicalRecordDto.AppointmentId)
             && !string.IsNullOrEmpty(addMedicalRecordDto.Symptoms)
-            && !string.IsNullOrEmpty(addMedicalRecordDto.Diagnosis)
-            && !string.IsNullOrEmpty(addMedicalRecordDto.MedicalRecordNotes);
+            && !string.IsNullOrEmpty(addMedicalRecordDto.Diagnosis);
     }
 }

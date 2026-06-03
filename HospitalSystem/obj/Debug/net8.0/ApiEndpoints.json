@@ -14,7 +14,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.AppointmentDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Appointments.AppointmentDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -35,7 +35,7 @@
     "Parameters": [
       {
         "Name": "addAppointmentDto",
-        "Type": "HospitalSystem.DTOs.AddAppointmentDto",
+        "Type": "HospitalSystem.DTOs.Appointments.AddAppointmentDto",
         "IsRequired": true
       }
     ],
@@ -50,7 +50,7 @@
         "StatusCode": 400
       },
       {
-        "Type": "HospitalSystem.DTOs.AddAppointmentDto",
+        "Type": "HospitalSystem.DTOs.Appointments.AddAppointmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -76,7 +76,7 @@
     "Parameters": [
       {
         "Name": "updateAppointmentDateTimeDto",
-        "Type": "HospitalSystem.DTOs.UpdateAppointmentDateTimeDto",
+        "Type": "HospitalSystem.DTOs.Appointments.UpdateAppointmentDateTimeDto",
         "IsRequired": true
       }
     ],
@@ -150,7 +150,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.FindAppointmentDto",
+        "Type": "HospitalSystem.DTOs.Appointments.FindAppointmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -292,7 +292,7 @@
     "Parameters": [
       {
         "Name": "rescheduleAppointmentDto",
-        "Type": "HospitalSystem.DTOs.RescheduleAppointmentDto",
+        "Type": "HospitalSystem.DTOs.Appointments.RescheduleAppointmentDto",
         "IsRequired": true
       }
     ],
@@ -342,7 +342,7 @@
     "Parameters": [
       {
         "Name": "updateAppointmentStatusDto",
-        "Type": "HospitalSystem.DTOs.UpdateAppointmentStatusDto",
+        "Type": "HospitalSystem.DTOs.Appointments.UpdateAppointmentStatusDto",
         "IsRequired": true
       }
     ],
@@ -397,7 +397,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.AppointmentDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Appointments.AppointmentDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -418,7 +418,7 @@
     "Parameters": [
       {
         "Name": "addMedicalRecordDto",
-        "Type": "HospitalSystem.DTOs.AddMedicalRecordDto",
+        "Type": "HospitalSystem.DTOs.MedicalRecords.AddMedicalRecordDto",
         "IsRequired": true
       }
     ],
@@ -446,6 +446,122 @@
     "EndpointName": "AddNewMedicalRecord"
   },
   {
+    "ContainingType": "HospitalSystem.API.Controllers.MedicalRecordsController",
+    "Method": "GetAllMedicalRecordsAsync",
+    "RelativePath": "api/medicalrecords",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      },
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.MedicalRecords.MedicalRecordDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetAllMedicalRecords"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.MedicalRecordsController",
+    "Method": "FindAsync",
+    "RelativePath": "api/medicalrecords/{medicalRecordId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "medicalRecordId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "HospitalSystem.DTOs.MedicalRecords.MedicalRecordDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "FindMedicalRecordByID"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.MedicalRecordsController",
+    "Method": "FindByAppointmentIdAsync",
+    "RelativePath": "api/medicalrecords/appointment/{appointmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "HospitalSystem.DTOs.MedicalRecords.MedicalRecordDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "FindMedicalRecordByAppointmentID"
+  },
+  {
     "ContainingType": "HospitalSystem.API.Controllers.PatientsController",
     "Method": "GetAllPatientsAsync",
     "RelativePath": "api/patients",
@@ -460,7 +576,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.PatientDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Patients.PatientDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -480,7 +596,7 @@
     "Parameters": [
       {
         "Name": "addPatientDto",
-        "Type": "HospitalSystem.DTOs.AddPatientDto",
+        "Type": "HospitalSystem.DTOs.Patients.AddPatientDto",
         "IsRequired": true
       }
     ],
@@ -500,7 +616,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "HospitalSystem.DTOs.PatientDto",
+        "Type": "HospitalSystem.DTOs.Patients.PatientDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -521,7 +637,7 @@
     "Parameters": [
       {
         "Name": "updatePatientDto",
-        "Type": "HospitalSystem.DTOs.UpdatePatientDto",
+        "Type": "HospitalSystem.DTOs.Patients.UpdatePatientDto",
         "IsRequired": true
       }
     ],
@@ -687,7 +803,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.PatientDto",
+        "Type": "HospitalSystem.DTOs.Patients.PatientDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -732,7 +848,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.PatientDto",
+        "Type": "HospitalSystem.DTOs.Patients.PatientDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -879,7 +995,7 @@
     "Parameters": [
       {
         "Name": "addPersonDto",
-        "Type": "HospitalSystem.DTOs.AddPersonDto",
+        "Type": "HospitalSystem.DTOs.People.AddPersonDto",
         "IsRequired": true
       }
     ],
@@ -920,7 +1036,7 @@
     "Parameters": [
       {
         "Name": "updatePersonDto",
-        "Type": "HospitalSystem.DTOs.UpdatePersonDto",
+        "Type": "HospitalSystem.DTOs.People.UpdatePersonDto",
         "IsRequired": true
       }
     ],
@@ -985,7 +1101,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.PersonDto",
+        "Type": "HospitalSystem.DTOs.People.PersonDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1006,7 +1122,7 @@
     "Parameters": [
       {
         "Name": "addPrescriptionDto",
-        "Type": "HospitalSystem.DTOs.AddPrescriptionDto",
+        "Type": "HospitalSystem.DTOs.Prescriptions.AddPrescriptionDto",
         "IsRequired": true
       }
     ],
@@ -1026,7 +1142,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "HospitalSystem.DTOs.PrescriptionDto",
+        "Type": "HospitalSystem.DTOs.Prescriptions.PrescriptionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1071,7 +1187,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.PrescriptionDto",
+        "Type": "HospitalSystem.DTOs.Prescriptions.PrescriptionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1116,7 +1232,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.PrescriptionDto",
+        "Type": "HospitalSystem.DTOs.Prescriptions.PrescriptionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1146,7 +1262,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.UserDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Users.UserDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1167,7 +1283,7 @@
     "Parameters": [
       {
         "Name": "addUserDto",
-        "Type": "HospitalSystem.DTOs.AddUserDto",
+        "Type": "HospitalSystem.DTOs.Users.AddUserDto",
         "IsRequired": true
       }
     ],
@@ -1182,7 +1298,7 @@
         "StatusCode": 400
       },
       {
-        "Type": "HospitalSystem.DTOs.UserDto",
+        "Type": "HospitalSystem.DTOs.Users.UserDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1208,7 +1324,7 @@
     "Parameters": [
       {
         "Name": "updateUserDto",
-        "Type": "HospitalSystem.DTOs.UpdateUserDto",
+        "Type": "HospitalSystem.DTOs.Users.UpdateUserDto",
         "IsRequired": true
       }
     ],
@@ -1278,7 +1394,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.UserDto",
+        "Type": "HospitalSystem.DTOs.Users.UserDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1399,7 +1515,7 @@
     "Parameters": [
       {
         "Name": "changePasswordDto",
-        "Type": "HospitalSystem.DTOs.ChangePasswordDto",
+        "Type": "HospitalSystem.DTOs.Users.ChangePasswordDto",
         "IsRequired": true
       }
     ],
@@ -1475,7 +1591,7 @@
     "Parameters": [
       {
         "Name": "findUserDto",
-        "Type": "HospitalSystem.DTOs.FindUserDto",
+        "Type": "HospitalSystem.DTOs.Users.FindUserDto",
         "IsRequired": true
       }
     ],
@@ -1499,7 +1615,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.UserDto",
+        "Type": "HospitalSystem.DTOs.Users.UserDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

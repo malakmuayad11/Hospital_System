@@ -25,5 +25,40 @@ namespace HospitalSystem.Service.Classes
                 Diagnosis = addMedicalRecordDto.Diagnosis,
                 MedicalRecordNotes = addMedicalRecordDto.MedicalRecordNotes
             });
+
+        public async Task<List<MedicalRecordDto>> GetAllMedicalRecordsAsync() =>
+            await _medicalRecordRepository.GetAllMedicalRecordsAsync();
+
+        public async Task<MedicalRecordDto> FindAsync(int medicalRecordId)
+        {
+            MedicalRecord medicalRecord = await _medicalRecordRepository.FindAsync(medicalRecordId);
+            if (medicalRecord == null)
+                return null;
+
+            return new MedicalRecordDto
+            {
+                MedicalRecordId = medicalRecord.MedicalRecordId,
+                AppointmentId = medicalRecord.AppointmentId,
+                Symptoms = medicalRecord.Symptoms,
+                Diagnosis = medicalRecord.Diagnosis,
+                MedicalRecordNotes = medicalRecord.MedicalRecordNotes
+            };
+        }
+
+        public async Task<MedicalRecordDto> FindByAppointmentIdAsync(int appointmentId)
+        {
+            MedicalRecord medicalRecord = await _medicalRecordRepository.FindByAppointmentIdAsync(appointmentId);
+            if (medicalRecord == null)
+                return null;
+
+            return new MedicalRecordDto
+            {
+                MedicalRecordId = medicalRecord.MedicalRecordId,
+                AppointmentId = medicalRecord.AppointmentId,
+                Symptoms = medicalRecord.Symptoms,
+                Diagnosis = medicalRecord.Diagnosis,
+                MedicalRecordNotes = medicalRecord.MedicalRecordNotes
+            };
+        }
     }
 }

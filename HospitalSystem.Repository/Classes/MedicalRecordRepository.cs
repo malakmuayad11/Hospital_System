@@ -1,6 +1,8 @@
 ﻿using HospitalSystem.API.Models;
 using HospitalSystem.Data.Data;
+using HospitalSystem.DTOs.MedicalRecords;
 using HospitalSystem.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +21,28 @@ namespace HospitalSystem.Repository.Classes
             await _context.MedicalRecords.AddAsync(medicalRecord);
             return await _context.SaveChangesAsync() == 1;
         }
+
+        public async Task<List<MedicalRecordDto>> GetAllMedicalRecordsAsync() =>
+            await _context.MedicalRecords
+            .Select(mr => new MedicalRecordDto
+            {
+                MedicalRecordId = mr.MedicalRecordId,
+                AppointmentId = mr.AppointmentId,
+                Symptoms = mr.Symptoms,
+                Diagnosis = mr.Diagnosis,
+                MedicalRecordNotes = mr.MedicalRecordNotes ?? "No notes"
+            })
+            .AsNoTracking()
+            .ToListAsync();
+
+        public async Task<MedicalRecord> FindAsync(int medicalRecordId) =>
+            await _context.MedicalRecords
+            .FindAsync(medicalRecordId);
+
+        public async Task<MedicalRecord> FindByAppointmentIdAsync(int appointmentId) =>
+            await _context.MedicalRecords
+            .AsNoTracking()
+            .FirstOrDefaultAsync(mr => mr.AppointmentId == appointmentId);
+
     }
 }
