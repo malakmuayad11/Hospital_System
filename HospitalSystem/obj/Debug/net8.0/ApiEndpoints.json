@@ -409,6 +409,159 @@
     "EndpointName": "GetTodaysAppointments"
   },
   {
+    "ContainingType": "HospitalSystem.API.Controllers.BillingsController",
+    "Method": "AddAdditionalCharges",
+    "RelativePath": "api/billings",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateBillingChargesDto",
+        "Type": "HospitalSystem.DTOs.Billings.AddAdditionalChargesDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "AddAdditionalCharges"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.BillingsController",
+    "Method": "GetAllBillings",
+    "RelativePath": "api/billings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 500
+      },
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Billings.BillingDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetAllBillings"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.BillingsController",
+    "Method": "Find",
+    "RelativePath": "api/billings/{billingId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "billingId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "HospitalSystem.DTOs.Billings.FindBillingDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "Find"
+  },
+  {
+    "ContainingType": "HospitalSystem.API.Controllers.BillingsController",
+    "Method": "UpdateBillingPaymentStatus",
+    "RelativePath": "api/billings/payment-status",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateBillingPaymentStatusDto",
+        "Type": "HospitalSystem.DTOs.Billings.UpdateBillingPaymentStatusDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "UpdateBillingPaymentStatus"
+  },
+  {
     "ContainingType": "HospitalSystem.API.Controllers.ConsultationsController",
     "Method": "GetAllConsultations",
     "RelativePath": "api/consultations",

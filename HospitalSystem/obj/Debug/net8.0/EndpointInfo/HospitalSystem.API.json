@@ -715,6 +715,271 @@
         }
       }
     },
+    "/api/billings": {
+      "patch": {
+        "tags": [
+          "Billings"
+        ],
+        "operationId": "AddAdditionalCharges",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAdditionalChargesDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAdditionalChargesDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAdditionalChargesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Billings"
+        ],
+        "operationId": "GetAllBillings",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BillingDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BillingDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BillingDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/billings/payment-status": {
+      "patch": {
+        "tags": [
+          "Billings"
+        ],
+        "operationId": "UpdateBillingPaymentStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBillingPaymentStatusDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBillingPaymentStatusDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBillingPaymentStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/billings/{billingId}": {
+      "get": {
+        "tags": [
+          "Billings"
+        ],
+        "operationId": "Find",
+        "parameters": [
+          {
+            "name": "billingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FindBillingDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FindBillingDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FindBillingDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/consultations": {
       "get": {
         "tags": [
@@ -3910,6 +4175,20 @@
   },
   "components": {
     "schemas": {
+      "AddAdditionalChargesDto": {
+        "type": "object",
+        "properties": {
+          "billingId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "additionalCharges": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "AddAppointmentDto": {
         "type": "object",
         "properties": {
@@ -4152,6 +4431,36 @@
         },
         "additionalProperties": false
       },
+      "BillingDto": {
+        "type": "object",
+        "properties": {
+          "billingId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appointmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "consultationFee": {
+            "type": "number",
+            "format": "double"
+          },
+          "additionalCharges": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ChangePasswordDto": {
         "type": "object",
         "properties": {
@@ -4248,6 +4557,37 @@
           "status": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FindBillingDto": {
+        "type": "object",
+        "properties": {
+          "billingID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appointmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "consultationFee": {
+            "type": "number",
+            "format": "double"
+          },
+          "additionalCharges": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isPaid": {
+            "type": "boolean"
+          },
+          "paymentMethod": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4515,6 +4855,24 @@
           "status": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateBillingPaymentStatusDto": {
+        "type": "object",
+        "properties": {
+          "billingId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isPaid": {
+            "type": "boolean"
+          },
+          "paymentMethod": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
