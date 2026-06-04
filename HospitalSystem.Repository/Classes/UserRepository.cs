@@ -28,10 +28,14 @@ namespace HospitalSystem.Repository.Classes
 
         public async Task<int> GetUsersCountAsync() => await _Context.Users.CountAsync();
 
-        public async Task<bool> AddUserAsync(User user)
+        public async Task<int?> AddUserAsync(User user)
         {
             await _Context.Users.AddAsync(user);
-            return await _Context.SaveChangesAsync() == 1;
+
+            if(await _Context.SaveChangesAsync() == 1)
+                return user.UserId;
+
+            return null;
         }
 
         public async Task<bool?> UpdateUserAsync(User updatedUser)

@@ -1,0 +1,16 @@
+﻿namespace HospitalSystem.DTOs.Doctors
+{
+    public class DoctorDto
+    {
+        public int DictorId { get; set; }
+        public string Name { get; set; }
+
+        public string StartWorkDay { get; set; }
+
+        public string EndWorkDay { get; set; }
+        public TimeOnly StartWorkHour { get; set; }
+        public TimeOnly EndWorkHour { get; set; }
+        public string Specialty { get; set; }
+
+    }
+}

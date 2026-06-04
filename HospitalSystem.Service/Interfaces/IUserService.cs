@@ -8,7 +8,7 @@ namespace HospitalSystem.Service.Interfaces
 
         public Task<int> getUsersCountAsync();
 
-        public Task<bool> addUserAsync(AddUserDto userDto);
+        public Task<int?> addUserAsync(AddUserDto userDto);
 
         public Task<bool?> updateUserAsync(UpdateUserDto userDto);
 

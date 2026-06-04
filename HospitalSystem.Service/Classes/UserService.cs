@@ -33,7 +33,7 @@ namespace HospitalSystem.Service.Classes
 
         public async Task<int> getUsersCountAsync() => await _userRepository.GetUsersCountAsync();
 
-        public async Task<bool> addUserAsync(AddUserDto addUserDto)
+        public async Task<int?> addUserAsync(AddUserDto addUserDto)
         {
             User user = new User
             {

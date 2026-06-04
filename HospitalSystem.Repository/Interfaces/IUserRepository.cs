@@ -14,7 +14,7 @@ namespace HospitalSystem.Repository.Interfaces
 
         public Task<int> GetUsersCountAsync();
 
-        public Task<bool> AddUserAsync(User user);
+        public Task<int?> AddUserAsync(User user);
 
         public Task<bool?> UpdateUserAsync(User updatedUser);
 

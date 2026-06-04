@@ -54,7 +54,7 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateAddUserInput(addUserDto))
                 return BadRequest("Please validate your input.");
 
-            if (!await _UserService.addUserAsync(addUserDto))
+            if (await _UserService.addUserAsync(addUserDto) == null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new user." });
 
