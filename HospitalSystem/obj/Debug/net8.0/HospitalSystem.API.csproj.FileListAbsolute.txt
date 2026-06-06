@@ -147,3 +147,4 @@ C:\Programming\HospitalSystem\HospitalSystem\bin\Debug\net8.0\HospitalSystem.DTO
 C:\Programming\HospitalSystem\HospitalSystem\bin\Debug\net8.0\HospitalSystem.Service.pdb
 C:\Programming\HospitalSystem\HospitalSystem\bin\Debug\net8.0\HospitalSystem.Data.pdb
 C:\Programming\HospitalSystem\HospitalSystem\bin\Debug\net8.0\HospitalSystem.Repository.pdb
+C:\Programming\HospitalSystem\HospitalSystem\bin\Debug\net8.0\BCrypt-Net-Next.dll

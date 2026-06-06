@@ -5,6 +5,7 @@ namespace HospitalSystem.Service.Validation
     public class DoctorValidation
     {
         private static bool _ValidateDay(byte Day) => Day >= 1 && Day <= 7;
+
         private static bool _ValidateHour(TimeOnly Hour) => Hour.Hour >= 0 && Hour.Hour <= 23;
 
         public static bool ValidateDoctorId(int doctorId) => doctorId > 0;

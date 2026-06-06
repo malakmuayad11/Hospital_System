@@ -4,7 +4,7 @@ namespace HospitalSystem.Service.Interfaces
 {
     public interface IBillingService
     {
-        public Task<bool?> AddAdditionalCharges(AddAdditionalChargesDto updateBillingChargesDto);
+        public Task<bool?> AddAdditionalCharges(AddAdditionalChargesDto addAdditionalChargesDto);
 
         public Task<bool?> UpdateBillingPaymentStatus(UpdateBillingPaymentStatusDto updateBillingPaymentStatusDto);
 

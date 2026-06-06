@@ -1,7 +1,6 @@
 ﻿using HospitalSystem.API.Validation;
 using HospitalSystem.DTOs.MedicalRecords;
 using HospitalSystem.Service.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
@@ -10,10 +9,10 @@ namespace HospitalSystem.API.Controllers
     [ApiController]
     public class MedicalRecordsController : ControllerBase
     {
-        private readonly IMedicalRecordService _mediicalRecordService;
+        private readonly IMedicalRecordService _medicalRecordService;
 
         public MedicalRecordsController(IMedicalRecordService mediicalRecordService)
-            => _mediicalRecordService = mediicalRecordService;
+            => _medicalRecordService = mediicalRecordService;
 
         [HttpPost(Name = "AddNewMedicalRecord")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -24,12 +23,13 @@ namespace HospitalSystem.API.Controllers
             if (!MedicalRecordValidation.ValidateAddMedicalRecordDto(addMedicalRecordDto))
                 return BadRequest("Please validate your input");
 
-            if (!await _mediicalRecordService.AddNewMedicalRecordAsync(addMedicalRecordDto))
+            int? medicalRecordId = await _medicalRecordService.AddNewMedicalRecordAsync(addMedicalRecordDto);
+
+            if (medicalRecordId is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new medical record." });
 
-            return Ok();
-            //return CreatedAtRoute("GetUserByID", new { userID = user.UserID }, user.userDTO);
+            return CreatedAtRoute("FindMedicalRecordByID", new { medicalRecordId = medicalRecordId}, addMedicalRecordDto);
         }
 
         [HttpGet(Name = "GetAllMedicalRecords")]
@@ -37,7 +37,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<MedicalRecordDto>>> GetAllMedicalRecordsAsync()
         {
-            List<MedicalRecordDto> medicalRecords = await _mediicalRecordService.GetAllMedicalRecordsAsync();
+            List<MedicalRecordDto> medicalRecords = await _medicalRecordService.GetAllMedicalRecordsAsync();
 
             if (medicalRecords is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
@@ -55,7 +55,7 @@ namespace HospitalSystem.API.Controllers
             if (!MedicalRecordValidation.ValidateMedicalRecordId(medicalRecordId))
                 return BadRequest("Please validate your input");
 
-            MedicalRecordDto medicalRecord = await _mediicalRecordService.FindAsync(medicalRecordId);
+            MedicalRecordDto medicalRecord = await _medicalRecordService.FindAsync(medicalRecordId);
 
             if (medicalRecord is null)
                 return NotFound(new { message = $"Medical record with ID {medicalRecordId} not found." });
@@ -72,9 +72,10 @@ namespace HospitalSystem.API.Controllers
             if (!MedicalRecordValidation.ValidateAppointmentId(appointmentId))
                 return BadRequest("Please validate your input");
 
-            MedicalRecordDto medicalRecord = await _mediicalRecordService.FindByAppointmentIdAsync(appointmentId);
+            MedicalRecordDto medicalRecord = await _medicalRecordService.FindByAppointmentIdAsync(appointmentId);
+            
             if (medicalRecord is null)
-                return NotFound(new { message = $"Medical record with appointment ID {appointmentId} not found." });
+                return NotFound($"Medical record with appointment ID {appointmentId} not found.");
 
             return Ok(medicalRecord);
         }

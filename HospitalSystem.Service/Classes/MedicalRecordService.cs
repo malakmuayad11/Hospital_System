@@ -1,11 +1,6 @@
 ﻿using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
 using HospitalSystem.API.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HospitalSystem.DTOs.MedicalRecords;
 
 namespace HospitalSystem.Service.Classes
@@ -17,7 +12,7 @@ namespace HospitalSystem.Service.Classes
         public MedicalRecordService(IMedicalRecordRepository medicalRecordRepository) =>
             this._medicalRecordRepository = medicalRecordRepository;
 
-        public async Task<bool> AddNewMedicalRecordAsync(AddMedicalRecordDto addMedicalRecordDto) =>
+        public async Task<int?> AddNewMedicalRecordAsync(AddMedicalRecordDto addMedicalRecordDto) =>
             await _medicalRecordRepository.AddNewMedicalRecordAsync(new MedicalRecord
             {
                 AppointmentId = addMedicalRecordDto.AppointmentId,
@@ -32,6 +27,7 @@ namespace HospitalSystem.Service.Classes
         public async Task<MedicalRecordDto> FindAsync(int medicalRecordId)
         {
             MedicalRecord medicalRecord = await _medicalRecordRepository.FindAsync(medicalRecordId);
+            
             if (medicalRecord == null)
                 return null;
 
@@ -48,6 +44,7 @@ namespace HospitalSystem.Service.Classes
         public async Task<MedicalRecordDto> FindByAppointmentIdAsync(int appointmentId)
         {
             MedicalRecord medicalRecord = await _medicalRecordRepository.FindByAppointmentIdAsync(appointmentId);
+            
             if (medicalRecord == null)
                 return null;
 

@@ -4,7 +4,6 @@ namespace HospitalSystem.Service.Validation
 {
     public class BillingValidation
     {
-
         public static bool ValidateBillingId(int billingId) => billingId >= 0;
         public static bool ValidateUpdateBillingChargesDto(AddAdditionalChargesDto updateBillingChargesDto) =>
             ValidateBillingId(updateBillingChargesDto.BillingId) &&
@@ -16,8 +15,11 @@ namespace HospitalSystem.Service.Validation
                 return false;
 
             if (updateBillingPaymentStatusDto.PaymentMethod is not null &&
-                updateBillingPaymentStatusDto.PaymentMethod > 1)
+            (updateBillingPaymentStatusDto.PaymentMethod < 0 ||
+            updateBillingPaymentStatusDto.PaymentMethod > 1))
+            {
                 return false;
+            }
 
             return true;
         }

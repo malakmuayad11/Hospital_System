@@ -1720,7 +1720,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "System.Boolean",
+        "Type": "HospitalSystem.DTOs.People.AddPersonDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1861,13 +1861,13 @@
   {
     "ContainingType": "HospitalSystem.API.Controllers.PrescriptionsController",
     "Method": "GetPrescriptionByPrescriptionIdAsync",
-    "RelativePath": "api/prescription/{PrescriptionId}",
+    "RelativePath": "api/prescription/{prescriptionId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "PrescriptionId",
+        "Name": "prescriptionId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -1906,13 +1906,13 @@
   {
     "ContainingType": "HospitalSystem.API.Controllers.PrescriptionsController",
     "Method": "GetPrescriptionByAppointmentIdAsync",
-    "RelativePath": "api/prescription/findByAppointmentId/{AppointmentId}",
+    "RelativePath": "api/prescription/findByAppointmentId/{appointmentId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "AppointmentId",
+        "Name": "appointmentId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2068,13 +2068,13 @@
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
     "Method": "FindAsync",
-    "RelativePath": "api/users/{UserId}",
+    "RelativePath": "api/users/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "UserId",
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2113,13 +2113,13 @@
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
     "Method": "DeleteUserAsync",
-    "RelativePath": "api/users/{UserId}",
+    "RelativePath": "api/users/{userId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "UserId",
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2163,13 +2163,13 @@
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
     "Method": "AddAsCurrentUserAsync",
-    "RelativePath": "api/users/addAsCurrentUser/{UserId}",
+    "RelativePath": "api/users/addAsCurrentUser/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "UserId",
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2334,13 +2334,13 @@
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
     "Method": "IsUsernameUsedAsync",
-    "RelativePath": "api/users/isUsernameUsed/{Username}",
+    "RelativePath": "api/users/isUsernameUsed/{username}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Username",
+        "Name": "username",
         "Type": "System.String",
         "IsRequired": true
       }
@@ -2370,13 +2370,13 @@
   {
     "ContainingType": "HospitalSystem.API.Controllers.UsersController",
     "Method": "UpdateUserLastLoginDateAsync",
-    "RelativePath": "api/users/updateLastLoginDate/{UserId}",
+    "RelativePath": "api/users/updateLastLoginDate/{userId}",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "UserId",
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
       }

@@ -1,10 +1,4 @@
 ﻿using HospitalSystem.API.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HospitalSystem.Data;
 using HospitalSystem.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using HospitalSystem.Repository.Interfaces;
@@ -20,13 +14,13 @@ namespace HospitalSystem.Repository.Classes
         public async Task<bool> AddNewPrescriptionAsync(Prescription prescription)
         {
             await this._context.Prescriptions.AddAsync(prescription);
-            return await this._context.SaveChangesAsync() == 1;
+            return await this._context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Prescription> GetPrescriptionByPrescriptionIdAsync(int PrescriptionId) =>
-            await _context.Prescriptions.FindAsync(PrescriptionId);
+        public async Task<Prescription> GetPrescriptionByPrescriptionIdAsync(int prescriptionId) =>
+            await _context.Prescriptions.FindAsync(prescriptionId);
 
-        public async Task<Prescription> GetPrescriptionByAppointmentIdAsync(int AppointmentId) =>
-            await _context.Prescriptions.SingleOrDefaultAsync(p => p.AppointmentId == AppointmentId);
+        public async Task<Prescription> GetPrescriptionByAppointmentIdAsync(int appointmentId) =>
+            await _context.Prescriptions.SingleOrDefaultAsync(p => p.AppointmentId == appointmentId);
     }
 }

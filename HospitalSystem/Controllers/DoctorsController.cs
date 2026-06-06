@@ -2,7 +2,6 @@
 using HospitalSystem.DTOs.Doctors;
 using HospitalSystem.Service.Interfaces;
 using HospitalSystem.Service.Validation;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
@@ -21,6 +20,7 @@ namespace HospitalSystem.API.Controllers
         public async Task<ActionResult<int>> GetDoctorsCount()
         {
             int count = await _doctorService.DoctorsCount();
+
             if (count == null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
             new { message = "An error occurred while getting doctors count." });
@@ -37,11 +37,21 @@ namespace HospitalSystem.API.Controllers
             if (!DoctorValidation.ValidateAddDoctorDto(addDoctorDto))
                 return BadRequest("Please validate your input.");
 
-            if (!await _doctorService.AddNewDoctorAsync(addDoctorDto))
+            int? doctorId = await _doctorService.AddNewDoctorAsync(addDoctorDto);
+
+            if (doctorId is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
             new { message = "An error occurred while adding new doctor." });
 
-            return Ok(); // replace with get route
+            return CreatedAtRoute("FindDoctor", new { doctorId = doctorId }, new 
+            {
+                PersonId = addDoctorDto.PersonId,
+                StartWorkDay = addDoctorDto.StartWorkDay,
+                EndWorkDay = addDoctorDto.EndWorkDay,
+                StartWorkHour = addDoctorDto.StartWorkHour,
+                EndWorkHour = addDoctorDto.EndWorkHour,
+                ConsultationId = addDoctorDto.ConsultationId
+            });
         }
 
         [HttpPut(Name = "UpdateDoctor")]
@@ -56,7 +66,7 @@ namespace HospitalSystem.API.Controllers
 
             bool? result = await _doctorService.UpdateDoctorAsync(updateDoctorDto);
 
-            if (result == null)
+            if (result is null)
                 return NotFound($"Doctor with id {updateDoctorDto.DoctorId} is not found.");
 
             if (result == false)
@@ -77,7 +87,7 @@ namespace HospitalSystem.API.Controllers
 
             FindDoctorDto doctorDto = await _doctorService.FindAsync(doctorId);
 
-            if (doctorDto == null)
+            if (doctorDto is null)
                 return NotFound($"Doctor with id {doctorId} is not found.");
 
             return Ok(doctorDto);
@@ -94,7 +104,7 @@ namespace HospitalSystem.API.Controllers
 
             FindDoctorDto doctorDto = await _doctorService.FindByUserIdAsync(userId);
 
-            if (doctorDto == null)
+            if (doctorDto is null)
                 return NotFound($"Doctor with user id {userId} is not found.");
 
             return Ok(doctorDto);
@@ -112,7 +122,7 @@ namespace HospitalSystem.API.Controllers
 
             bool? result = await _doctorService.DeleteDoctorAsync(doctorId);
 
-            if (result == null)
+            if (result is null)
                 return NotFound($"Doctor with id {doctorId} is not found.");
 
             if (result == false)
@@ -129,7 +139,7 @@ namespace HospitalSystem.API.Controllers
         {
             List<DoctorDto> doctors = await _doctorService.GetAllDoctorsAsync();
 
-            if (doctors == null)
+            if (doctors is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
             new { message = "An error occurred while getting all doctors." });
 
@@ -147,7 +157,7 @@ namespace HospitalSystem.API.Controllers
 
             List<AppointmentForDoctorDto> appointments = await _doctorService.GetTodaysAppointmentsForDoctorAsync(doctorId);
 
-            if (appointments == null)
+            if (appointments is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
             new { message = "An error occurred while getting today's appointments for doctor." });
 
@@ -165,7 +175,7 @@ namespace HospitalSystem.API.Controllers
 
             int? count = await _doctorService.PatientsCountForDoctorAsync(doctorId);
 
-            if (count == null)
+            if (count is null)
                 return NotFound($"Doctor with id: {doctorId} is not found.");
 
             return Ok(count);
@@ -182,7 +192,7 @@ namespace HospitalSystem.API.Controllers
 
             int? count = await _doctorService.AppointmentsCountForDoctorAsync(doctorId);
 
-            if (count == null)
+            if (count is null)
                 return NotFound($"Doctor with id: {doctorId} is not found.");
 
             return Ok(count);
@@ -199,11 +209,10 @@ namespace HospitalSystem.API.Controllers
 
             int? count = await _doctorService.MedicalRecordsCountForDoctorAsync(doctorId);
 
-            if (count == null)
+            if (count is null)
                 return NotFound($"Doctor with id: {doctorId} is not found.");
 
             return Ok(count);
         }
-
     }
 }

@@ -3,12 +3,6 @@ using HospitalSystem.DTOs.Appointments;
 using HospitalSystem.DTOs.Doctors;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Service.Classes
 {
@@ -16,16 +10,18 @@ namespace HospitalSystem.Service.Classes
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IPasswordHasher _passwordHasher;
 
-        public DoctorService(IDoctorRepository doctorRepository, IUserRepository userRepository)
+        public DoctorService(IDoctorRepository doctorRepository, IUserRepository userRepository, IPasswordHasher passwordHasher)
         {
             _doctorRepository = doctorRepository;
             _userRepository = userRepository;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<int> DoctorsCount() => await _doctorRepository.DoctorsCount();
 
-        public async Task<bool> AddNewDoctorAsync(AddDoctorDto addDoctorDto)
+        public async Task<int?> AddNewDoctorAsync(AddDoctorDto addDoctorDto)
         {
             // we need first to add a user for the doctor, then we can add the doctor with the user id
 
@@ -35,14 +31,14 @@ namespace HospitalSystem.Service.Classes
             int? userId = await _userRepository.AddUserAsync(new API.Models.User
             {
                 Username = $"Doctor{doctorUsernameId}",
-                Password = "1234", // this should be handled
+                Password = _passwordHasher.HashPassword(addDoctorDto.Password), // this should be handled
                 Role = 3, // Doctor role
                 Permissions = 18 // Permissions for doctor role
             });
 
             // If user creation failed, return false
             if (userId == null)
-                return false;
+                return null;
 
             // Now we can create the doctor with the generated userId
             Doctor doctor = new Doctor

@@ -8,7 +8,7 @@ namespace HospitalSystem.Repository.Interfaces
     {
         public Task<int> DoctorsCount();
 
-        public Task<bool> AddNewDoctorAsync(Doctor doctor);
+        public Task<int?> AddNewDoctorAsync(Doctor doctor);
 
         public Task<bool?> UpdateDoctorAsync(Doctor doctor);
 
@@ -27,7 +27,5 @@ namespace HospitalSystem.Repository.Interfaces
         public Task<int?> AppointmentsCountForDoctorAsync(int doctorId);
 
         public Task<int?> MedicalRecordsCountForDoctorAsync(int doctorId);
-
-
     }
 }

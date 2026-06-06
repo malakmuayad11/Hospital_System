@@ -1,11 +1,6 @@
 ﻿using HospitalSystem.API.Models;
 using HospitalSystem.Data.Data;
 using HospitalSystem.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Repository.Classes
 {
@@ -18,7 +13,7 @@ namespace HospitalSystem.Repository.Classes
         public async Task<int?> AddNewPersonAsync(Person person)
         {
             await _context.People.AddAsync(person);
-            if (await _context.SaveChangesAsync() != 1)
+            if (await _context.SaveChangesAsync() < 1)
                 return null;
             return person.PersonId;
         }
@@ -39,7 +34,7 @@ namespace HospitalSystem.Repository.Classes
             person.Email = updatedPerson.Email;
             person.Gender = updatedPerson.Gender;
 
-            return await _context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

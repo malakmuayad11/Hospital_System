@@ -39,6 +39,7 @@ builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<IConsultationService, ConsultationService>();
 builder.Services.AddScoped<IBillingService, BillingService>();
+builder.Services.AddScoped<IPasswordHasher, BcryptHasher>();
 
 var app = builder.Build();
 

@@ -3,11 +3,6 @@ using HospitalSystem.Data.Data;
 using HospitalSystem.DTOs.Appointments;
 using HospitalSystem.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Repository.Classes
 {
@@ -54,9 +49,9 @@ namespace HospitalSystem.Repository.Classes
 
         public async Task<int?> AddNewAppointmentAsync(Appointment appointment)
         {
-            _context.Appointments.Add(appointment);
+            await _context.Appointments.AddAsync(appointment);
 
-            if (_context.SaveChanges() != 1) return null;
+            if (_context.SaveChanges() < 1) return null;
 
             return appointment.AppointmentId;
         }
@@ -73,7 +68,7 @@ namespace HospitalSystem.Repository.Classes
             appointment.AppointmentDate = appointmentDate;
             appointment.AppointmentTime = appointmentTime;
 
-            return await _context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool?> UpdateAppointmentStatusAsync(int appointmentId, byte newStatus)
@@ -85,7 +80,7 @@ namespace HospitalSystem.Repository.Classes
 
             appointment.Status = newStatus;
 
-            return await _context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<Appointment> FindAsync(int appointmentId) =>
@@ -104,7 +99,7 @@ namespace HospitalSystem.Repository.Classes
             appointment.AppointmentDate = newDate;
             appointment.AppointmentTime = newTime;
             appointment.Status = 2;
-            return await _context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool?> HasAppointmentMedicalRecordAsync(int appointmentId)

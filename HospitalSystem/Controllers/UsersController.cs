@@ -1,8 +1,6 @@
-﻿using HospitalSystem.API.Models;
-using HospitalSystem.API.Validation;
+﻿using HospitalSystem.API.Validation;
 using HospitalSystem.DTOs.Users;
 using HospitalSystem.Service.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
@@ -11,11 +9,11 @@ namespace HospitalSystem.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _UserService;
+        private readonly IUserService _userService;
 
         public UsersController(IUserService UserService)
         {
-            this._UserService = UserService;
+            this._userService = UserService;
         }
 
         [HttpGet(Name = "GetAllUsers")]
@@ -23,9 +21,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsersAsync()
         {
-            List<UserDto> users = await _UserService.getAllUsersAsync();
+            List<UserDto> users = await _userService.GetAllUsersAsync();
 
-            if (users == null || users.Count == 0)
+            if (users == null)
                 return NotFound("Users are not found");
 
             return Ok(users);
@@ -36,13 +34,13 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<int>> GetUsersCountAsync()
         {
-            int UsersCount = await _UserService.getUsersCountAsync();
+            int usersCount = await _userService.GetUsersCountAsync();
 
-            if (UsersCount == null || UsersCount < 0)
+            if (usersCount == null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while counting users." });
 
-            return Ok(UsersCount);
+            return Ok(usersCount);
         }
 
         [HttpPost(Name = "AddNewUser")]
@@ -54,12 +52,13 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateAddUserInput(addUserDto))
                 return BadRequest("Please validate your input.");
 
-            if (await _UserService.addUserAsync(addUserDto) == null)
+            int? userId = await _userService.AddUserAsync(addUserDto);
+
+            if (userId is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new user." });
 
-            return Ok();
-            //return CreatedAtRoute("GetUserByID", new { userID = user.UserID }, user.userDTO);
+            return CreatedAtRoute("FindUserById", new { userId = userId }, addUserDto);
         }
 
         [HttpPut(Name = "UpdateUser")]
@@ -72,17 +71,16 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.updateUserAsync(updateUserDto);
+            bool? result = await _userService.UpdateUserAsync(updateUserDto);
 
-            if (result == null)
+            if (result is null)
                 return NotFound($"User with id: {updateUserDto.UserId} is not found.");
 
             if (result == false)
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while updating the user." });
 
-            return Ok("User updated successfully.");
-
+            return Ok("User is updated successfully.");
         }
 
         [HttpPatch("changePassword", Name = "changePassword")]
@@ -95,9 +93,9 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateChangePasswordInput(changePasswordDto))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.changePasswordAsync(changePasswordDto);
+            bool? result = await _userService.ChangePasswordAsync(changePasswordDto);
 
-            if (result == null)
+            if (result is null)
                 return NotFound($"User with id: {changePasswordDto.UserId} is not found.");
 
             if (result == false)
@@ -107,19 +105,19 @@ namespace HospitalSystem.API.Controllers
             return Ok("Password is changed successfully.");
         }
 
-        [HttpGet("{UserId}", Name = "FindUserById")]
+        [HttpGet("{userId}", Name = "FindUserById")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<UserDto>> FindAsync(int UserId)
+        public async Task<ActionResult<UserDto>> FindAsync(int userId)
         {
-            if (!UserValidation.ValidateUserId(UserId))
+            if (!UserValidation.ValidateUserId(userId))
                 return BadRequest("Please validate your input.");
 
-            UserDto user = await _UserService.findAsync(UserId);
+            UserDto user = await _userService.FindAsync(userId);
 
-            if (user == null)
-                return NotFound($"User with id: {UserId} is not found.");
+            if (user is null)
+                return NotFound($"User with id: {userId} is not found.");
 
             return Ok(user);
         }
@@ -133,39 +131,39 @@ namespace HospitalSystem.API.Controllers
             if (!UserValidation.ValidateFindUserInput(findUserDto))
                 return BadRequest("Please validate your input.");
 
-            UserDto user = await _UserService.findAsync(findUserDto);
+            UserDto user = await _userService.FindAsync(findUserDto);
 
-            if (user == null)
-                return NotFound($"User with username: {findUserDto.Username} is not found.");
+            if (user is null)
+                return NotFound($"User is not found.");
 
             return Ok(user);
         }
 
-        [HttpGet("isUsernameUsed/{Username}", Name = "IsUsernameUsed")]
+        [HttpGet("isUsernameUsed/{username}", Name = "IsUsernameUsed")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<bool>> IsUsernameUsedAsync(string Username)
+        public async Task<ActionResult<bool>> IsUsernameUsedAsync(string username)
         {
-            if (!UserValidation.ValidateUsername(Username))
+            if (!UserValidation.ValidateUsername(username))
                 return BadRequest("Please validate your input.");
 
-            return Ok(await _UserService.isUsernameUsedAsync(Username));
+            return Ok(await _userService.IsUsernameUsedAsync(username));
         }
 
-        [HttpDelete("{UserId}", Name = "DeleteUser")]
+        [HttpDelete("{userId}", Name = "DeleteUser")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<bool>> DeleteUserAsync(int UserId)
+        public async Task<ActionResult<bool>> DeleteUserAsync(int userId)
         {
-            if (!UserValidation.ValidateUserId(UserId))
+            if (!UserValidation.ValidateUserId(userId))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.deleteUserAsync(UserId);
+            bool? result = await _userService.DeleteUserAsync(userId);
 
-            if (result == null)
-                return NotFound($"User with id: {UserId} is not found.");
+            if (result is null)
+                return NotFound($"User with id: {userId} is not found.");
 
             if (result == false)
                 return StatusCode(StatusCodes.Status500InternalServerError,
@@ -174,20 +172,20 @@ namespace HospitalSystem.API.Controllers
             return Ok("User deleted successfully.");
         }
 
-        [HttpPatch("updateLastLoginDate/{UserId}", Name = "UpdateUserLastLoginDate")]
+        [HttpPatch("updateLastLoginDate/{userId}", Name = "UpdateUserLastLoginDate")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UpdateUserLastLoginDateAsync(int UserId)
+        public async Task<ActionResult> UpdateUserLastLoginDateAsync(int userId)
         {
-            if (!UserValidation.ValidateUserId(UserId))
+            if (!UserValidation.ValidateUserId(userId))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.updateUserLastLoginDateAsync(UserId);
+            bool? result = await _userService.UpdateUserLastLoginDateAsync(userId);
 
-            if (result == null)
-                return NotFound($"User with id: {UserId} is not found.");
+            if (result is null)
+                return NotFound($"User with id: {userId} is not found.");
 
             if (result == false)
                 return StatusCode(StatusCodes.Status500InternalServerError,
@@ -196,20 +194,20 @@ namespace HospitalSystem.API.Controllers
             return Ok("User's last login date is updated successfully.");
         }
 
-        [HttpGet("addAsCurrentUser/{UserId}", Name = "AddAsCurrentUser")]
+        [HttpGet("addAsCurrentUser/{userId}", Name = "AddAsCurrentUser")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<bool>> AddAsCurrentUserAsync(int UserId)
+        public async Task<ActionResult<bool>> AddAsCurrentUserAsync(int userId)
         {
-            if (!UserValidation.ValidateUserId(UserId))
+            if (!UserValidation.ValidateUserId(userId))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _UserService.addAsCurrentUserAsync(UserId);
+            bool? result = await _userService.AddAsCurrentUserAsync(userId);
 
-            if (result == null)
-                return NotFound($"User with id: {UserId} is not found.");
+            if (result is null)
+                return NotFound($"User with id: {userId} is not found.");
 
             if (result == false)
                 return StatusCode(StatusCodes.Status500InternalServerError,

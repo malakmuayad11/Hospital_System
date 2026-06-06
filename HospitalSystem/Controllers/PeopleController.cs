@@ -16,19 +16,19 @@ namespace HospitalSystem.API.Controllers
         [HttpPost(Name = "AddNewPerson")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<bool>> AddNewPersonAsync(AddPersonDto addPersonDto)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<ActionResult<AddPersonDto>> AddNewPersonAsync(AddPersonDto addPersonDto)
         {
             if (!PersonValidation.validateAddPersonDto(addPersonDto))
                 return BadRequest("Please validate your input");
 
             int? personId = await _personService.AddNewPersonAsync(addPersonDto);
 
-            if(personId == null)
+            if(personId is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new person." });
 
-            return Ok(personId); 
+            return CreatedAtRoute("FindById", new { personId = personId }, addPersonDto);
         }
 
         [HttpGet("{personId}", Name = "FindById")]
@@ -57,9 +57,9 @@ namespace HospitalSystem.API.Controllers
             if (!PersonValidation.validateUpdatePersonDto(updatePersonDto))
                 return BadRequest("Please validate your input.");
 
-            bool? result = await _personService.updateAsync(updatePersonDto);
+            bool? result = await _personService.UpdateAsync(updatePersonDto);
 
-            if (result == null)
+            if (result is null)
                 return NotFound($"Person with id: {updatePersonDto.PersonId} is not found.");
 
             if (result == false)

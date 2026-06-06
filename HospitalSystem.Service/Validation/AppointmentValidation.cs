@@ -4,7 +4,6 @@ namespace HospitalSystem.API.Validation
 {
     public class AppointmentValidation
     {
-
         public static bool ValidateAppointmentId(int appointmentId) => appointmentId > 0;
         public static bool ValidateAppointmentDate(DateOnly appointmentDate) =>
             appointmentDate >= DateOnly.FromDateTime(DateTime.Today);

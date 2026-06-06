@@ -3,11 +3,6 @@ using HospitalSystem.Data.Data;
 using HospitalSystem.DTOs.MedicalRecords;
 using HospitalSystem.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Repository.Classes
 {
@@ -16,10 +11,13 @@ namespace HospitalSystem.Repository.Classes
         private readonly HospitalSystemContext _context;
         public MedicalRecordRepository(HospitalSystemContext context) => _context = context;
 
-        public async Task<bool> AddNewMedicalRecordAsync(MedicalRecord medicalRecord)
+        public async Task<int?> AddNewMedicalRecordAsync(MedicalRecord medicalRecord)
         {
             await _context.MedicalRecords.AddAsync(medicalRecord);
-            return await _context.SaveChangesAsync() == 1;
+
+            if (await _context.SaveChangesAsync() < 1) return null;
+
+            return medicalRecord.MedicalRecordId;
         }
 
         public async Task<List<MedicalRecordDto>> GetAllMedicalRecordsAsync() =>
@@ -43,6 +41,5 @@ namespace HospitalSystem.Repository.Classes
             await _context.MedicalRecords
             .AsNoTracking()
             .FirstOrDefaultAsync(mr => mr.AppointmentId == appointmentId);
-
     }
 }

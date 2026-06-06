@@ -20,7 +20,7 @@ namespace HospitalSystem.API.Controllers
         {
             List<PatientDto> patientDtos = await _patientService.GetAllPatientsAsync();
 
-            if (patientDtos == null)
+            if (patientDtos is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while fetching patients." });
 
@@ -38,7 +38,7 @@ namespace HospitalSystem.API.Controllers
 
             int? patientId = await _patientService.AddNewPatientAsync(addPatientDto);
 
-            if(patientId == null)
+            if(patientId is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new patient." });
 
@@ -56,7 +56,7 @@ namespace HospitalSystem.API.Controllers
 
             bool? result = await _patientService.UpdatePatientAsync(updatePatientDto);
 
-            if(result == null)
+            if(result is null)
                 return NotFound($"Patient with id: {updatePatientDto.PatientId} is not found.");
 
             if (result == false)

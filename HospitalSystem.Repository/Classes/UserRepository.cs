@@ -1,38 +1,28 @@
 ﻿using HospitalSystem.API.Models;
 using HospitalSystem.Data.Data;
-using HospitalSystem.DTOs;
 using HospitalSystem.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Repository.Classes
 {
     public class UserRepository : IUserRepository
     {
-        private readonly HospitalSystemContext _Context;
+        private readonly HospitalSystemContext _context;
 
-        public UserRepository(HospitalSystemContext Context)
-        {
-            this._Context = Context;
-        }
+        public UserRepository(HospitalSystemContext Context) => this._context = Context;
 
         public async Task<List<User>> GetAllUsersAsync() =>
-            await _Context.Users
+            await _context.Users
                 .AsNoTracking()
                 .ToListAsync();
 
-        public async Task<int> GetUsersCountAsync() => await _Context.Users.CountAsync();
+        public async Task<int> GetUsersCountAsync() => await _context.Users.CountAsync();
 
         public async Task<int?> AddUserAsync(User user)
         {
-            await _Context.Users.AddAsync(user);
+            await _context.Users.AddAsync(user);
 
-            if(await _Context.SaveChangesAsync() == 1)
+            if(await _context.SaveChangesAsync() > 0)
                 return user.UserId;
 
             return null;
@@ -40,8 +30,7 @@ namespace HospitalSystem.Repository.Classes
 
         public async Task<bool?> UpdateUserAsync(User updatedUser)
         {
-            User user = await _Context.Users
-                .FindAsync(updatedUser.UserId);
+            User user = await this.FindAsync(updatedUser.UserId);
 
             if (user == null)
                 return null;
@@ -50,72 +39,72 @@ namespace HospitalSystem.Repository.Classes
             user.Role = updatedUser.Role;
             user.Permissions = updatedUser.Permissions;
 
-            return await _Context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool?> ChangePasswordAsync(int UserId, string newPassword)
+        public async Task<bool?> ChangePasswordAsync(int userId, string newPassword)
         {
-            User user = await _Context.Users
-                .FindAsync(UserId);
+            User user = await this.FindAsync(userId);
 
             if (user == null)
                 return null;
 
             user.Password = newPassword;
-            return await _Context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<User> FindAsync(int UserId) =>
-            await _Context.Users
-                .FindAsync(UserId);
+        public async Task<User> FindAsync(int userId) =>
+            await _context.Users
+                .FindAsync(userId);
 
-        public async Task<User> FindAsyc(string Username, string Password) =>
-            await _Context.Users
-                .SingleOrDefaultAsync(u => u.Username == Username && u.Password == Password);
+        public async Task<User> FindAsync(string username, string password) =>
+            await _context.Users
+                .SingleOrDefaultAsync(u => u.Username == username && u.Password == password);
 
-        public async Task<bool> IsUsernameUsedAsync(string Username) =>
-            await _Context.Users
-            .AnyAsync(u => u.Username == Username);
+        public async Task<User> FindAsync(string username) =>
+            await _context.Users.SingleOrDefaultAsync(u => u.Username == username);
 
-        public async Task<bool?> DeleteUserAsync(int UserId)
+        public async Task<bool> IsUsernameUsedAsync(string username) =>
+            await _context.Users
+            .AnyAsync(u => u.Username == username);
+
+        public async Task<bool?> DeleteUserAsync(int userId)
         {
-            User user = await _Context.Users
-                .FindAsync(UserId);
+            User user = await this.FindAsync(userId);
 
             if (user == null)
                 return null;
 
-            _Context.Users.Remove(user);
-            return await _Context.SaveChangesAsync() == 1;
+            _context.Users.Remove(user);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool?> UpdateUserLastLoginDateAsync(int UserId)
+        public async Task<bool?> UpdateUserLastLoginDateAsync(int userId)
         {
-            User user = await _Context.Users
-                .FindAsync(UserId);
+            User user = await this.FindAsync(userId);
 
             if (user == null)
                 return null;
 
             user.LastLoginDate = DateTime.UtcNow;
-            return await _Context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool?> AddAsCurrentUserAsync(int UserId)
+        public async Task<bool?> AddAsCurrentUserAsync(int userId)
         {
-            if (!await _Context.Users
-                .AnyAsync(u => u.UserId == UserId))
+            if (!await _context.Users
+                .AnyAsync(u => u.UserId == userId))
                 return null;
 
-            SystemSetting systemSetting = await _Context.SystemSettings
+            SystemSetting systemSetting = await _context.SystemSettings
                 .FindAsync(1);
 
             if (systemSetting == null)
                 return false;
 
-            systemSetting.CurrentUserId = UserId;
+            systemSetting.CurrentUserId = userId;
 
-            return await _Context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

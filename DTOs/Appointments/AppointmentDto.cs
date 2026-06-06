@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HospitalSystem.DTOs.Appointments
+﻿namespace HospitalSystem.DTOs.Appointments
 {
     public class AppointmentDto
     {
@@ -16,7 +10,5 @@ namespace HospitalSystem.DTOs.Appointments
         public DateOnly AppointmentDate { get; set; }
         public TimeOnly AppointmentTime { get; set; }
         public byte Status { get; set; }
-
-    
     }
 }

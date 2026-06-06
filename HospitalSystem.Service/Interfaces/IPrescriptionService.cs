@@ -1,9 +1,4 @@
 ﻿using HospitalSystem.DTOs.Prescriptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Service.Interfaces
 {
@@ -11,8 +6,8 @@ namespace HospitalSystem.Service.Interfaces
     {
         public Task<bool> AddNewPrescriptionAsync(AddPrescriptionDto addPrescriptionDto);
 
-        public Task<PrescriptionDto> GetPrescriptionByPrescriptionIdAsync(int PrescriptionId);
+        public Task<PrescriptionDto> GetPrescriptionByPrescriptionIdAsync(int prescriptionId);
 
-        public Task<PrescriptionDto> GetPrescriptionByAppointmentIdAsync(int AppointmentId);
+        public Task<PrescriptionDto> GetPrescriptionByAppointmentIdAsync(int appointmentId);
     }
 }

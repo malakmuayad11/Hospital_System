@@ -1,9 +1,4 @@
 ﻿using HospitalSystem.DTOs.People;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Service.Interfaces
 {
@@ -13,6 +8,6 @@ namespace HospitalSystem.Service.Interfaces
 
         public Task<PersonDto> FindAsync(int personId);
 
-        public Task<bool?> updateAsync(UpdatePersonDto updatePersonDto);
+        public Task<bool?> UpdateAsync(UpdatePersonDto updatePersonDto);
     }
 }

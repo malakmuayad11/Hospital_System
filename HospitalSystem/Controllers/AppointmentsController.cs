@@ -78,7 +78,7 @@ namespace HospitalSystem.API.Controllers
 
             bool? result = await _appointmentService.UpdateAppointmentDateTimeAsync(updateAppointmentDateTimeDto);
 
-            if (result == null)
+            if (result is null)
                 return NotFound($"Appointment with id: {updateAppointmentDateTimeDto.AppointmentId} is not found");
 
             if (result == false)
@@ -100,7 +100,7 @@ namespace HospitalSystem.API.Controllers
 
             bool? result = await _appointmentService.UpdateAppointmentStatusAsync(updateAppointmentStatusDto);
 
-            if (result == null)
+            if (result is null)
                 return NotFound($"Appointment with id: {updateAppointmentStatusDto.AppointmentId} is not found");
 
             if (result == false)
@@ -120,6 +120,7 @@ namespace HospitalSystem.API.Controllers
                 return BadRequest("Please validate your input");
 
             FindAppointmentDto appointmentDto = await _appointmentService.FindAsync(appointmentId);
+            
             if (appointmentDto is null)
                 return NotFound($"Appointment with id: {appointmentId} is not found");
 
@@ -138,7 +139,7 @@ namespace HospitalSystem.API.Controllers
 
             bool? result = await _appointmentService.CancelAppointmentAsync(appointmentId);
 
-            if (result == null)
+            if (result is null)
                 return NotFound($"Appointment with id: {appointmentId} is not found");
 
             if (result == false)
@@ -160,7 +161,7 @@ namespace HospitalSystem.API.Controllers
 
             bool? result = await _appointmentService.RescheduleAppointmentAsync(rescheduleAppointmentDto);
             
-            if (result == null)
+            if (result is null)
                 return NotFound($"Appointment with id: {rescheduleAppointmentDto.AppointmentId} is not found");
             
             if (result == false)
@@ -181,7 +182,7 @@ namespace HospitalSystem.API.Controllers
 
             bool? result = await _appointmentService.HasAppointmentMedicalRecordAsync(appointmentId);
             
-            if (result == null)
+            if (result is null)
                 return NotFound($"Appointment with id: {appointmentId} is not found");
 
             return Ok(result);

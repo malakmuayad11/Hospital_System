@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HospitalSystem.API.Models;
+﻿using HospitalSystem.API.Models;
 using HospitalSystem.DTOs.Prescriptions;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
@@ -51,6 +46,7 @@ namespace HospitalSystem.Service.Classes
         public async Task<PrescriptionDto> GetPrescriptionByAppointmentIdAsync(int AppointmentId)
         {
             Prescription prescription = await _prescriptionRepository.GetPrescriptionByAppointmentIdAsync(AppointmentId);
+            
             if (prescription == null)
                 return null;
 

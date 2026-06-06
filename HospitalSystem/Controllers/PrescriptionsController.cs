@@ -1,8 +1,6 @@
-﻿using HospitalSystem.API.Models;
-using HospitalSystem.API.Validation;
+﻿using HospitalSystem.API.Validation;
 using HospitalSystem.DTOs.Prescriptions;
 using HospitalSystem.Service.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
@@ -29,40 +27,39 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new prescription." });
 
-            return Ok();
-            //return CreatedAtRoute("FindPrescriptionByAppointmentId", new { AppointmentId = addPrescriptionDto.AppointmentId }, addPrescriptionDto);
+            return CreatedAtRoute("FindPrescriptionByAppointmentId", new { AppointmentId = addPrescriptionDto.AppointmentId }, addPrescriptionDto);
         }
 
-        [HttpGet("{PrescriptionId}", Name = "FindPrescriptionById")]
+        [HttpGet("{prescriptionId}", Name = "FindPrescriptionById")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<PrescriptionDto>> GetPrescriptionByPrescriptionIdAsync(int PrescriptionId)
+        public async Task<ActionResult<PrescriptionDto>> GetPrescriptionByPrescriptionIdAsync(int prescriptionId)
         {
-            if (!PrescriptionValidation.ValidatePrescriptionId(PrescriptionId))
+            if (!PrescriptionValidation.ValidatePrescriptionId(prescriptionId))
                 return BadRequest("Please validate your input");
 
-            PrescriptionDto prescriptionDto = await _prescriptionService.GetPrescriptionByPrescriptionIdAsync(PrescriptionId);
+            PrescriptionDto prescriptionDto = await _prescriptionService.GetPrescriptionByPrescriptionIdAsync(prescriptionId);
 
-            if (prescriptionDto == null)
-                return NotFound($"Prescription with id: {PrescriptionId} is not found");
+            if (prescriptionDto is null)
+                return NotFound($"Prescription with id: {prescriptionId} is not found");
 
             return Ok(prescriptionDto);
         }
 
-        [HttpGet("findByAppointmentId/{AppointmentId}", Name = "FindPrescriptionByAppointmentId")]
+        [HttpGet("findByAppointmentId/{appointmentId}", Name = "FindPrescriptionByAppointmentId")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<PrescriptionDto>> GetPrescriptionByAppointmentIdAsync(int AppointmentId)
+        public async Task<ActionResult<PrescriptionDto>> GetPrescriptionByAppointmentIdAsync(int appointmentId)
         {
-            if (!PrescriptionValidation.ValidateAppointmentId(AppointmentId))
+            if (!PrescriptionValidation.ValidateAppointmentId(appointmentId))
                 return BadRequest("Please validate your input");
 
-            PrescriptionDto prescriptionDto = await _prescriptionService.GetPrescriptionByAppointmentIdAsync(AppointmentId);
+            PrescriptionDto prescriptionDto = await _prescriptionService.GetPrescriptionByAppointmentIdAsync(appointmentId);
 
-            if (prescriptionDto == null)
-                return NotFound($"Prescription with appointment id: {AppointmentId} is not found");
+            if (prescriptionDto is null)
+                return NotFound($"Prescription with appointment id: {appointmentId} is not found");
 
             return Ok(prescriptionDto);
         }

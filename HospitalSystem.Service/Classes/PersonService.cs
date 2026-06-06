@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HospitalSystem.Data;
-using HospitalSystem.API.Models;
-using Microsoft.Extensions.Logging.Abstractions;
+﻿using HospitalSystem.API.Models;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
 using HospitalSystem.DTOs.People;
@@ -49,7 +42,7 @@ namespace HospitalSystem.Service.Classes
             };
         }
 
-        public async Task<bool?> updateAsync(UpdatePersonDto updatePersonDto) =>
+        public async Task<bool?> UpdateAsync(UpdatePersonDto updatePersonDto) =>
             await _personRepository.UpdateAsync(new Person
             {
                 PersonId = updatePersonDto.PersonId,

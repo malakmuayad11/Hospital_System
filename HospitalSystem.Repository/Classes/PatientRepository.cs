@@ -3,11 +3,6 @@ using HospitalSystem.Data.Data;
 using HospitalSystem.DTOs.Patients;
 using HospitalSystem.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Repository.Classes
 {
@@ -35,7 +30,7 @@ namespace HospitalSystem.Repository.Classes
         {
             await _context.Patients.AddAsync(patient);
 
-            if (_context.SaveChanges() != 1)
+            if (_context.SaveChanges() < 1)
                 return null;
 
             return patient.PatientId;
@@ -53,7 +48,7 @@ namespace HospitalSystem.Repository.Classes
             patient.Address = updatedPatient.Address;
             patient.EmergencyContact = updatedPatient.EmergencyContact;
 
-            return await _context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<Patient> FindAsync(int patientId) =>
@@ -75,7 +70,7 @@ namespace HospitalSystem.Repository.Classes
 
            _context.Patients.Remove(patient);
 
-            return await _context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DoesNationalNoExistAsync(string nationalNo) =>

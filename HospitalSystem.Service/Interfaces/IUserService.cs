@@ -4,26 +4,26 @@ namespace HospitalSystem.Service.Interfaces
 {
     public interface IUserService
     {
-        public Task<List<UserDto>> getAllUsersAsync();
+        public Task<List<UserDto>> GetAllUsersAsync();
 
-        public Task<int> getUsersCountAsync();
+        public Task<int> GetUsersCountAsync();
 
-        public Task<int?> addUserAsync(AddUserDto userDto);
+        public Task<int?> AddUserAsync(AddUserDto userDto);
 
-        public Task<bool?> updateUserAsync(UpdateUserDto userDto);
+        public Task<bool?> UpdateUserAsync(UpdateUserDto userDto);
 
-        public Task<bool?> changePasswordAsync(ChangePasswordDto changePasswordDto);
+        public Task<bool?> ChangePasswordAsync(ChangePasswordDto changePasswordDto);
 
-        public Task<UserDto> findAsync(int UserId);
+        public Task<UserDto> FindAsync(int UserId);
 
-        public Task<UserDto> findAsync(FindUserDto findUserDto);
+        public Task<UserDto> FindAsync(FindUserDto findUserDto);
 
-        public Task<bool> isUsernameUsedAsync(string Username);
+        public Task<bool> IsUsernameUsedAsync(string username);
 
-        public Task<bool?> deleteUserAsync(int UserId);
+        public Task<bool?> DeleteUserAsync(int userId);
 
-        public Task<bool?> updateUserLastLoginDateAsync(int UserId);
+        public Task<bool?> UpdateUserLastLoginDateAsync(int userId);
 
-        public Task<bool?> addAsCurrentUserAsync(int UserId);
+        public Task<bool?> AddAsCurrentUserAsync(int userId);
     }
 }

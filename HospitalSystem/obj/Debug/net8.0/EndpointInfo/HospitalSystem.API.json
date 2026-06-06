@@ -2976,17 +2976,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/AddPersonDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/AddPersonDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/AddPersonDto"
                 }
               }
             }
@@ -3217,7 +3217,7 @@
         }
       }
     },
-    "/api/prescription/{PrescriptionId}": {
+    "/api/prescription/{prescriptionId}": {
       "get": {
         "tags": [
           "Prescriptions"
@@ -3225,7 +3225,7 @@
         "operationId": "FindPrescriptionById",
         "parameters": [
           {
-            "name": "PrescriptionId",
+            "name": "prescriptionId",
             "in": "path",
             "required": true,
             "schema": {
@@ -3298,7 +3298,7 @@
         }
       }
     },
-    "/api/prescription/findByAppointmentId/{AppointmentId}": {
+    "/api/prescription/findByAppointmentId/{appointmentId}": {
       "get": {
         "tags": [
           "Prescriptions"
@@ -3306,7 +3306,7 @@
         "operationId": "FindPrescriptionByAppointmentId",
         "parameters": [
           {
-            "name": "AppointmentId",
+            "name": "appointmentId",
             "in": "path",
             "required": true,
             "schema": {
@@ -3709,7 +3709,7 @@
         }
       }
     },
-    "/api/users/{UserId}": {
+    "/api/users/{userId}": {
       "get": {
         "tags": [
           "Users"
@@ -3717,7 +3717,7 @@
         "operationId": "FindUserById",
         "parameters": [
           {
-            "name": "UserId",
+            "name": "userId",
             "in": "path",
             "required": true,
             "schema": {
@@ -3796,7 +3796,7 @@
         "operationId": "DeleteUser",
         "parameters": [
           {
-            "name": "UserId",
+            "name": "userId",
             "in": "path",
             "required": true,
             "schema": {
@@ -3961,7 +3961,7 @@
         }
       }
     },
-    "/api/users/isUsernameUsed/{Username}": {
+    "/api/users/isUsernameUsed/{username}": {
       "get": {
         "tags": [
           "Users"
@@ -3969,7 +3969,7 @@
         "operationId": "IsUsernameUsed",
         "parameters": [
           {
-            "name": "Username",
+            "name": "username",
             "in": "path",
             "required": true,
             "schema": {
@@ -4021,7 +4021,7 @@
         }
       }
     },
-    "/api/users/updateLastLoginDate/{UserId}": {
+    "/api/users/updateLastLoginDate/{userId}": {
       "patch": {
         "tags": [
           "Users"
@@ -4029,7 +4029,7 @@
         "operationId": "UpdateUserLastLoginDate",
         "parameters": [
           {
-            "name": "UserId",
+            "name": "userId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4088,7 +4088,7 @@
         }
       }
     },
-    "/api/users/addAsCurrentUser/{UserId}": {
+    "/api/users/addAsCurrentUser/{userId}": {
       "get": {
         "tags": [
           "Users"
@@ -4096,7 +4096,7 @@
         "operationId": "AddAsCurrentUser",
         "parameters": [
           {
-            "name": "UserId",
+            "name": "userId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4241,6 +4241,10 @@
           "consultationId": {
             "type": "integer",
             "format": "int32"
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

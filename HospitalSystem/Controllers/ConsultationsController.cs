@@ -20,9 +20,11 @@ namespace HospitalSystem.API.Controllers
         public async Task<ActionResult<IEnumerable<ConsultationDto>>> GetAllConsultations()
         {
             List<ConsultationDto> consultations = await _consultationService.GetAllConsultationsAsync();
+            
             if(consultations is null)
                 return StatusCode(StatusCodes.Status500InternalServerError,
            new { message = "An error occurred while getting consultations." });
+            
             return Ok(consultations);
         }
 

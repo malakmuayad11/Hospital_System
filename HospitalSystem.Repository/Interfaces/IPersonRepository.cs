@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HospitalSystem.API.Models;
-using HospitalSystem.Data;
+﻿using HospitalSystem.API.Models;
 
 namespace HospitalSystem.Repository.Interfaces
 {

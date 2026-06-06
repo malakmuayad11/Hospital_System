@@ -4,12 +4,6 @@ using HospitalSystem.DTOs.Appointments;
 using HospitalSystem.DTOs.Doctors;
 using HospitalSystem.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Repository.Classes
 {
@@ -21,19 +15,23 @@ namespace HospitalSystem.Repository.Classes
 
         public async Task<int> DoctorsCount() => await _context.Doctors.CountAsync();
 
-        public async Task<bool> AddNewDoctorAsync(Doctor doctor)
+        public async Task<int?> AddNewDoctorAsync(Doctor doctor)
         {
             await _context.Doctors.AddAsync(doctor);
-            return await _context.SaveChangesAsync() == 1;
+
+            if (await _context.SaveChangesAsync() < 1)
+                return null;
+
+            return doctor.DoctorId;
         }
 
         public async Task<bool?> UpdateDoctorAsync(Doctor updatedDoctor)
         {
-            Doctor doctor = await _context.Doctors.FindAsync(updatedDoctor.DoctorId);
+            Doctor doctor = await this.FindAsync(updatedDoctor.DoctorId);
+
             if (doctor == null)
                 return null;
 
-            // Update the doctor's properties
             doctor.StartWorkDay = updatedDoctor.StartWorkDay;
             doctor.EndWorkDay = updatedDoctor.EndWorkDay;
             doctor.StartWorkHour = updatedDoctor.StartWorkHour;
@@ -41,7 +39,7 @@ namespace HospitalSystem.Repository.Classes
             doctor.ConsultationId = updatedDoctor.ConsultationId;
 
             _context.Doctors.Update(doctor);
-            return await _context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<Doctor> FindAsync(int doctorId) =>
@@ -52,13 +50,13 @@ namespace HospitalSystem.Repository.Classes
 
         public async Task<bool?> DeleteDoctorAsync(int doctorId)
         {
-            Doctor doctor = await _context.Doctors.FindAsync(doctorId);
+            Doctor doctor = await this.FindAsync(doctorId);
 
             if (doctor == null)
                 return null;
 
             _context.Doctors.Remove(doctor);
-            return await _context.SaveChangesAsync() == 1;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         private static string _GetDayOfWeek(byte dayOfWeek)
@@ -111,7 +109,7 @@ namespace HospitalSystem.Repository.Classes
 
         private async Task<bool> _DoesDoctorExist(int doctorId) =>
             await _context.Doctors.AnyAsync(d => d.DoctorId == doctorId);
-        // may be not correct
+
         public async Task<int?> PatientsCountForDoctorAsync(int doctorId)
         {
             if (!await _DoesDoctorExist(doctorId))
