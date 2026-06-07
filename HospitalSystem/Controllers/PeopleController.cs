@@ -50,6 +50,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpPut(Name = "UpdatePerson")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<bool?>> updateAsync(UpdatePersonDto updatePersonDto)

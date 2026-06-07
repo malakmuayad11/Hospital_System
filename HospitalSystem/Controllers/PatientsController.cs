@@ -175,9 +175,7 @@ namespace HospitalSystem.API.Controllers
         public async Task<ActionResult<bool>> HasPatientAppointmentAtAsync(int patientId, 
             DateOnly appointmentDate, TimeOnly appointmentTime)
         {
-            if (!PatientValidation.ValidatePatientId(patientId) 
-                || !AppointmentValidation.ValidateAppointmentDate(appointmentDate)
-                || !AppointmentValidation.ValidateAppointmentTime(appointmentTime))
+            if (!PatientValidation.ValidatePatientId(patientId))
                 return BadRequest("Please validate your input.");
 
             bool? result = await _patientService.HasPatientAppointmentAtAsync(patientId,
