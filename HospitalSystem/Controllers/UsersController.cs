@@ -1,10 +1,12 @@
 ﻿using HospitalSystem.API.Validation;
-using HospitalSystem.DTOs.Users;
+using HospitalSystem.Infrastructure.DTOs.Users;
 using HospitalSystem.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
+    [Authorize]
     [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -17,6 +19,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet(Name = "GetAllUsers")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsersAsync()
@@ -30,6 +33,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("count", Name = "GetUsersCount")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<int>> GetUsersCountAsync()
@@ -44,6 +48,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPost(Name = "AddNewUser")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -62,6 +67,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPut(Name = "UpdateUser")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -84,6 +90,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPatch("changePassword", Name = "changePassword")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -106,6 +113,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("{userId}", Name = "FindUserById")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -123,6 +131,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPost("find", Name = "FindUserByCredentials")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -140,6 +149,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("isUsernameUsed/{username}", Name = "IsUsernameUsed")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<bool>> IsUsernameUsedAsync(string username)
@@ -151,6 +161,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpDelete("{userId}", Name = "DeleteUser")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -173,6 +184,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPatch("updateLastLoginDate/{userId}", Name = "UpdateUserLastLoginDate")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -195,6 +207,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("addAsCurrentUser/{userId}", Name = "AddAsCurrentUser")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

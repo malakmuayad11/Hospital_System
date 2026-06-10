@@ -1,4 +1,4 @@
-﻿using HospitalSystem.DTOs.Billings;
+﻿using HospitalSystem.Infrastructure.DTOs.Billings;
 
 namespace HospitalSystem.Service.Validation
 {

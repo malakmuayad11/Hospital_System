@@ -1,4 +1,4 @@
-﻿using HospitalSystem.DTOs.Users;
+﻿using HospitalSystem.Infrastructure.DTOs.Users;
 
 namespace HospitalSystem.API.Validation
 {

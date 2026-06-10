@@ -1,5 +1,5 @@
 ﻿using HospitalSystem.API.Models;
-using HospitalSystem.DTOs.Billings;
+using HospitalSystem.Infrastructure.DTOs.Billings;
 
 namespace HospitalSystem.Repository.Interfaces
 {

@@ -1,7 +1,7 @@
 ﻿using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
 using HospitalSystem.API.Models;
-using HospitalSystem.DTOs.MedicalRecords;
+using HospitalSystem.Infrastructure.DTOs.MedicalRecords;
 
 namespace HospitalSystem.Service.Classes
 {

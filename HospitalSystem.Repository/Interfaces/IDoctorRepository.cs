@@ -1,6 +1,6 @@
 ﻿using HospitalSystem.API.Models;
-using HospitalSystem.DTOs.Appointments;
-using HospitalSystem.DTOs.Doctors;
+using HospitalSystem.Infrastructure.DTOs.Appointments;
+using HospitalSystem.Infrastructure.DTOs.Doctors;
 
 namespace HospitalSystem.Repository.Interfaces
 {

@@ -9,12 +9,21 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Appointments.AppointmentDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.Infrastructure.DTOs.Appointments.AppointmentDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -35,7 +44,7 @@
     "Parameters": [
       {
         "Name": "addAppointmentDto",
-        "Type": "HospitalSystem.DTOs.Appointments.AddAppointmentDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Appointments.AddAppointmentDto",
         "IsRequired": true
       }
     ],
@@ -47,10 +56,19 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
-        "Type": "HospitalSystem.DTOs.Appointments.AddAppointmentDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Appointments.AddAppointmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -76,11 +94,20 @@
     "Parameters": [
       {
         "Name": "updateAppointmentDateTimeDto",
-        "Type": "HospitalSystem.DTOs.Appointments.UpdateAppointmentDateTimeDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Appointments.UpdateAppointmentDateTimeDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -138,6 +165,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -150,7 +186,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Appointments.FindAppointmentDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Appointments.FindAppointmentDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -176,6 +212,15 @@
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -228,6 +273,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -266,6 +320,15 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Int32",
         "MediaTypes": [
           "text/plain",
@@ -292,11 +355,20 @@
     "Parameters": [
       {
         "Name": "rescheduleAppointmentDto",
-        "Type": "HospitalSystem.DTOs.Appointments.RescheduleAppointmentDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Appointments.RescheduleAppointmentDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -342,11 +414,20 @@
     "Parameters": [
       {
         "Name": "updateAppointmentStatusDto",
-        "Type": "HospitalSystem.DTOs.Appointments.UpdateAppointmentStatusDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Appointments.UpdateAppointmentStatusDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -392,12 +473,21 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Appointments.AppointmentDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.Infrastructure.DTOs.Appointments.AppointmentDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -409,6 +499,22 @@
     "EndpointName": "GetTodaysAppointments"
   },
   {
+    "ContainingType": "HospitalSystem.API.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HospitalSystem.Infrastructure.Auth.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HospitalSystem.API.Controllers.BillingsController",
     "Method": "AddAdditionalCharges",
     "RelativePath": "api/billings",
@@ -418,11 +524,20 @@
     "Parameters": [
       {
         "Name": "updateBillingChargesDto",
-        "Type": "HospitalSystem.DTOs.Billings.AddAdditionalChargesDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Billings.AddAdditionalChargesDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -459,12 +574,21 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Billings.BillingDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.Infrastructure.DTOs.Billings.BillingDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -497,6 +621,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -509,7 +642,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Billings.FindBillingDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Billings.FindBillingDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -530,11 +663,20 @@
     "Parameters": [
       {
         "Name": "updateBillingPaymentStatusDto",
-        "Type": "HospitalSystem.DTOs.Billings.UpdateBillingPaymentStatusDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Billings.UpdateBillingPaymentStatusDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -571,12 +713,21 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Consultations.ConsultationDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.Infrastructure.DTOs.Consultations.ConsultationDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -609,6 +760,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -621,7 +781,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Consultations.FindConsultationDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Consultations.FindConsultationDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -642,12 +802,21 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Consultations.ConsultationDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.Infrastructure.DTOs.Consultations.ConsultationDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -668,11 +837,20 @@
     "Parameters": [
       {
         "Name": "addDoctorDto",
-        "Type": "HospitalSystem.DTOs.Doctors.AddDoctorDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Doctors.AddDoctorDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -705,11 +883,20 @@
     "Parameters": [
       {
         "Name": "updateDoctorDto",
-        "Type": "HospitalSystem.DTOs.Doctors.UpdateDoctorDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Doctors.UpdateDoctorDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -755,12 +942,21 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.List\u00601[[HospitalSystem.DTOs.Doctors.DoctorDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[HospitalSystem.Infrastructure.DTOs.Doctors.DoctorDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -793,6 +989,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -805,7 +1010,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Doctors.FindDoctorDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Doctors.FindDoctorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -888,6 +1093,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -921,6 +1135,15 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 500
@@ -952,6 +1175,15 @@
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -1004,6 +1236,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -1049,6 +1290,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -1057,7 +1307,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Appointments.AppointmentForDoctorDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.Infrastructure.DTOs.Appointments.AppointmentForDoctorDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1102,7 +1352,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Doctors.FindDoctorDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Doctors.FindDoctorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1123,11 +1373,20 @@
     "Parameters": [
       {
         "Name": "addMedicalRecordDto",
-        "Type": "HospitalSystem.DTOs.MedicalRecords.AddMedicalRecordDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.MedicalRecords.AddMedicalRecordDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -1160,12 +1419,21 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.MedicalRecords.MedicalRecordDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.Infrastructure.DTOs.MedicalRecords.MedicalRecordDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1198,6 +1466,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -1210,7 +1487,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.MedicalRecords.MedicalRecordDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.MedicalRecords.MedicalRecordDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1243,6 +1520,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -1255,7 +1541,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.MedicalRecords.MedicalRecordDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.MedicalRecords.MedicalRecordDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1281,7 +1567,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Patients.PatientDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.Infrastructure.DTOs.Patients.PatientDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1301,7 +1587,7 @@
     "Parameters": [
       {
         "Name": "addPatientDto",
-        "Type": "HospitalSystem.DTOs.Patients.AddPatientDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Patients.AddPatientDto",
         "IsRequired": true
       }
     ],
@@ -1321,7 +1607,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "HospitalSystem.DTOs.Patients.PatientDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Patients.PatientDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1342,7 +1628,7 @@
     "Parameters": [
       {
         "Name": "updatePatientDto",
-        "Type": "HospitalSystem.DTOs.Patients.UpdatePatientDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Patients.UpdatePatientDto",
         "IsRequired": true
       }
     ],
@@ -1508,7 +1794,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Patients.PatientDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Patients.PatientDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1553,7 +1839,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Patients.PatientDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Patients.PatientDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1700,11 +1986,20 @@
     "Parameters": [
       {
         "Name": "addPersonDto",
-        "Type": "HospitalSystem.DTOs.People.AddPersonDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.People.AddPersonDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -1720,7 +2015,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "HospitalSystem.DTOs.People.AddPersonDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.People.AddPersonDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1741,11 +2036,20 @@
     "Parameters": [
       {
         "Name": "updatePersonDto",
-        "Type": "HospitalSystem.DTOs.People.UpdatePersonDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.People.UpdatePersonDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -1803,6 +2107,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -1815,7 +2128,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.People.PersonDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.People.PersonDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1836,11 +2149,20 @@
     "Parameters": [
       {
         "Name": "addPrescriptionDto",
-        "Type": "HospitalSystem.DTOs.Prescriptions.AddPrescriptionDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Prescriptions.AddPrescriptionDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -1856,7 +2178,7 @@
         "StatusCode": 500
       },
       {
-        "Type": "HospitalSystem.DTOs.Prescriptions.PrescriptionDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Prescriptions.PrescriptionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1889,6 +2211,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -1901,7 +2232,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Prescriptions.PrescriptionDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Prescriptions.PrescriptionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1934,6 +2265,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -1946,7 +2286,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Prescriptions.PrescriptionDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Prescriptions.PrescriptionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1973,10 +2313,19 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 404
       },
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.DTOs.Users.UserDto, HospitalSystem.DTOs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HospitalSystem.Infrastructure.DTOs.Users.UserDto, HospitalSystem.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1997,7 +2346,7 @@
     "Parameters": [
       {
         "Name": "addUserDto",
-        "Type": "HospitalSystem.DTOs.Users.AddUserDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Users.AddUserDto",
         "IsRequired": true
       }
     ],
@@ -2009,10 +2358,19 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
-        "Type": "HospitalSystem.DTOs.Users.UserDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Users.UserDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2038,11 +2396,20 @@
     "Parameters": [
       {
         "Name": "updateUserDto",
-        "Type": "HospitalSystem.DTOs.Users.UpdateUserDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Users.UpdateUserDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -2096,6 +2463,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -2108,7 +2484,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Users.UserDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Users.UserDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2134,6 +2510,15 @@
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -2191,6 +2576,15 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "StatusCode": 400
       },
       {
@@ -2229,11 +2623,20 @@
     "Parameters": [
       {
         "Name": "changePasswordDto",
-        "Type": "HospitalSystem.DTOs.Users.ChangePasswordDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Users.ChangePasswordDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -2279,6 +2682,15 @@
     "Parameters": [],
     "ReturnTypes": [
       {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
         "Type": "System.Int32",
         "MediaTypes": [
           "text/plain",
@@ -2305,11 +2717,20 @@
     "Parameters": [
       {
         "Name": "findUserDto",
-        "Type": "HospitalSystem.DTOs.Users.FindUserDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Users.FindUserDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -2329,7 +2750,7 @@
         "StatusCode": 404
       },
       {
-        "Type": "HospitalSystem.DTOs.Users.UserDto",
+        "Type": "HospitalSystem.Infrastructure.DTOs.Users.UserDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2355,6 +2776,15 @@
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [
@@ -2391,6 +2821,15 @@
       }
     ],
     "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
         "MediaTypes": [

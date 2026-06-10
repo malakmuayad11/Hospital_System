@@ -1,4 +1,4 @@
-﻿using HospitalSystem.DTOs.Doctors;
+﻿using HospitalSystem.Infrastructure.DTOs.Doctors;
 
 namespace HospitalSystem.Service.Validation
 {

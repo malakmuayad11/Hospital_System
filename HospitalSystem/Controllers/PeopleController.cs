@@ -1,10 +1,12 @@
 ﻿using HospitalSystem.API.Validation;
-using HospitalSystem.DTOs.People;
+using HospitalSystem.Infrastructure.DTOs.People;
 using HospitalSystem.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
+    [Authorize]
     [Route("api/people")]
     [ApiController]
     public class PeopleController : ControllerBase
@@ -14,6 +16,7 @@ namespace HospitalSystem.API.Controllers
         public PeopleController(IPersonService personService) => this._personService = personService;
 
         [HttpPost(Name = "AddNewPerson")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -32,6 +35,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("{personId}", Name = "FindById")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType (StatusCodes.Status200OK)]
@@ -49,6 +53,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPut(Name = "UpdatePerson")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

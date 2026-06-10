@@ -1,5 +1,6 @@
 ﻿using HospitalSystem.API.Models;
-using HospitalSystem.DTOs.Users;
+using HospitalSystem.Infrastructure.DTOs.UserDTOs;
+using HospitalSystem.Infrastructure.DTOs.Users;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
 
@@ -21,12 +22,12 @@ namespace HospitalSystem.Service.Classes
 
             foreach (User User in await _userRepository.GetAllUsersAsync())
             {
-                UserDtos.Add(new UserDto(
-                    User.UserId,
-                    User.Username,
-                    User.Role,
-                    User.LastLoginDate,
-                    User.Permissions));
+                UserDtos.Add(new UserDto {
+                    UserId = User.UserId,
+                    Username = User.Username,
+                    Role = User.Role,
+                    LastLoginDate = User.LastLoginDate,
+                    Permissions = User.Permissions});
             }
 
             if (UserDtos.Count == 0)
@@ -62,6 +63,15 @@ namespace HospitalSystem.Service.Classes
         public async Task<bool?> ChangePasswordAsync(ChangePasswordDto changePasswordDto) =>
             await _userRepository.ChangePasswordAsync(changePasswordDto.UserId, _passwordHasher.HashPassword(changePasswordDto.Password));
 
+        private UserDto _MapUserDto(User user) =>
+            new UserDto{
+                UserId = user.UserId,
+                Username = user.Username,
+                Role = user.Role,
+                LastLoginDate = user.LastLoginDate,
+                Permissions = user.Permissions
+            };
+
         public async Task<UserDto> FindAsync(int userId)
         {
             User user = await _userRepository.FindAsync(userId);
@@ -69,12 +79,7 @@ namespace HospitalSystem.Service.Classes
             if (user is null)
                 return null;
 
-            return new UserDto(
-                    user.UserId,
-                    user.Username,
-                    user.Role,
-                    user.LastLoginDate,
-                    user.Permissions);
+            return _MapUserDto(user);
         }
 
         public async Task<UserDto> FindAsync(FindUserDto findUserDto)
@@ -87,12 +92,25 @@ namespace HospitalSystem.Service.Classes
             if (!_passwordHasher.VerifyPassword(findUserDto.Password, user.Password))
                 return null;
 
-            return new UserDto(
-                    user.UserId,
-                    user.Username,
-                    user.Role,
-                    user.LastLoginDate,
-                    user.Permissions);
+            return _MapUserDto(user);
+        }
+
+        public async Task<LoginUserDto> FindAsync(string username)
+        {
+            User user = await _userRepository.FindAsync(username);
+
+            if (user is null)
+                return null;
+
+            return new LoginUserDto
+            {
+                UserId = user.UserId,
+                Username = user.Username,
+                Role = user.Role,
+                LastLoginDate = user.LastLoginDate,
+                Permissions = user.Permissions,
+                PasswordHash = user.Password
+            };
         }
 
         public async Task<bool> IsUsernameUsedAsync(string username) =>
@@ -106,5 +124,23 @@ namespace HospitalSystem.Service.Classes
 
         public async Task<bool?> AddAsCurrentUserAsync(int userId) =>
             await _userRepository.AddAsCurrentUserAsync(userId);
+
+        public static string RoleString(byte role)
+        {
+            switch (role)
+            {
+                case 1:
+                    return "Admin";
+                case 2:
+                    return "Receptionist";
+                case 3:
+                    return "Doctor";
+                default:
+                    return "Unknown";
+            }
+        }
+
+        public static string PermissionsString(int permissions) => permissions.ToString();
+
     }
 }

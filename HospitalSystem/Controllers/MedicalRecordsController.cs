@@ -1,10 +1,12 @@
 ﻿using HospitalSystem.API.Validation;
-using HospitalSystem.DTOs.MedicalRecords;
+using HospitalSystem.Infrastructure.DTOs.MedicalRecords;
 using HospitalSystem.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
+    [Authorize]
     [Route("api/medicalrecords")]
     [ApiController]
     public class MedicalRecordsController : ControllerBase
@@ -15,6 +17,7 @@ namespace HospitalSystem.API.Controllers
             => _medicalRecordService = mediicalRecordService;
 
         [HttpPost(Name = "AddNewMedicalRecord")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -33,6 +36,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet(Name = "GetAllMedicalRecords")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<MedicalRecordDto>>> GetAllMedicalRecordsAsync()
@@ -47,6 +51,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("{medicalRecordId}", Name = "FindMedicalRecordByID")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -64,6 +69,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("appointment/{appointmentId}", Name = "FindMedicalRecordByAppointmentID")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -1,4 +1,5 @@
-﻿using HospitalSystem.DTOs.Users;
+﻿using HospitalSystem.Infrastructure.DTOs.UserDTOs;
+using HospitalSystem.Infrastructure.DTOs.Users;
 
 namespace HospitalSystem.Service.Interfaces
 {
@@ -17,6 +18,8 @@ namespace HospitalSystem.Service.Interfaces
         public Task<UserDto> FindAsync(int UserId);
 
         public Task<UserDto> FindAsync(FindUserDto findUserDto);
+
+        public Task<LoginUserDto> FindAsync(string username);
 
         public Task<bool> IsUsernameUsedAsync(string username);
 

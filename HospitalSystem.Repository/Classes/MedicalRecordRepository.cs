@@ -1,6 +1,6 @@
 ﻿using HospitalSystem.API.Models;
 using HospitalSystem.Data.Data;
-using HospitalSystem.DTOs.MedicalRecords;
+using HospitalSystem.Infrastructure.DTOs.MedicalRecords;
 using HospitalSystem.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

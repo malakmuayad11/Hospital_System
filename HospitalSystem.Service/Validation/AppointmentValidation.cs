@@ -1,4 +1,4 @@
-﻿using HospitalSystem.DTOs.Appointments;
+﻿using HospitalSystem.Infrastructure.DTOs.Appointments;
 
 namespace HospitalSystem.API.Validation
 {

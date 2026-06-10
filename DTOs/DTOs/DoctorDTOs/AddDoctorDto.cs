@@ -1,0 +1,13 @@
+﻿namespace HospitalSystem.Infrastructure.DTOs.Doctors
+{
+    public class AddDoctorDto
+    {
+        public int PersonId { get; set; }
+        public byte StartWorkDay { get; set; }
+        public byte EndWorkDay { get; set; }
+        public TimeOnly StartWorkHour { get; set; }
+        public TimeOnly EndWorkHour { get; set; }
+        public int ConsultationId { get; set; }
+        public string Password { get; set; }
+    }
+}

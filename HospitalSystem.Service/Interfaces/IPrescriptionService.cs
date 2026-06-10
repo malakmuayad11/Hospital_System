@@ -1,4 +1,4 @@
-﻿using HospitalSystem.DTOs.Prescriptions;
+﻿using HospitalSystem.Infrastructure.DTOs.Prescriptions;
 
 namespace HospitalSystem.Service.Interfaces
 {

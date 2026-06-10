@@ -1,10 +1,12 @@
-﻿using HospitalSystem.DTOs.Consultations;
+﻿using HospitalSystem.Infrastructure.DTOs.Consultations;
 using HospitalSystem.Service.Interfaces;
 using HospitalSystem.Service.Validation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
+    [Authorize]
     [Route("api/consultations")]
     [ApiController]
     public class ConsultationsController : ControllerBase
@@ -15,6 +17,7 @@ namespace HospitalSystem.API.Controllers
             _consultationService = consultationService;
 
         [HttpGet(Name = "GetAllConsultations")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<ConsultationDto>>> GetAllConsultations()
@@ -29,6 +32,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("{consultationId}", Name = "FindConsultation")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -46,6 +50,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("specialities", Name = "GetAllSpecialities")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<ConsultationDto>>> GetAllSpecialities()

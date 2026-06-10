@@ -1,4 +1,4 @@
-﻿using HospitalSystem.DTOs.MedicalRecords;
+﻿using HospitalSystem.Infrastructure.DTOs.MedicalRecords;
 
 namespace HospitalSystem.Service.Interfaces
 {

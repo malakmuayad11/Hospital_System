@@ -1,7 +1,7 @@
 ﻿using HospitalSystem.API.Models;
 using HospitalSystem.Data.Data;
-using HospitalSystem.DTOs.Appointments;
-using HospitalSystem.DTOs.Doctors;
+using HospitalSystem.Infrastructure.DTOs.Appointments;
+using HospitalSystem.Infrastructure.DTOs.Doctors;
 using HospitalSystem.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

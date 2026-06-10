@@ -1,10 +1,12 @@
-﻿using HospitalSystem.DTOs.Billings;
+﻿using HospitalSystem.Infrastructure.DTOs.Billings;
 using HospitalSystem.Service.Interfaces;
 using HospitalSystem.Service.Validation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
+    [Authorize]
     [Route("api/billings")]
     [ApiController]
     public class BillingsController : ControllerBase
@@ -14,6 +16,7 @@ namespace HospitalSystem.API.Controllers
         public BillingsController(IBillingService billingService) => _billingService = billingService;
 
         [HttpPatch(Name = "AddAdditionalCharges")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -35,6 +38,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPatch("payment-status", Name = "UpdateBillingPaymentStatus")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -56,6 +60,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet(Name = "GetAllBillings")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<BillingDto>>> GetAllBillings()
@@ -70,6 +75,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("{billingId}", Name = "Find")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]

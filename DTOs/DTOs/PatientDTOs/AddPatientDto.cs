@@ -1,0 +1,11 @@
+﻿namespace HospitalSystem.Infrastructure.DTOs.Patients
+{
+    public class AddPatientDto
+    {
+        public int PersonId { get; set; }
+        public string NationalNo { get; set; }
+        public DateOnly DateOfBirth { get; set; }
+        public string Address { get; set; }
+        public string EmergencyContact { get; set; }
+    }
+}

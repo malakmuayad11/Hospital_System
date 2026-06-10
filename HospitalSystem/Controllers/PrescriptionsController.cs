@@ -1,10 +1,12 @@
 ﻿using HospitalSystem.API.Validation;
-using HospitalSystem.DTOs.Prescriptions;
+using HospitalSystem.Infrastructure.DTOs.Prescriptions;
 using HospitalSystem.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
+    [Authorize]
     [Route("api/prescription")]
     [ApiController]
     public class PrescriptionsController : ControllerBase
@@ -15,6 +17,7 @@ namespace HospitalSystem.API.Controllers
             this._prescriptionService = prescriptionService;
 
         [HttpPost(Name = "AddNewPrescription")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -31,6 +34,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("{prescriptionId}", Name = "FindPrescriptionById")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -48,6 +52,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("findByAppointmentId/{appointmentId}", Name = "FindPrescriptionByAppointmentId")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]

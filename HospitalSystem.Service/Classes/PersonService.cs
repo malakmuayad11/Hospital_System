@@ -1,7 +1,7 @@
 ﻿using HospitalSystem.API.Models;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
-using HospitalSystem.DTOs.People;
+using HospitalSystem.Infrastructure.DTOs.People;
 
 namespace HospitalSystem.Service.Classes
 {
