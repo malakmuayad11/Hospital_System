@@ -1,10 +1,13 @@
 using Azure.Identity;
 using HospitalSystem.Data.Data;
+using HospitalSystem.Infrastructure.Authorization.Handlers;
+using HospitalSystem.Infrastructure.Authorization.Requirements;
 using HospitalSystem.Repository.Classes;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Classes;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -131,6 +134,38 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             RoleClaimType = ClaimTypes.Role
         };
     });
+
+// 🔹 Adding Policies
+builder.Services.AddSingleton<IAuthorizationHandler, UserOwnerOrAdminHandler>();
+builder.Services.AddSingleton<IAuthorizationHandler, HasUserPermissionsHandler>();
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("UserOwnerOrAdmin", policy =>
+        policy.Requirements.Add(new UserOwnerOrAdminRequirement()));
+
+    options.AddPolicy("AddEditDoctors", policy =>
+        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eAddEditDoctors)));
+
+    options.AddPolicy("ManagePatients", policy =>
+        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eManagePatients)));
+
+    options.AddPolicy("ManageAppointments", policy =>
+        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eManageAppointments)));
+
+    options.AddPolicy("ManagePayments", policy =>
+        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eManagePayments)));
+
+    options.AddPolicy("ShowMedicalRecords", policy =>
+        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eShowMedicalRecords)));
+
+    options.AddPolicy("AddEditMedicalRecords", policy =>
+        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eAddEditMedicalRecords)));
+    
+    options.AddPolicy("ManageUsers", policy =>
+        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eManageUsers)));
+});
 
 var app = builder.Build();
 

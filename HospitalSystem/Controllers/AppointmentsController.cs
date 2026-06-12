@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "ManageAppointments")]
     [Route("api/appointments")]
     [ApiController]
     public class AppointmentsController : ControllerBase
@@ -15,8 +15,8 @@ namespace HospitalSystem.API.Controllers
 
         public AppointmentsController(IAppointmentService appointmentService) => _appointmentService = appointmentService;
 
+        [AllowAnonymous]
         [HttpGet("count", Name = "AppointmentsCount")]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<int>> GetAppointmentsCountAsync() =>
@@ -24,6 +24,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpGet(Name = "GetAllAppointments")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetAllAppointmentsAsync()
@@ -39,6 +40,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpGet("todays-appointments", Name = "GetTodaysAppointments")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetTodaysAppointmentsAsync()
@@ -55,6 +57,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpPost(Name = "AddNewAppointment")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -74,6 +77,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpPatch(Name = "UpdateAppointmentDateTime")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -97,6 +101,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpPatch("status", Name = "UpdateAppointmentStatus")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -120,6 +125,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpGet("{appointmentId}", Name = "FindAppointmentById")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -138,6 +144,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpPatch("cancel/{appointmentId}", Name = "CancelAppointment")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -161,6 +168,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpPatch("reschedule", Name = "RescheduleAppointment")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -184,6 +192,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpGet("{appointmentId}/has-medical-record", Name = "HasAppointmentMedicalRecord")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]

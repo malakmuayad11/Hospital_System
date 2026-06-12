@@ -1,4 +1,5 @@
-﻿using HospitalSystem.API.Validation;
+﻿using HospitalSystem.API.Models;
+using HospitalSystem.API.Validation;
 using HospitalSystem.Infrastructure.DTOs.Users;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -6,19 +7,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
-    [Authorize]
     [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IAuthorizationService _authorizationService;
 
-        public UsersController(IUserService UserService)
+        public UsersController(IUserService UserService, IAuthorizationService authorizationService)
         {
             this._userService = UserService;
+            this._authorizationService = authorizationService;
         }
 
+        [Authorize(Policy = "ManageUsers")]
         [HttpGet(Name = "GetAllUsers")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -32,7 +36,9 @@ namespace HospitalSystem.API.Controllers
             return Ok(users);
         }
 
+        [Authorize(Policy = "ManageUsers")]
         [HttpGet("count", Name = "GetUsersCount")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -47,7 +53,9 @@ namespace HospitalSystem.API.Controllers
             return Ok(usersCount);
         }
 
+        [Authorize(Policy = "ManageUsers")]
         [HttpPost(Name = "AddNewUser")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -67,6 +75,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPut(Name = "UpdateUser")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -74,6 +83,14 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> UpdateUserAsync(UpdateUserDto updateUserDto)
         {
+            var authResult = await _authorizationService.AuthorizeAsync(
+                User,
+                updateUserDto.UserId,
+                "UserOwnerOrAdmin");
+
+            if (!authResult.Succeeded)
+                return Forbid(); // 403
+
             if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
                 return BadRequest("Please validate your input.");
 
@@ -90,6 +107,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPatch("changePassword", Name = "changePassword")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -97,6 +115,14 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<bool>> ChangePasswordAsync(ChangePasswordDto changePasswordDto)
         {
+            var authResult = await _authorizationService.AuthorizeAsync(
+                User,
+                changePasswordDto.UserId,
+                "UserOwnerOrAdmin");
+
+            if (!authResult.Succeeded)
+                return Forbid(); // 403
+
             if (!UserValidation.ValidateChangePasswordInput(changePasswordDto))
                 return BadRequest("Please validate your input.");
 
@@ -116,9 +142,18 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<UserDto>> FindAsync(int userId)
         {
+            var authResult = await _authorizationService.AuthorizeAsync(
+                User,
+                userId,
+                "UserOwnerOrAdmin");
+
+            if (!authResult.Succeeded)
+                return Forbid(); // 403
+
             if (!UserValidation.ValidateUserId(userId))
                 return BadRequest("Please validate your input.");
 
@@ -131,6 +166,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPost("find", Name = "FindUserByCredentials")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -145,10 +181,20 @@ namespace HospitalSystem.API.Controllers
             if (user is null)
                 return NotFound($"User is not found.");
 
+            var authResult = await _authorizationService.AuthorizeAsync(
+                User,
+                user.UserId,
+                "UserOwnerOrAdmin");
+
+            if (!authResult.Succeeded)
+                return Forbid(); // 403
+
             return Ok(user);
         }
 
+        [Authorize(Policy = "ManageUsers")]
         [HttpGet("isUsernameUsed/{username}", Name = "IsUsernameUsed")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -160,7 +206,9 @@ namespace HospitalSystem.API.Controllers
             return Ok(await _userService.IsUsernameUsedAsync(username));
         }
 
+        [Authorize(Policy = "ManageUsers")]
         [HttpDelete("{userId}", Name = "DeleteUser")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -183,7 +231,9 @@ namespace HospitalSystem.API.Controllers
             return Ok("User deleted successfully.");
         }
 
+        [Authorize(Policy = "ManageUsers")]
         [HttpPatch("updateLastLoginDate/{userId}", Name = "UpdateUserLastLoginDate")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -206,7 +256,9 @@ namespace HospitalSystem.API.Controllers
             return Ok("User's last login date is updated successfully.");
         }
 
+        [Authorize(Policy = "ManageUsers")]
         [HttpGet("addAsCurrentUser/{userId}", Name = "AddAsCurrentUser")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

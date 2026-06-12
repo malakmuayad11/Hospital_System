@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
-    [Authorize]
     [Route("api/medicalrecords")]
     [ApiController]
     public class MedicalRecordsController : ControllerBase
@@ -16,8 +15,10 @@ namespace HospitalSystem.API.Controllers
         public MedicalRecordsController(IMedicalRecordService mediicalRecordService)
             => _medicalRecordService = mediicalRecordService;
 
+        [Authorize(Policy = "AddEditMedicalRecords")]
         [HttpPost(Name = "AddNewMedicalRecord")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -35,8 +36,10 @@ namespace HospitalSystem.API.Controllers
             return CreatedAtRoute("FindMedicalRecordByID", new { medicalRecordId = medicalRecordId}, addMedicalRecordDto);
         }
 
+        [Authorize(Policy = "ShowMedicalRecords")]
         [HttpGet(Name = "GetAllMedicalRecords")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<MedicalRecordDto>>> GetAllMedicalRecordsAsync()
@@ -50,8 +53,10 @@ namespace HospitalSystem.API.Controllers
             return Ok(medicalRecords);
         }
 
+        [Authorize(Policy = "ShowMedicalRecords")]
         [HttpGet("{medicalRecordId}", Name = "FindMedicalRecordByID")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -68,8 +73,10 @@ namespace HospitalSystem.API.Controllers
             return Ok(medicalRecord);
         }
 
+        [Authorize(Policy = "ShowMedicalRecords")]
         [HttpGet("appointment/{appointmentId}", Name = "FindMedicalRecordByAppointmentID")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -106,10 +106,9 @@ namespace HospitalSystem.Service.Classes
             {
                 UserId = user.UserId,
                 Username = user.Username,
+                PasswordHash = user.Password,
                 Role = user.Role,
-                LastLoginDate = user.LastLoginDate,
-                Permissions = user.Permissions,
-                PasswordHash = user.Password
+                Permissions = user.Permissions
             };
         }
 

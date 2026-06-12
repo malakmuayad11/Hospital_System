@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "AddEditDoctors")]
     [Route("api/doctors")]
     [ApiController]
     public class DoctorsController : ControllerBase
@@ -15,11 +15,11 @@ namespace HospitalSystem.API.Controllers
         private readonly IDoctorService _doctorService;
         public DoctorsController(IDoctorService doctorService) => _doctorService = doctorService;
 
+        [AllowAnonymous]
         [HttpGet("count", Name = "GetDoctorsCount")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-
         public async Task<ActionResult<int>> GetDoctorsCount()
         {
             int count = await _doctorService.DoctorsCount();
@@ -33,6 +33,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpPost(Name = "AddNewDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -61,6 +62,7 @@ namespace HospitalSystem.API.Controllers
         [HttpPut(Name = "UpdateDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -83,6 +85,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpGet("{doctorId}", Name = "FindDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -100,6 +103,8 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpGet("user/{userId}", Name = "FindDoctorByUserId")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -117,6 +122,8 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpDelete("{doctorId}", Name = "DeleteDoctor")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -140,6 +147,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpGet(Name = "GetAllDoctors")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<DoctorDto>>> GetAllDoctors()
@@ -155,6 +163,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpGet("todays-appointments/{doctorId}", Name = "GetTodaysAppointmentsForDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -172,8 +181,8 @@ namespace HospitalSystem.API.Controllers
             return Ok(appointments);
         }
 
+        [AllowAnonymous]
         [HttpGet("patients/{doctorId}", Name = "PatientsCountForDoctor")]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -190,6 +199,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(count);
         }
 
+        [AllowAnonymous]
         [HttpGet("appointments/{doctorId}", Name = "AppointmentsCountForDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -208,6 +218,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(count);
         }
 
+        [AllowAnonymous]
         [HttpGet("medicalrecords/{doctorId}", Name = "MedicalRecordsCountForDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

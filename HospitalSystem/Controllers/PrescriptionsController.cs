@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "AddEditMedicalRecords")] // Prescriptions should be accessed via medical records
     [Route("api/prescription")]
     [ApiController]
     public class PrescriptionsController : ControllerBase
@@ -18,6 +18,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpPost(Name = "AddNewPrescription")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -35,6 +36,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpGet("{prescriptionId}", Name = "FindPrescriptionById")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -53,6 +55,7 @@ namespace HospitalSystem.API.Controllers
 
         [HttpGet("findByAppointmentId/{appointmentId}", Name = "FindPrescriptionByAppointmentId")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]

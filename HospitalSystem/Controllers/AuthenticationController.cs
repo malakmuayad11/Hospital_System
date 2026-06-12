@@ -8,13 +8,13 @@ namespace HospitalSystem.API.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
 
-        public AuthController(IUserService userService, ITokenService tokenService, IConfiguration configuration)
+        public AuthenticationController(IUserService userService, ITokenService tokenService, IConfiguration configuration)
         {
             _userService = userService;
             _tokenService = tokenService;
