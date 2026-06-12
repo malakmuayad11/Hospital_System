@@ -28,7 +28,6 @@ namespace HospitalSystem.Service.Interfaces
         public Task<bool?> UpdateUserLastLoginDateAsync(int userId);
 
         public Task<bool?> AddAsCurrentUserAsync(int userId);
-
         public enum enPermissions
         {
             eAll = -1, eAddEditDoctors = 1, eManagePatients = 2,

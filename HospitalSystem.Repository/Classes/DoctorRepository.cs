@@ -141,5 +141,11 @@ namespace HospitalSystem.Repository.Classes
                 .Where(mr => mr.Appointment.DoctorId == doctorId)
                 .CountAsync();
         }
+
+        public async Task<int?> FindUserIdForDoctor(int doctorId) =>
+            await _context.Doctors
+                .Where(d => d.DoctorId == doctorId)
+                .Select(d => (int?)d.UserId)
+                .FirstOrDefaultAsync();
     }
 }

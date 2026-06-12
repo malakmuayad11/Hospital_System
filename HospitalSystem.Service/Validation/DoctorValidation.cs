@@ -22,6 +22,7 @@ namespace HospitalSystem.Service.Validation
 
         public static bool ValidateUpdateDoctorDto(UpdateDoctorDto updateDoctorDto) =>
             ValidateDoctorId(updateDoctorDto.DoctorId) &&
+            updateDoctorDto.UserId > 0 &&
             _ValidateDay(updateDoctorDto.StartWorkDay) &&
             _ValidateDay(updateDoctorDto.EndWorkDay) &&
             _ValidateHour(updateDoctorDto.StartWorkHour) &&

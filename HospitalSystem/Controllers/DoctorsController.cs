@@ -7,15 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HospitalSystem.API.Controllers
 {
-    [Authorize(Policy = "AddEditDoctors")]
     [Route("api/doctors")]
     [ApiController]
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
-        public DoctorsController(IDoctorService doctorService) => _doctorService = doctorService;
+        private readonly IAuthorizationService _authorizationService;
 
-        [AllowAnonymous]
+        public DoctorsController(IDoctorService doctorService, IAuthorizationService authorizationService)
+        {
+            _doctorService = doctorService;
+            _authorizationService = authorizationService;
+        }
+
         [HttpGet("count", Name = "GetDoctorsCount")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -31,6 +35,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(count);
         }
 
+        [Authorize(Policy = "AddEditDoctors")]
         [HttpPost(Name = "AddNewDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -68,6 +73,14 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<bool>> UpdateDoctor(UpdateDoctorDto updateDoctorDto)
         {
+            AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
+                User,
+                updateDoctorDto.UserId,
+                "UserOwnerOrAdmin");
+
+            if (!authResult.Succeeded)
+                return Forbid(); 
+
             if (!DoctorValidation.ValidateUpdateDoctorDto(updateDoctorDto))
                 return BadRequest("Please validate your input.");
 
@@ -83,6 +96,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "AddEditDoctors")]
         [HttpGet("{doctorId}", Name = "FindDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -113,6 +127,14 @@ namespace HospitalSystem.API.Controllers
             if (!DoctorValidation.ValidateUserId(userId))
                 return BadRequest("Please validate your input.");
 
+            AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
+                User,
+                userId,
+                "UserOwnerOrAdmin");
+
+            if (!authResult.Succeeded)
+                return Forbid(); 
+
             FindDoctorDto doctorDto = await _doctorService.FindByUserIdAsync(userId);
 
             if (doctorDto is null)
@@ -121,6 +143,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(doctorDto);
         }
 
+        [Authorize(Policy = "AddEditDoctors")]
         [HttpDelete("{doctorId}", Name = "DeleteDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -145,6 +168,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "AddEditDoctors")]
         [HttpGet(Name = "GetAllDoctors")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -165,12 +189,26 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<AppointmentForDoctorDto>>> GetTodaysAppointmentsForDoctor(int doctorId)
         {
             if (!DoctorValidation.ValidateDoctorId(doctorId))
                 return BadRequest("Please validate your input.");
+
+            int? userId = await _doctorService.FindUserIdForDoctor(doctorId);
+
+            if (userId is null)
+                return NotFound($"Doctor with id: {doctorId} is not found.");
+
+            AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
+                User,
+                userId,
+                "UserOwnerOrAdmin");
+
+            if (!authResult.Succeeded)
+                return Forbid(); 
 
             List<AppointmentForDoctorDto> appointments = await _doctorService.GetTodaysAppointmentsForDoctorAsync(doctorId);
 
@@ -181,7 +219,6 @@ namespace HospitalSystem.API.Controllers
             return Ok(appointments);
         }
 
-        [AllowAnonymous]
         [HttpGet("patients/{doctorId}", Name = "PatientsCountForDoctor")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -199,7 +236,6 @@ namespace HospitalSystem.API.Controllers
             return Ok(count);
         }
 
-        [AllowAnonymous]
         [HttpGet("appointments/{doctorId}", Name = "AppointmentsCountForDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -218,7 +254,6 @@ namespace HospitalSystem.API.Controllers
             return Ok(count);
         }
 
-        [AllowAnonymous]
         [HttpGet("medicalrecords/{doctorId}", Name = "MedicalRecordsCountForDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

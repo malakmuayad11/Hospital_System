@@ -27,5 +27,7 @@ namespace HospitalSystem.Service.Interfaces
 
         public Task<int?> MedicalRecordsCountForDoctorAsync(int doctorId);
 
+        public Task<int?> FindUserIdForDoctor(int doctorId);
+
     }
 }

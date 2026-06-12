@@ -1,4 +1,4 @@
-﻿using HospitalSystem.Infrastructure.Auth;
+﻿using HospitalSystem.Infrastructure.DTOs.AuthenticationDTOs;
 using HospitalSystem.Infrastructure.DTOs.UserDTOs;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ namespace HospitalSystem.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
             LoginUserDto loginUserDto = await _userService.FindAsync(request.Username);
 

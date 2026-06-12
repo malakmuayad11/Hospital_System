@@ -60,6 +60,7 @@ namespace HospitalSystem.Service.Classes
             Doctor doctor = new Doctor
             {
                 DoctorId = updateDoctorDto.DoctorId,
+                UserId = updateDoctorDto.UserId,
                 StartWorkDay = updateDoctorDto.StartWorkDay,
                 EndWorkDay = updateDoctorDto.EndWorkDay,
                 StartWorkHour = updateDoctorDto.StartWorkHour,
@@ -127,5 +128,7 @@ namespace HospitalSystem.Service.Classes
         public async Task<int?> MedicalRecordsCountForDoctorAsync(int doctorId) =>
             await _doctorRepository.MedicalRecordsCountForDoctorAsync(doctorId);
 
+        public async Task<int?> FindUserIdForDoctor(int doctorId) =>
+            await _doctorRepository.FindUserIdForDoctor(doctorId);
     }
 }

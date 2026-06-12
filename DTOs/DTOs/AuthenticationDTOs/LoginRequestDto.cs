@@ -1,6 +1,6 @@
-﻿namespace HospitalSystem.Infrastructure.Auth
+﻿namespace HospitalSystem.Infrastructure.DTOs.AuthenticationDTOs
 {
-    public class LoginRequest
+    public class LoginRequestDto
     {
         public string Username { get; set; }
         public string Password { get; set; }

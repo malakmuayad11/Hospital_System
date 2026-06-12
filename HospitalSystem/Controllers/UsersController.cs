@@ -1,5 +1,4 @@
-﻿using HospitalSystem.API.Models;
-using HospitalSystem.API.Validation;
+﻿using HospitalSystem.API.Validation;
 using HospitalSystem.Infrastructure.DTOs.Users;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -83,16 +82,16 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> UpdateUserAsync(UpdateUserDto updateUserDto)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(
+            if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
+                return BadRequest("Please validate your input.");
+
+            AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
                 User,
                 updateUserDto.UserId,
                 "UserOwnerOrAdmin");
 
             if (!authResult.Succeeded)
                 return Forbid(); // 403
-
-            if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
-                return BadRequest("Please validate your input.");
 
             bool? result = await _userService.UpdateUserAsync(updateUserDto);
 
@@ -115,7 +114,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<bool>> ChangePasswordAsync(ChangePasswordDto changePasswordDto)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(
+            AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
                 User,
                 changePasswordDto.UserId,
                 "UserOwnerOrAdmin");
@@ -146,7 +145,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<UserDto>> FindAsync(int userId)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(
+            AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
                 User,
                 userId,
                 "UserOwnerOrAdmin");
@@ -181,7 +180,7 @@ namespace HospitalSystem.API.Controllers
             if (user is null)
                 return NotFound($"User is not found.");
 
-            var authResult = await _authorizationService.AuthorizeAsync(
+            AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
                 User,
                 user.UserId,
                 "UserOwnerOrAdmin");

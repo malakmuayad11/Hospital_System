@@ -3,28 +3,24 @@
   "WorkspaceRootPath": "C:\\Programming\\HospitalSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.service\\classes\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|solutionrelative:hospitalsystem.service\\classes\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.service\\classes\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|solutionrelative:hospitalsystem.service\\classes\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|c:\\programming\\hospitalsystem\\hospitalsystem\\controllers\\doctorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|solutionrelative:hospitalsystem\\controllers\\doctorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|c:\\programming\\hospitalsystem\\hospitalsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|solutionrelative:hospitalsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.Infrastructure.csproj|c:\\programming\\hospitalsystem\\dtos\\dtos\\userdtos\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D001ECD-B0AF-4593-A5FA-5AF63025E678}|DTOs\\HospitalSystem.Infrastructure.csproj|solutionrelative:dtos\\dtos\\userdtos\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|c:\\programming\\hospitalsystem\\hospitalsystem\\controllers\\billingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|solutionrelative:hospitalsystem\\controllers\\billingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|c:\\programming\\hospitalsystem\\hospitalsystem.service\\classes\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CE3AC24-96E6-4796-A40A-2B2368C561AA}|HospitalSystem.Service\\HospitalSystem.Service.csproj|solutionrelative:hospitalsystem.service\\classes\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|c:\\programming\\hospitalsystem\\hospitalsystem\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|solutionrelative:hospitalsystem\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|c:\\programming\\hospitalsystem\\hospitalsystem\\repository\\classes\\doctorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B991EBB9-9EEF-F4BA-BECA-9CCD5CB89BDC}|HospitalSystem\\HospitalSystem.API.csproj|solutionrelative:hospitalsystem\\repository\\classes\\doctorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,26 +38,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LoginUserDto.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\DTOs\\DTOs\\UserDTOs\\LoginUserDto.cs",
-              "RelativeDocumentMoniker": "DTOs\\DTOs\\UserDTOs\\LoginUserDto.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\DTOs\\DTOs\\UserDTOs\\LoginUserDto.cs",
-              "RelativeToolTip": "DTOs\\DTOs\\UserDTOs\\LoginUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "DoctorRepository.cs",
+              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Repository\\Classes\\DoctorRepository.cs",
+              "RelativeDocumentMoniker": "HospitalSystem\\Repository\\Classes\\DoctorRepository.cs",
+              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Repository\\Classes\\DoctorRepository.cs",
+              "RelativeToolTip": "HospitalSystem\\Repository\\Classes\\DoctorRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T07:44:52.287Z",
+              "WhenOpened": "2026-06-12T11:30:55.229Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
+              "Title": "DoctorsController.cs",
+              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\DoctorsController.cs",
+              "RelativeDocumentMoniker": "HospitalSystem\\Controllers\\DoctorsController.cs",
+              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\DoctorsController.cs",
+              "RelativeToolTip": "HospitalSystem\\Controllers\\DoctorsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T09:49:04.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "AuthenticationController.cs",
               "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\AuthenticationController.cs",
               "RelativeDocumentMoniker": "HospitalSystem\\Controllers\\AuthenticationController.cs",
               "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\AuthenticationController.cs",
               "RelativeToolTip": "HospitalSystem\\Controllers\\AuthenticationController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAA1wBoAAABBAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-12T07:43:40.106Z",
               "EditorCaption": ""
@@ -69,53 +78,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TokenService.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\Classes\\TokenService.cs",
-              "RelativeDocumentMoniker": "HospitalSystem.Service\\Classes\\TokenService.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\Classes\\TokenService.cs",
-              "RelativeToolTip": "HospitalSystem.Service\\Classes\\TokenService.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAqwBUAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T07:42:25.043Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "BillingsController.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\BillingsController.cs",
-              "RelativeDocumentMoniker": "HospitalSystem\\Controllers\\BillingsController.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Controllers\\BillingsController.cs",
-              "RelativeToolTip": "HospitalSystem\\Controllers\\BillingsController.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAgwEMAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T07:48:59.939Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Program.cs",
               "RelativeDocumentMoniker": "HospitalSystem\\Program.cs",
               "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem\\Program.cs",
               "RelativeToolTip": "HospitalSystem\\Program.cs",
-              "ViewState": "AgIAAIsAAAAAAAAAAAAAALUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALkAAAAAAAAAAAAUwL4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-12T07:09:51.465Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\Classes\\UserService.cs",
-              "RelativeDocumentMoniker": "HospitalSystem.Service\\Classes\\UserService.cs",
-              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\Classes\\UserService.cs",
-              "RelativeToolTip": "HospitalSystem.Service\\Classes\\UserService.cs",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAkwHAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\Classes\\TokenService.cs",
+              "RelativeDocumentMoniker": "HospitalSystem.Service\\Classes\\TokenService.cs",
+              "ToolTip": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\Classes\\TokenService.cs",
+              "RelativeToolTip": "HospitalSystem.Service\\Classes\\TokenService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAUwC0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T07:44:02.906Z",
+              "WhenOpened": "2026-06-12T07:42:25.043Z",
               "EditorCaption": ""
             }
           ]

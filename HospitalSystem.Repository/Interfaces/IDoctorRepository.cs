@@ -27,5 +27,7 @@ namespace HospitalSystem.Repository.Interfaces
         public Task<int?> AppointmentsCountForDoctorAsync(int doctorId);
 
         public Task<int?> MedicalRecordsCountForDoctorAsync(int doctorId);
+
+        public Task<int?> FindUserIdForDoctor(int doctorId);
     }
 }

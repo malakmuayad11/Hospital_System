@@ -110,7 +110,7 @@ namespace HospitalSystem.Service.Classes
                 Role = user.Role,
                 Permissions = user.Permissions
             };
-        }
+          }
 
         public async Task<bool> IsUsernameUsedAsync(string username) =>
             await _userRepository.IsUsernameUsedAsync(username);
@@ -140,6 +140,5 @@ namespace HospitalSystem.Service.Classes
         }
 
         public static string PermissionsString(int permissions) => permissions.ToString();
-
     }
 }
