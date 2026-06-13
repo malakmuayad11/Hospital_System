@@ -1,4 +1,4 @@
-﻿namespace HospitalSystem.API.Models
+﻿namespace HospitalSystem.Data.Entities
 {
     public partial class UsersTokens
     {

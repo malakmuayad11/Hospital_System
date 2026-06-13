@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HospitalSystem.API.Models;
+﻿namespace HospitalSystem.Data.Entities;
 
 public partial class Appointment
 {
@@ -24,9 +21,6 @@ public partial class Appointment
 
     // Bool flag for the reminder service
     public bool? IsReminderSent { get; set; }
-
-    public virtual ICollection<AppointmentAuditTrail> AppointmentAuditTrails { get; set; } = new List<AppointmentAuditTrail>();
-
     public virtual ICollection<Billing> Billings { get; set; } = new List<Billing>();
 
     public virtual Doctor Doctor { get; set; } = null!;

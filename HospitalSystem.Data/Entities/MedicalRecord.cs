@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HospitalSystem.API.Models;
-
+﻿namespace HospitalSystem.Data.Entities;
 public partial class MedicalRecord
 {
     public int MedicalRecordId { get; set; }
@@ -16,6 +12,4 @@ public partial class MedicalRecord
     public string MedicalRecordNotes { get; set; } = null!;
 
     public virtual Appointment Appointment { get; set; } = null!;
-
-    public virtual ICollection<MedicalRecordAuditTrail> MedicalRecordAuditTrails { get; set; } = new List<MedicalRecordAuditTrail>();
 }

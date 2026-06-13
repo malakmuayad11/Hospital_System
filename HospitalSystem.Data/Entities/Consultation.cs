@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HospitalSystem.API.Models;
+﻿namespace HospitalSystem.Data.Entities;
 
 public partial class Consultation
 {

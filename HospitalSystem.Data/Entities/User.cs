@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HospitalSystem.API.Models;
+﻿namespace HospitalSystem.Data.Entities;
 
 public partial class User
 {
@@ -19,13 +16,7 @@ public partial class User
     public int Permissions { get; set; }
 
     public DateTime? LastLoginDate { get; set; }
-
-    public virtual ICollection<AuditTrail> AuditTrails { get; set; } = new List<AuditTrail>();
-
-
     public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
-
-    public virtual ICollection<PasswordLog> PasswordLogs { get; set; } = new List<PasswordLog>();
 
     public virtual ICollection<UsersTokens> UsersTokens { get; set; } = new List<UsersTokens>();
 }

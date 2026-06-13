@@ -1,4 +1,4 @@
-﻿using HospitalSystem.API.Models;
+﻿using HospitalSystem.Data.Entities;
 using HospitalSystem.Repository.Interfaces;
 using HospitalSystem.Service.Interfaces;
 using HospitalSystem.Infrastructure.DTOs.People;

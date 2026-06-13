@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HospitalSystem.API.Models;
+﻿namespace HospitalSystem.Data.Entities;
 
 public partial class Prescription
 {
@@ -18,6 +15,4 @@ public partial class Prescription
     public byte DurationMonths { get; set; }
 
     public virtual Appointment Appointment { get; set; } = null!;
-
-    public virtual ICollection<PrescriptionAuditTrail> PrescriptionAuditTrails { get; set; } = new List<PrescriptionAuditTrail>();
 }

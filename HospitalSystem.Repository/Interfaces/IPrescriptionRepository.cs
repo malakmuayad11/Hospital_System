@@ -1,4 +1,4 @@
-﻿using HospitalSystem.API.Models;
+﻿using HospitalSystem.Data.Entities;
 
 namespace HospitalSystem.Repository.Interfaces
 {

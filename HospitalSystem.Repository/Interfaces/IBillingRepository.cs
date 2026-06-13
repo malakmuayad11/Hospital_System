@@ -1,4 +1,4 @@
-﻿using HospitalSystem.API.Models;
+﻿using HospitalSystem.Data.Entities;
 using HospitalSystem.Infrastructure.DTOs.Billings;
 
 namespace HospitalSystem.Repository.Interfaces

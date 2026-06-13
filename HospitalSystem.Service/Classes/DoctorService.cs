@@ -1,4 +1,4 @@
-﻿using HospitalSystem.API.Models;
+﻿using HospitalSystem.Data.Entities;
 using HospitalSystem.Infrastructure.DTOs.Appointments;
 using HospitalSystem.Infrastructure.DTOs.Doctors;
 using HospitalSystem.Repository.Interfaces;
@@ -28,7 +28,7 @@ namespace HospitalSystem.Service.Classes
             // Generate a unique username for the doctor, for example "Doctor1", "Doctor2", etc.
             int doctorUsernameId = await DoctorsCount() + 1;
 
-            int? userId = await _userRepository.AddUserAsync(new API.Models.User
+            int? userId = await _userRepository.AddUserAsync(new Data.Entities.User
             {
                 Username = $"Doctor{doctorUsernameId}",
                 Password = _passwordHasher.ComputeHash(addDoctorDto.Password), // this should be handled
