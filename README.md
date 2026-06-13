@@ -2,7 +2,7 @@
 A backend RESTful API built with ASP.NET Core (.NET 8) for managing hospital operations: patients, doctors, appointments, medical records, prescriptions, billing, authentication and authorization.
 
 > 💡 This project is a RESTful Web API for my Hospital Management System.  
-> You can view it on my [GitHub Profile](https://github.com/malakmuayad11/Hospital_System).
+> You can view it on my [GitHub Profile](https://github.com/malakmuayad11/Hospital-Management-System).
 
 ## ✅ Features
 - 🩺 Patient, Doctor, Appointment management
@@ -52,16 +52,16 @@ A backend RESTful API built with ASP.NET Core (.NET 8) for managing hospital ope
 ### 📃 AppointmentsController
 ![AppointmentsController](./screenshots/appointmentsController.png)
 
-### 🏠 AuthenticationController + BillingsController
+### 💰 AuthenticationController + BillingsController
 ![AuthenticationController](./screenshots/authenticationController+billingsController.png)
 
-### 📚 ConsultationsController + DoctorsCotnroller
-![ConsultationsController + DoctorsCotnroller](./screenshots/consultationsController+dctorsCotnroller.png)
+### 📃 ConsultationsController + DoctorsCotnroller
+![ConsultationsController + DoctorsCotnroller](./screenshots/consultationsController+doctorsCotnroller.png)
 
-### 🏫 DoctorssController + MedicalRecordsController
-![DoctorssController + MedicalRecordsController](./screenshots/doctorssController+medicalRecordsController.png)
+### 🩺 DoctorsController + MedicalRecordsController
+![DoctorssController + MedicalRecordsController](./screenshots/doctorsController+medicalRecordsController.png)
 
-### 💰 PatientsController
+### 🏥 PatientsController
 ![PatientsController](./screenshots/patientsController.png)
 
 ### 👥 PeopleController + PrescriptionsController
