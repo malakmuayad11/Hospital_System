@@ -1,0 +1,51 @@
+﻿using HospitalSystem.API.Models;
+using HospitalSystem.Data.Data;
+using HospitalSystem.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace HospitalSystem.Repository.Classes
+{
+    public class UsersTokensRepository : IUsersTokensRepository
+    {
+        private readonly HospitalSystemContext _context;
+
+        public UsersTokensRepository(HospitalSystemContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<bool?> Login(int userId, string refreshTokenHash, DateTime refreshTokenExpiresAt)
+        {
+            if (!await _context.Users.AnyAsync(u => u.UserId == userId))
+                return null;
+
+            UsersTokens usersTokens = new UsersTokens
+            {
+                UserId = userId,
+                RefreshTokenHash = refreshTokenHash,
+                RefreshTokenExpiresAt = refreshTokenExpiresAt,
+                RefreshTokenRevokedAt = null
+            };
+
+            await _context.UsersTokens.AddAsync(usersTokens);
+
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<(DateTime? expiresAt, DateTime? revokedAt, string hash)> GetTokenDataForUser(int userId)
+        {
+            if (!await _context.Users.AnyAsync(u => u.UserId == userId))
+                return (null, null, null);
+
+            return await _context.UsersTokens
+                .Select(ut => new (DateTime ? expiresAt, DateTime ? revokedAt, string hash)
+                {
+                    RefreshTokenExpiresAt = ut.RefreshTokenExpiresAt,
+                    RefreshTokenRevokedAt = ut.RefreshTokenRevokedAt,
+                    RefreshTokenHash = ut.RefreshTokenHash
+                })
+                .OrderByDescending(ut => ut.RefreshTokenExpiresAt)
+                .SingleOrDefaultAsync();
+        }
+    }
+}

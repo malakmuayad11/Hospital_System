@@ -9,9 +9,9 @@ namespace HospitalSystem.Service.Classes
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IPasswordHasher _passwordHasher;
+        private readonly IPasswordHasherService _passwordHasher;
 
-        public UserService(IUserRepository UserRepository, IPasswordHasher passwordHasher)
+        public UserService(IUserRepository UserRepository, IPasswordHasherService passwordHasher)
         {
             this._userRepository = UserRepository;
             this._passwordHasher = passwordHasher;

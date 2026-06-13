@@ -79,6 +79,7 @@ builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
 builder.Services.AddScoped<IBillingRepository, BillingRepository>();
+builder.Services.AddScoped<IUsersTokensRepository, UsersTokensRepository>();
 
 // Service
 builder.Services.AddScoped<IUserService, UserService>();
@@ -90,8 +91,9 @@ builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<IConsultationService, ConsultationService>();
 builder.Services.AddScoped<IBillingService, BillingService>();
-builder.Services.AddScoped<IPasswordHasher, BcryptHasher>();
+builder.Services.AddScoped<IPasswordHasherService, BcryptHasherService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUsersTokensService, UsersTokensService>();
 
 builder.Services.AddCors(options =>
 {

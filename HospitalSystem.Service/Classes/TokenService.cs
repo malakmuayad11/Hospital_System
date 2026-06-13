@@ -13,8 +13,8 @@ namespace HospitalSystem.Service.Classes
     {
         public string GenerateRefreshToken()
         {
-            var bytes = new byte[64];
-            using var rng = RandomNumberGenerator.Create();
+            byte[] bytes = new byte[64];
+            using RandomNumberGenerator rng = RandomNumberGenerator.Create();
             rng.GetBytes(bytes);
             return Convert.ToBase64String(bytes);
         }

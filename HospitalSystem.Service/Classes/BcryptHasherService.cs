@@ -2,7 +2,7 @@
 
 namespace HospitalSystem.Service.Classes
 {
-    public class BcryptHasher : IPasswordHasher
+    public class BcryptHasherService : IPasswordHasherService
     {
         private const int _workFactor = 12;
 

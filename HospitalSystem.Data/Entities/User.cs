@@ -26,4 +26,6 @@ public partial class User
     public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
 
     public virtual ICollection<PasswordLog> PasswordLogs { get; set; } = new List<PasswordLog>();
+
+    public virtual ICollection<UsersTokens> UsersTokens { get; set; } = new List<UsersTokens>();
 }

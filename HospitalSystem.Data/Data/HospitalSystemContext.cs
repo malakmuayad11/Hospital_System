@@ -56,6 +56,8 @@ public partial class HospitalSystemContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<UsersTokens> UsersTokens { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.;Database=Hospital_System;Trusted_Connection=True;TrustServerCertificate=True;");
@@ -378,6 +380,32 @@ public partial class HospitalSystemContext : DbContext
             entity.Property(e => e.Password).HasMaxLength(64);
             entity.Property(e => e.Role).HasComment("1- Admin, 2- Receptionist, 3- Doctor");
             entity.Property(e => e.Username).HasMaxLength(50);
+        
+        });
+        modelBuilder.Entity<UsersTokens>(entity =>
+        {
+            entity.HasKey(e => e.TokenId)
+                  .HasName("PK_Users_Tokens");
+
+            entity.Property(e => e.TokenId)
+                  .HasColumnName("TokenID");
+
+            entity.Property(e => e.UserId)
+                  .HasColumnName("UserID");
+
+            entity.Property(e => e.RefreshTokenHash)
+                  .HasMaxLength(100);
+
+            entity.Property(e => e.RefreshTokenExpiresAt)
+                  .HasColumnType("datetime2");
+
+            entity.Property(e => e.RefreshTokenRevokedAt)
+                  .HasColumnType("datetime2");
+
+            entity.HasOne(d => d.User)
+                  .WithMany(p => p.UsersTokens)
+                  .HasForeignKey(d => d.UserId)
+                  .HasConstraintName("FK_Tokens_Users");
         });
 
         OnModelCreatingPartial(modelBuilder);

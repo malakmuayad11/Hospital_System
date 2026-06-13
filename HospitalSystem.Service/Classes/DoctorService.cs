@@ -10,9 +10,9 @@ namespace HospitalSystem.Service.Classes
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IPasswordHasher _passwordHasher;
+        private readonly IPasswordHasherService _passwordHasher;
 
-        public DoctorService(IDoctorRepository doctorRepository, IUserRepository userRepository, IPasswordHasher passwordHasher)
+        public DoctorService(IDoctorRepository doctorRepository, IUserRepository userRepository, IPasswordHasherService passwordHasher)
         {
             _doctorRepository = doctorRepository;
             _userRepository = userRepository;
