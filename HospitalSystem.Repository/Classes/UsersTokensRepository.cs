@@ -35,6 +35,7 @@ namespace HospitalSystem.Repository.Classes
                 return (null, null, null);
 
             var tokenData = await _context.UsersTokens
+                .Where(u => u.UserId == userId)
                 .Select(ut => new { ut.RefreshTokenExpiresAt, ut.RefreshTokenRevokedAt, ut.RefreshTokenHash })
                 .OrderByDescending(ut => ut.RefreshTokenExpiresAt)
                 .FirstOrDefaultAsync();

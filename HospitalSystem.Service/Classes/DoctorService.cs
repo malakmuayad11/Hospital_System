@@ -31,7 +31,7 @@ namespace HospitalSystem.Service.Classes
             int? userId = await _userRepository.AddUserAsync(new API.Models.User
             {
                 Username = $"Doctor{doctorUsernameId}",
-                Password = _passwordHasher.HashPassword(addDoctorDto.Password), // this should be handled
+                Password = _passwordHasher.ComputeHash(addDoctorDto.Password), // this should be handled
                 Role = 3, // Doctor role
                 Permissions = 18 // Permissions for doctor role
             });

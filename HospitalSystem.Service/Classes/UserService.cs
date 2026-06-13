@@ -43,7 +43,7 @@ namespace HospitalSystem.Service.Classes
             User user = new User
             {
                 Username = addUserDto.Username,
-                Password = this._passwordHasher.HashPassword(addUserDto.Password),
+                Password = this._passwordHasher.ComputeHash(addUserDto.Password),
                 Role = addUserDto.Role,
                 Permissions = addUserDto.Permissions
             };
@@ -61,7 +61,7 @@ namespace HospitalSystem.Service.Classes
             });
 
         public async Task<bool?> ChangePasswordAsync(ChangePasswordDto changePasswordDto) =>
-            await _userRepository.ChangePasswordAsync(changePasswordDto.UserId, _passwordHasher.HashPassword(changePasswordDto.Password));
+            await _userRepository.ChangePasswordAsync(changePasswordDto.UserId, _passwordHasher.ComputeHash(changePasswordDto.Password));
 
         private UserDto _MapUserDto(User user) =>
             new UserDto{
@@ -89,7 +89,7 @@ namespace HospitalSystem.Service.Classes
             if (user is null)
                 return null;
 
-            if (!_passwordHasher.VerifyPassword(findUserDto.Password, user.Password))
+            if (!_passwordHasher.Verify(findUserDto.Password, user.Password))
                 return null;
 
             return _MapUserDto(user);

@@ -15,7 +15,7 @@ namespace HospitalSystem.Service.Classes
             _passwordHasherService = passwordHasherService;
         }
         public Task<bool?> LoginAsync(int userId, string refreshToken, DateTime refreshTokenExpiresAt) =>
-            _usersTokensRepository.LoginAsync(userId, _passwordHasherService.HashPassword(refreshToken), refreshTokenExpiresAt);
+            _usersTokensRepository.LoginAsync(userId, _passwordHasherService.ComputeHash(refreshToken), refreshTokenExpiresAt);
 
         public async Task<TokenForUserDto> GetTokenDataForUserAsync(int userId)
         {
@@ -33,7 +33,7 @@ namespace HospitalSystem.Service.Classes
         }
 
         public async Task<bool?> RefreshAsync(int userId, string refreshToken, DateTime refreshTokenExpiresAt) =>
-            await _usersTokensRepository.RefreshAsync(userId,  _passwordHasherService.HashPassword(refreshToken), refreshTokenExpiresAt);
+            await _usersTokensRepository.RefreshAsync(userId,  _passwordHasherService.ComputeHash(refreshToken), refreshTokenExpiresAt);
 
         public async Task<string> GetRefreshTokenHashForUserAsync(int userId) =>
             await _usersTokensRepository.GetRefreshTokenHashForUserAsync(userId);

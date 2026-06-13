@@ -6,8 +6,8 @@ namespace HospitalSystem.Service.Classes
     {
         private const int _workFactor = 12;
 
-        public string HashPassword(string password) => BCrypt.Net.BCrypt.EnhancedHashPassword(password, _workFactor);
+        public string ComputeHash(string password) => BCrypt.Net.BCrypt.EnhancedHashPassword(password, _workFactor);
 
-        public bool VerifyPassword(string password, string hashedPassword) => BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword);
+        public bool Verify(string password, string hashedPassword) => BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword);
     }
 }
