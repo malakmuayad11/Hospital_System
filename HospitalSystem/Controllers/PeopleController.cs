@@ -4,6 +4,7 @@ using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Security.Claims;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -13,7 +14,12 @@ namespace HospitalSystem.API.Controllers
     public class PeopleController : ControllerBase
     {
         private readonly IPersonService _personService;
-        public PeopleController(IPersonService personService) => this._personService = personService;
+        private readonly ILoggerService _loggerService;
+        public PeopleController(IPersonService personService, ILoggerService loggerService)
+        {
+            _personService = personService;
+            _loggerService = loggerService;
+        }
 
         [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPost(Name = "AddNewPerson")]
@@ -24,6 +30,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<AddPersonDto>> AddNewPersonAsync(AddPersonDto addPersonDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!PersonValidation.validateAddPersonDto(addPersonDto))
                 return BadRequest("Please validate your input");
 
@@ -33,6 +42,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new person." });
 
+            _loggerService.Log($"Added person with id: {personId}.", ip, userId);
             return CreatedAtRoute("FindById", new { personId = personId }, addPersonDto);
         }
 
@@ -66,6 +76,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool?>> updateAsync(UpdatePersonDto updatePersonDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!PersonValidation.validateUpdatePersonDto(updatePersonDto))
                 return BadRequest("Please validate your input.");
 
@@ -78,6 +91,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while updating the person." });
 
+            _loggerService.Log($"Updated person with id: {updatePersonDto.PersonId}.", ip, userId);
             return Ok("Person is updated successfully.");
         }
     }

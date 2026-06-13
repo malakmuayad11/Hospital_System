@@ -4,6 +4,7 @@ using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Security.Claims;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -13,9 +14,13 @@ namespace HospitalSystem.API.Controllers
     public class PrescriptionsController : ControllerBase
     {
         private readonly IPrescriptionService _prescriptionService;
+        private readonly ILoggerService _loggerService;
 
-        public PrescriptionsController(IPrescriptionService prescriptionService) =>
-            this._prescriptionService = prescriptionService;
+        public PrescriptionsController(IPrescriptionService prescriptionService, ILoggerService loggerService)
+        {
+            _prescriptionService = prescriptionService;
+            _loggerService = loggerService;
+        }
 
         [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPost(Name = "AddNewPrescription")]
@@ -27,6 +32,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<PrescriptionDto>> AddNewPrescriptionAsync(AddPrescriptionDto addPrescriptionDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!PrescriptionValidation.ValidateAddPrescriptionDto(addPrescriptionDto))
                 return BadRequest("Please validate your input.");
 
@@ -34,6 +42,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new prescription." });
 
+            _loggerService.Log($"Added prescription with appointmentId: {addPrescriptionDto.AppointmentId}.", ip, userId);
             return CreatedAtRoute("FindPrescriptionByAppointmentId", new { AppointmentId = addPrescriptionDto.AppointmentId }, addPrescriptionDto);
         }
 

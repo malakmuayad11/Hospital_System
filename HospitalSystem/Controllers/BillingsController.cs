@@ -4,6 +4,7 @@ using HospitalSystem.Service.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Security.Claims;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -13,8 +14,13 @@ namespace HospitalSystem.API.Controllers
     public class BillingsController : ControllerBase
     {
         private readonly IBillingService _billingService;
+        private readonly ILoggerService _loggerService;
 
-        public BillingsController(IBillingService billingService) => _billingService = billingService;
+        public BillingsController(IBillingService billingService, ILoggerService loggerService)
+        {
+            _billingService = billingService;
+            _loggerService = loggerService;
+        }
 
         [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPatch(Name = "AddAdditionalCharges")]
@@ -26,6 +32,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> AddAdditionalCharges(AddAdditionalChargesDto updateBillingChargesDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!BillingValidation.ValidateUpdateBillingChargesDto(updateBillingChargesDto))
                 return BadRequest("Please validate your input");
 
@@ -38,6 +47,8 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while updating the billing's charges." });
 
+            _loggerService.Log($"Updated billing's charges with billingID: {updateBillingChargesDto.BillingId}.",
+                ip, userID);
             return Ok("Billing's charges are updated successfully.");
         }
 
@@ -51,6 +62,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> UpdateBillingPaymentStatus(UpdateBillingPaymentStatusDto updateBillingPaymentStatusDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!BillingValidation.ValidateUpdateBillingPaymentStatusDto(updateBillingPaymentStatusDto))
                 return BadRequest("Please validate your input");
 
@@ -63,6 +77,8 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while updating the billing's payment status." });
 
+            _loggerService.Log($"Updated billing's status with billingID: {updateBillingPaymentStatusDto.BillingId}.",
+                ip, userID);
             return Ok("Billing's payment status is updated successfully.");
         }
 

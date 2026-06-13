@@ -13,13 +13,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Load Azure Key Vault
-
 var keyVaultUrl = builder.Configuration["KeyVault:Url"];
 
 if (!string.IsNullOrWhiteSpace(keyVaultUrl))
@@ -145,6 +143,7 @@ builder.Services.AddScoped<IBillingService, BillingService>();
 builder.Services.AddScoped<IPasswordHasherService, BcryptHasherService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUsersTokensService, UsersTokensService>();
+builder.Services.AddScoped<ILoggerService, NotepadLoggerService>();
 
 builder.Services.AddCors(options =>
 {
@@ -243,6 +242,23 @@ app.Use(async (context, next) =>
     if (context.Response.StatusCode == StatusCodes.Status429TooManyRequests)
     {
         await context.Response.WriteAsync("Too many attempts. Please try again later.");
+    }
+});
+
+app.Use(async (context, next) =>
+{
+    await next();
+
+    if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
+    {
+        var loggerService = context.RequestServices.GetRequiredService<NotepadLoggerService>();
+
+        var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+        var userIdClaim = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        int userId = int.TryParse(userIdClaim, out var id) ? id : 0;
+
+        loggerService.Log("Forbidden Access", ip, userIdClaim);
     }
 });
 

@@ -4,6 +4,7 @@ using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Security.Claims;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -13,7 +14,12 @@ namespace HospitalSystem.API.Controllers
     public class PatientsController : ControllerBase
     {
         private readonly IPatientService _patientService;
-        public PatientsController(IPatientService patientService) => this._patientService = patientService;
+        private readonly ILoggerService _loggerService;
+        public PatientsController(IPatientService patientService, ILoggerService loggerService)
+        {
+            _patientService = patientService;
+            _loggerService = loggerService;
+        }
 
         [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet]
@@ -43,6 +49,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<PatientDto>> AddNewPatientAsync(AddPatientDto addPatientDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!PatientValidation.ValidateAddPatientDto(addPatientDto))
                 return BadRequest("Please validate your input.");
 
@@ -52,6 +61,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new patient." });
 
+            _loggerService.Log($"Added patient with id: {patientId}.", ip, userId);
             return CreatedAtRoute("GetPatientByPatientId", new { patientId = patientId }, addPatientDto);
         }
 
@@ -65,6 +75,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> UpdatePatientAsync(UpdatePatientDto updatePatientDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!PatientValidation.ValidateUpdatePatientDto(updatePatientDto))
                 return BadRequest("Please validate your input");
 
@@ -77,6 +90,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while updating the patient." });
 
+            _loggerService.Log($"Updated patient with id: {updatePatientDto.PatientId}.", ip, userId);
             return Ok("Patient is updated successfully.");
         }
 
@@ -133,6 +147,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> DeleteAsync(int patientId)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!PatientValidation.ValidatePatientId(patientId))
                 return BadRequest("Please validate your input.");
 
@@ -144,7 +161,8 @@ namespace HospitalSystem.API.Controllers
 
             if (result == false)
                     return NotFound($"Patient with id: {patientId} is not found.");
-            
+
+            _loggerService.Log($"Deleted patient with id: {patientId}.", ip, userId);
             return Ok(result);
         }
 

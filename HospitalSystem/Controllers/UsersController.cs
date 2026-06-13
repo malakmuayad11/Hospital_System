@@ -4,6 +4,7 @@ using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Security.Claims;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -14,11 +15,14 @@ namespace HospitalSystem.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAuthorizationService _authorizationService;
+        private readonly ILoggerService _loggerService;
 
-        public UsersController(IUserService UserService, IAuthorizationService authorizationService)
+        public UsersController(IUserService UserService, IAuthorizationService authorizationService
+            , ILoggerService loggerService)
         {
-            this._userService = UserService;
-            this._authorizationService = authorizationService;
+            _userService = UserService;
+            _authorizationService = authorizationService;
+            _loggerService = loggerService;
         }
 
         [Authorize(Policy = "ManageUsers")]
@@ -66,6 +70,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<UserDto>> AddNewUserAsync(AddUserDto addUserDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!UserValidation.ValidateAddUserInput(addUserDto))
                 return BadRequest("Please validate your input.");
 
@@ -75,6 +82,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new user." });
 
+            _loggerService.Log($"Added new user with id: {userId}.", ip, userID);
             return CreatedAtRoute("FindUserById", new { userId = userId }, addUserDto);
         }
 
@@ -88,6 +96,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> UpdateUserAsync(UpdateUserDto updateUserDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
                 return BadRequest("Please validate your input.");
 
@@ -97,7 +108,7 @@ namespace HospitalSystem.API.Controllers
                 "UserOwnerOrAdmin");
 
             if (!authResult.Succeeded)
-                return Forbid(); // 403
+                return Forbid(); 
 
             bool? result = await _userService.UpdateUserAsync(updateUserDto);
 
@@ -108,6 +119,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while updating the user." });
 
+            _loggerService.Log($"Updated user with id: {updateUserDto.UserId}.", ip, userId);
             return Ok("User is updated successfully.");
         }
 
@@ -121,6 +133,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> ChangePasswordAsync(ChangePasswordDto changePasswordDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
                 User,
                 changePasswordDto.UserId,
@@ -141,6 +156,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while changing the password." });
 
+            _loggerService.Log($"Changed user's password with id: {changePasswordDto.UserId}.", ip, userId);
             return Ok("Password is changed successfully.");
         }
 
@@ -226,6 +242,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> DeleteUserAsync(int userId)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!UserValidation.ValidateUserId(userId))
                 return BadRequest("Please validate your input.");
 
@@ -238,6 +257,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while deleting the user." });
 
+            _loggerService.Log($"Deleted user with id: {userId}.", ip, userID);
             return Ok("User deleted successfully.");
         }
 
@@ -252,6 +272,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> UpdateUserLastLoginDateAsync(int userId)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!UserValidation.ValidateUserId(userId))
                 return BadRequest("Please validate your input.");
 
@@ -264,6 +287,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while updating the user's last login date." });
 
+            _loggerService.Log($"Updated user's last login date with id: {userId}.", ip, userID);
             return Ok("User's last login date is updated successfully.");
         }
 
@@ -278,6 +302,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> AddAsCurrentUserAsync(int userId)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!UserValidation.ValidateUserId(userId))
                 return BadRequest("Please validate your input.");
 
@@ -290,6 +317,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the user as the current user." });
 
+            _loggerService.Log($"Added user with id: {userId} as current user.", ip, userID);
             return Ok("User is added as the current user successfully.");
         }
     }

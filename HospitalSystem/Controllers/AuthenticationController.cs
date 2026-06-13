@@ -19,16 +19,19 @@ namespace HospitalSystem.API.Controllers
         private readonly IConfiguration _configuration;
         private readonly IPasswordHasherService _passwordHasher;
         private readonly IUsersTokensService _usersTokensService;
+        private readonly ILoggerService _loggerService;
 
         public AuthenticationController(IUserService userService,
             ITokenService tokenService, IConfiguration configuration,
-            IPasswordHasherService passwordHasher, IUsersTokensService usersTokensService)
+            IPasswordHasherService passwordHasher, IUsersTokensService usersTokensService,
+            ILoggerService loggerService)
         {
             _userService = userService;
             _tokenService = tokenService;
             _configuration = configuration;
             _passwordHasher = passwordHasher;
             _usersTokensService = usersTokensService;
+            _loggerService = loggerService;
         }
 
         [HttpPost("login", Name = "Login")]
@@ -39,19 +42,27 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
             if (!UsersTokensValidation.ValidateLoginRequestDto(request))
                 return BadRequest("Please validate your input");
 
             LoginUserDto loginUserDto = await _userService.FindAsync(request.Username);
 
-            if (loginUserDto is null)
+            if (loginUserDto is null)
+            {
+                _loggerService.Log("Failed Login", ip, "Unknown");
                 return Unauthorized("Invalid credentials");
+            }
 
             if (string.IsNullOrEmpty(loginUserDto.PasswordHash) ||
                 !_passwordHasher.Verify(request.Password, loginUserDto.PasswordHash))
+            {
+                _loggerService.Log("Failed login attempt (bad password).",
+                    ip, loginUserDto.UserId.ToString());
                 return Unauthorized("Invalid credentials");
+            }
 
-            var token = _tokenService.GenerateJwtToken(loginUserDto, _configuration);
+                var token = _tokenService.GenerateJwtToken(loginUserDto, _configuration);
 
             if (token is null)
                 return StatusCode(500, "JWT key missing from Key Vault");
@@ -105,8 +116,9 @@ namespace HospitalSystem.API.Controllers
             
             if (!refreshValid)
             {
-                //_Logger.Log(HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
-                //    user.UserID.ToString(), "Invalid refresh token attempt.");
+                _loggerService.Log("Invalid refresh token attempt.",
+                    HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                    loginUserDto.UserId.ToString());
                 return Unauthorized("Invalid refresh token");
             }
 

@@ -4,6 +4,7 @@ using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Security.Claims;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -12,9 +13,13 @@ namespace HospitalSystem.API.Controllers
     public class MedicalRecordsController : ControllerBase
     {
         private readonly IMedicalRecordService _medicalRecordService;
+        private readonly ILoggerService _loggerService;
 
-        public MedicalRecordsController(IMedicalRecordService mediicalRecordService)
-            => _medicalRecordService = mediicalRecordService;
+        public MedicalRecordsController(IMedicalRecordService mediicalRecordService, ILoggerService loggerService)
+        {
+            _medicalRecordService = mediicalRecordService;
+            _loggerService = loggerService;
+        }
 
         [EnableRateLimiting("CriticalOpsLimiter")]
         [Authorize(Policy = "AddEditMedicalRecords")]
@@ -27,6 +32,9 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> AddNewMedicalRecordAsync(AddMedicalRecordDto addMedicalRecordDto)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "unknown";
+
             if (!MedicalRecordValidation.ValidateAddMedicalRecordDto(addMedicalRecordDto))
                 return BadRequest("Please validate your input");
 
@@ -36,6 +44,7 @@ namespace HospitalSystem.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
              new { message = "An error occurred while adding the new medical record." });
 
+            _loggerService.Log($"Added medical record with id: {medicalRecordId}.", ip, userID);
             return CreatedAtRoute("FindMedicalRecordByID", new { medicalRecordId = medicalRecordId}, addMedicalRecordDto);
         }
 
