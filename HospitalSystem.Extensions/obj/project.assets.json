@@ -1174,6 +1174,7 @@
           "Azure.Extensions.AspNetCore.Configuration.Secrets": "1.5.1",
           "Azure.Identity": "1.21.0",
           "HospitalSystem.Data": "1.0.0",
+          "HospitalSystem.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
@@ -2999,8 +3000,8 @@
     },
     "HospitalSystem.Infrastructure/1.0.0": {
       "type": "project",
-      "path": "../DTOs/HospitalSystem.Infrastructure.csproj",
-      "msbuildProject": "../DTOs/HospitalSystem.Infrastructure.csproj"
+      "path": "../HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj",
+      "msbuildProject": "../HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj"
     },
     "HospitalSystem.Repository/1.0.0": {
       "type": "project",

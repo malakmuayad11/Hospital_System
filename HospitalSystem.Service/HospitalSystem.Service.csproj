@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DTOs\HospitalSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\HospitalSystem.Infrastructure\HospitalSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\HospitalSystem.Repository\HospitalSystem.Repository.csproj" />
   </ItemGroup>
 

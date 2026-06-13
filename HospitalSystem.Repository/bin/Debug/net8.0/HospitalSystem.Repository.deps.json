@@ -931,7 +931,6 @@
         "dependencies": {
           "Azure.Extensions.AspNetCore.Configuration.Secrets": "1.5.1",
           "Azure.Identity": "1.21.0",
-          "HospitalSystem.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
@@ -939,20 +938,6 @@
         },
         "runtime": {
           "HospitalSystem.Data.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "HospitalSystem.Infrastructure/1.0.0": {
-        "dependencies": {
-          "Azure.Extensions.AspNetCore.Configuration.Secrets": "1.5.1",
-          "Azure.Identity": "1.21.0",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.0",
-          "System.IdentityModel.Tokens.Jwt": "8.0.1"
-        },
-        "runtime": {
-          "HospitalSystem.Infrastructure.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1387,11 +1372,6 @@
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
     "HospitalSystem.Data/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "HospitalSystem.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

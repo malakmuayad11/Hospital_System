@@ -11,3 +11,16 @@ C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\refint\HospitalSystem.Infras
 C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\HospitalSystem.Infrastructure.pdb
 C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\ref\HospitalSystem.Infrastructure.dll
 C:\Programming\HospitalSystem\DTOs\obj\Debug\net8.0\HospitalSystem.Infrastructure.csproj.AssemblyReference.cache
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\bin\Debug\net8.0\HospitalSystem.Infrastructure.deps.json
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\bin\Debug\net8.0\HospitalSystem.Infrastructure.dll
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\bin\Debug\net8.0\HospitalSystem.Infrastructure.pdb
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\HospitalSystem.Infrastructure.csproj.AssemblyReference.cache
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\HospitalSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\HospitalSystem.Infrastructure.AssemblyInfoInputs.cache
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\HospitalSystem.Infrastructure.AssemblyInfo.cs
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\HospitalSystem.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\HospitalSystem.Infrastructure.sourcelink.json
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\HospitalSystem.Infrastructure.dll
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\refint\HospitalSystem.Infrastructure.dll
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\HospitalSystem.Infrastructure.pdb
+C:\Programming\HospitalSystem\HospitalSystem.Infrastructure\obj\Debug\net8.0\ref\HospitalSystem.Infrastructure.dll
