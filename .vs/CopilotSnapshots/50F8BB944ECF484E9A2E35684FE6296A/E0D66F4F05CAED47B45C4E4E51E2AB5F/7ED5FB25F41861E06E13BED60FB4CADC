@@ -19,11 +19,6 @@ namespace HospitalSystem.Service.Classes
         {
             _logsDirectory = _configuration["LogsFilePath"];
 
-            if (string.IsNullOrWhiteSpace(_logsDirectory))
-            {
-                _logsDirectory = Path.Combine(AppContext.BaseDirectory, "Logs");
-            }
-
             if (!Directory.Exists(_logsDirectory))
                 Directory.CreateDirectory(_logsDirectory);
 

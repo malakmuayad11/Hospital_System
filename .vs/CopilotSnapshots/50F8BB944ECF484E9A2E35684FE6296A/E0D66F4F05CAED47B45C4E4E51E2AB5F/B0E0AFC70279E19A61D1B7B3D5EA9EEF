@@ -1,4 +1,4 @@
-using Azure.Identity;
+﻿using Azure.Identity;
 using HospitalSystem.Data.Data;
 using HospitalSystem.Infrastructure.Authorization.Handlers;
 using HospitalSystem.Infrastructure.Authorization.Requirements;
@@ -249,17 +249,17 @@ app.Use(async (context, next) =>
 {
     await next();
 
-        if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
-        {
-            var loggerService = context.RequestServices.GetRequiredService<ILoggerService>();
+    if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
+    {
+        var loggerService = context.RequestServices.GetRequiredService<NotepadLoggerService>();
 
-            var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+        var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
 
-            var userIdClaim = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            int userId = int.TryParse(userIdClaim, out var id) ? id : 0;
+        var userIdClaim = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        int userId = int.TryParse(userIdClaim, out var id) ? id : 0;
 
-            await loggerService.Log("Forbidden Access", ip, userIdClaim);
-        }
+        loggerService.Log("Forbidden Access", ip, userIdClaim);
+    }
 });
 
 app.UseAuthentication();

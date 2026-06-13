@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using HospitalSystem.API.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace HospitalSystem.Data.Data;
 
@@ -60,44 +59,8 @@ public partial class HospitalSystemContext : DbContext
     public virtual DbSet<UsersTokens> UsersTokens { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        // If DbContext already configured (e.g. by DI in Program.cs) do nothing.
-        if (optionsBuilder.IsConfigured)
-            return;
-
-        // Build configuration from appsettings.json and environment, then optionally Key Vault.
-        var configBuilder = new ConfigurationBuilder()
-            .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddEnvironmentVariables();
-
-        var config = configBuilder.Build();
-
-        var keyVaultUrl = config["KeyVault:Url"];
-        if (!string.IsNullOrWhiteSpace(keyVaultUrl))
-        {
-            try
-            {
-                configBuilder.AddAzureKeyVault(new Uri(keyVaultUrl), new Azure.Identity.DefaultAzureCredential());
-                config = configBuilder.Build();
-            }
-            catch
-            {
-                // If Key Vault cannot be reached, fall back to local configuration.
-            }
-        }
-
-        // Look for secret names used in Key Vault and in configuration:
-        // - "ConnectionString" (example in screenshot)
-        // - "ConnectionStrings:HospitalDB"
-        var connectionString = config["ConnectionString"]
-            ?? config["ConnectionStrings:HospitalDB"];
-
-        if (!string.IsNullOrWhiteSpace(connectionString))
-        {
-            optionsBuilder.UseSqlServer(connectionString);
-        }
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=.;Database=Hospital_System;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
