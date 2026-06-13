@@ -56,7 +56,7 @@ A backend RESTful API built with ASP.NET Core (.NET 8) for managing hospital ope
 ![AuthenticationController](./screenshots/authenticationController+billingsController.png)
 
 ### 📃 ConsultationsController + DoctorsCotnroller
-![ConsultationsController + DoctorsCotnroller](./screenshots/consultationsController+doctorsCotnroller.png)
+![ConsultationsController + DoctorsCotnroller](./screenshots/consultationsController+doctorsController.png)
 
 ### 🩺 DoctorsController + MedicalRecordsController
 ![DoctorssController + MedicalRecordsController](./screenshots/doctorsController+medicalRecordsController.png)
