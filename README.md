@@ -71,6 +71,6 @@ A backend RESTful API built with ASP.NET Core (.NET 8) for managing hospital ope
 ![UsersController](./screenshots/usersController.png)
 
 ## 👩‍💻 Author
-**Malak Muayad**  
+**Malak Abu Omar**  
 📧 [malakmuayad15@gmail.com](mailto:malakmuayad15@gmail.com)  
 🔗 [malakmuayad11](https://github.com/malakmuayad11)
