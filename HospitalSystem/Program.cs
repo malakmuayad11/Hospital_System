@@ -1,228 +1,29 @@
-using Azure.Identity;
-using HospitalSystem.Data.Data;
-using HospitalSystem.Infrastructure.Authorization.Handlers;
-using HospitalSystem.Infrastructure.Authorization.Requirements;
-using HospitalSystem.Repository.Classes;
-using HospitalSystem.Repository.Interfaces;
-using HospitalSystem.Service.Classes;
+using HospitalSystem.Extensions;
 using HospitalSystem.Service.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Load Azure Key Vault
-var keyVaultUrl = builder.Configuration["KeyVault:Url"];
+// Centralized configuration moved to extension methods
+builder.Configuration.AddAzureKeyVaultIfConfigured();
 
-if (!string.IsNullOrWhiteSpace(keyVaultUrl))
-{
-    builder.Configuration.AddAzureKeyVault(
-        new Uri(keyVaultUrl),
-        new DefaultAzureCredential());
-}
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(o => {});
 
-// Rate Limiting
-builder.Services.AddRateLimiter(options =>
-{
-    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
-
-    options.AddPolicy("AuthLimiter", httpContext =>
-    {
-        string ip = httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
-
-        return RateLimitPartition.GetFixedWindowLimiter(
-            partitionKey: ip,
-            factory: _ => new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 5,
-                Window = TimeSpan.FromMinutes(1),
-                QueueLimit = 0
-            });
-    });
-    options.AddPolicy("CriticalOpsLimiter", httpContext =>
-    {
-        string userID =
-            httpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value
-            ?? "unknown";
-
-        return RateLimitPartition.GetFixedWindowLimiter(
-            partitionKey: userID,
-            factory: _ => new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 30,
-                Window = TimeSpan.FromMinutes(1),
-                QueueLimit = 0
-            });
-    });
-    options.AddPolicy("LightOpsLimiter", httpContext =>
-    {
-        string userID =
-            httpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value
-            ?? "unknown";
-
-        return RateLimitPartition.GetFixedWindowLimiter(
-            partitionKey: userID,
-            factory: _ => new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 100,
-                Window = TimeSpan.FromMinutes(1),
-                QueueLimit = 0
-            });
-    });
-});
-
-// Add services to the container.
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-// Register Swagger generator and customize its behavior.
-builder.Services.AddSwaggerGen(options =>
-{
-    // Define the JWT Bearer security scheme
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "Enter: Bearer {your JWT token}"
-    });
-
-    // Require the Bearer scheme for secured endpoints
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-  {
-    {
-      new OpenApiSecurityScheme
-      {
-                // Reference the previously defined "Bearer" security scheme.
-                Reference = new OpenApiReference
-        {
-          Type = ReferenceType.SecurityScheme,
-          Id = "Bearer"
-        }
-      },
-            new string[] {}
-    }
-  });
-});
-
-// DbContext
-builder.Services.AddDbContext<HospitalSystemContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("HospitalDB")));
-
-// Repository
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
-builder.Services.AddScoped<IPatientRepository, PatientRepository>();
-builder.Services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
-builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
-builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
-builder.Services.AddScoped<IBillingRepository, BillingRepository>();
-builder.Services.AddScoped<IUsersTokensRepository, UsersTokensRepository>();
-
-// Service
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
-builder.Services.AddScoped<IPersonService, PersonService>();
-builder.Services.AddScoped<IPatientService, PatientService>();
-builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
-builder.Services.AddScoped<IAppointmentService, AppointmentService>();
-builder.Services.AddScoped<IDoctorService, DoctorService>();
-builder.Services.AddScoped<IConsultationService, ConsultationService>();
-builder.Services.AddScoped<IBillingService, BillingService>();
-builder.Services.AddScoped<IPasswordHasherService, BcryptHasherService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IUsersTokensService, UsersTokensService>();
-builder.Services.AddScoped<ILoggerService, NotepadLoggerService>();
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("HospitalSystemApiCorsPolicy", policy =>
-    {
-        policy
-            .WithOrigins(
-                "http://127.0.0.1:5500",
-                "http://localhost:5109"
-            )
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
-});
-
-// 🔹 JWT Authentication
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        var secretKey = builder.Configuration["JwtSigningKey"];
-
-        if (string.IsNullOrWhiteSpace(secretKey))
-        {
-            throw new Exception("JWT Signing Key is not found in Azure Key Vault.");
-        }
-
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-
-            ValidIssuer = "HospitalSystemApi",
-            ValidAudience = "HospitalSystemApiUsers",
-
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(secretKey)
-            ),
-            RoleClaimType = ClaimTypes.Role,
-            NameClaimType = ClaimTypes.NameIdentifier
-        };
-    });
-
-// 🔹 Adding Policies
-builder.Services.AddSingleton<IAuthorizationHandler, UserOwnerOrAdminHandler>();
-builder.Services.AddSingleton<IAuthorizationHandler, HasUserPermissionsHandler>();
-
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("UserOwnerOrAdmin", policy =>
-        policy.Requirements.Add(new UserOwnerOrAdminRequirement()));
-
-    options.AddPolicy("AddEditDoctors", policy =>
-        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eAddEditDoctors)));
-
-    options.AddPolicy("ManagePatients", policy =>
-        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eManagePatients)));
-
-    options.AddPolicy("ManageAppointments", policy =>
-        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eManageAppointments)));
-
-    options.AddPolicy("ManagePayments", policy =>
-        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eManagePayments)));
-
-    options.AddPolicy("ShowMedicalRecords", policy =>
-        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eShowMedicalRecords)));
-
-    options.AddPolicy("AddEditMedicalRecords", policy =>
-        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eAddEditMedicalRecords)));
-    
-    options.AddPolicy("ManageUsers", policy =>
-        policy.Requirements.Add(new HasUserPermissionsRequirement((int)IUserService.enPermissions.eManageUsers)));
-});
+// Compose feature groups
+builder.Services.AddHospitalPersistence(builder.Configuration);
+builder.Services.AddHospitalRepositories();
+builder.Services.AddHospitalServices();
+builder.Services.AddHospitalAuthAndPolicies(builder.Configuration);
+builder.Services.AddHospitalSwagger();
+builder.Services.AddHospitalRateLimiting();
+builder.Services.AddHospitalCors();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -230,10 +31,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors("HospitalSystemApiCorsPolicy");
 
 app.UseRateLimiter();
+
 // Safe Message for rate limiter
 app.Use(async (context, next) =>
 {
@@ -245,25 +46,26 @@ app.Use(async (context, next) =>
     }
 });
 
+// Logging Forbidden Access
 app.Use(async (context, next) =>
 {
     await next();
 
-        if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
-        {
-            var loggerService = context.RequestServices.GetRequiredService<ILoggerService>();
+    if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
+    {
+        var loggerService = context.RequestServices.GetRequiredService<ILoggerService>();
 
-            var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+        var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
 
-            var userIdClaim = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            int userId = int.TryParse(userIdClaim, out var id) ? id : 0;
+        var userIdClaim = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        int userId = int.TryParse(userIdClaim, out var id) ? id : 0;
 
-            await loggerService.Log("Forbidden Access", ip, userIdClaim);
-        }
+        loggerService.Log(ip, userIdClaim, "Forbidden Access");
+    }
 });
 
-app.UseAuthentication();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

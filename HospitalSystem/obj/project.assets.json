@@ -1685,6 +1685,22 @@
           "bin/placeholder/HospitalSystem.Data.dll": {}
         }
       },
+      "HospitalSystem.Extensions/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "HospitalSystem.Repository": "1.0.0",
+          "HospitalSystem.Service": "1.0.0",
+          "Microsoft.OpenApi": "1.6.14",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.6.2"
+        },
+        "compile": {
+          "bin/placeholder/HospitalSystem.Extensions.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HospitalSystem.Extensions.dll": {}
+        }
+      },
       "HospitalSystem.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -4562,6 +4578,11 @@
       "path": "../HospitalSystem.Data/HospitalSystem.Data.csproj",
       "msbuildProject": "../HospitalSystem.Data/HospitalSystem.Data.csproj"
     },
+    "HospitalSystem.Extensions/1.0.0": {
+      "type": "project",
+      "path": "../HospitalSystem.Extensions/HospitalSystem.Extensions.csproj",
+      "msbuildProject": "../HospitalSystem.Extensions/HospitalSystem.Extensions.csproj"
+    },
     "HospitalSystem.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../DTOs/HospitalSystem.Infrastructure.csproj",
@@ -4582,6 +4603,7 @@
     "net8.0": [
       "Azure.Extensions.AspNetCore.Configuration.Secrets >= 1.5.1",
       "Azure.Identity >= 1.21.0",
+      "HospitalSystem.Extensions >= 1.0.0",
       "HospitalSystem.Infrastructure >= 1.0.0",
       "HospitalSystem.Service >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.0",
@@ -4627,6 +4649,9 @@
           "projectReferences": {
             "C:\\Programming\\HospitalSystem\\DTOs\\HospitalSystem.Infrastructure.csproj": {
               "projectPath": "C:\\Programming\\HospitalSystem\\DTOs\\HospitalSystem.Infrastructure.csproj"
+            },
+            "C:\\Programming\\HospitalSystem\\HospitalSystem.Extensions\\HospitalSystem.Extensions.csproj": {
+              "projectPath": "C:\\Programming\\HospitalSystem\\HospitalSystem.Extensions\\HospitalSystem.Extensions.csproj"
             },
             "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\HospitalSystem.Service.csproj": {
               "projectPath": "C:\\Programming\\HospitalSystem\\HospitalSystem.Service\\HospitalSystem.Service.csproj"
