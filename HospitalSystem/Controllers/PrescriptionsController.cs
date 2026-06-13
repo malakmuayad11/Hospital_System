@@ -3,6 +3,7 @@ using HospitalSystem.Infrastructure.DTOs.Prescriptions;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -16,12 +17,14 @@ namespace HospitalSystem.API.Controllers
         public PrescriptionsController(IPrescriptionService prescriptionService) =>
             this._prescriptionService = prescriptionService;
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPost(Name = "AddNewPrescription")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<PrescriptionDto>> AddNewPrescriptionAsync(AddPrescriptionDto addPrescriptionDto)
         {
             if (!PrescriptionValidation.ValidateAddPrescriptionDto(addPrescriptionDto))
@@ -34,12 +37,14 @@ namespace HospitalSystem.API.Controllers
             return CreatedAtRoute("FindPrescriptionByAppointmentId", new { AppointmentId = addPrescriptionDto.AppointmentId }, addPrescriptionDto);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("{prescriptionId}", Name = "FindPrescriptionById")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<PrescriptionDto>> GetPrescriptionByPrescriptionIdAsync(int prescriptionId)
         {
             if (!PrescriptionValidation.ValidatePrescriptionId(prescriptionId))
@@ -53,12 +58,14 @@ namespace HospitalSystem.API.Controllers
             return Ok(prescriptionDto);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("findByAppointmentId/{appointmentId}", Name = "FindPrescriptionByAppointmentId")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<PrescriptionDto>> GetPrescriptionByAppointmentIdAsync(int appointmentId)
         {
             if (!PrescriptionValidation.ValidateAppointmentId(appointmentId))

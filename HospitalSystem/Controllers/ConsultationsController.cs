@@ -3,9 +3,11 @@ using HospitalSystem.Service.Interfaces;
 using HospitalSystem.Service.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HospitalSystem.API.Controllers
 {
+    [EnableRateLimiting("LightOpsLimiter")]
     [Authorize]
     [Route("api/consultations")]
     [ApiController]
@@ -20,6 +22,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<IEnumerable<ConsultationDto>>> GetAllConsultations()
         {
             List<ConsultationDto> consultations = await _consultationService.GetAllConsultationsAsync();
@@ -36,6 +39,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<FindConsultationDto>> Find(int consultationId)
         {
             if (!ConsultationValidation.ValidateConsultationId(consultationId))
@@ -53,6 +57,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<IEnumerable<ConsultationDto>>> GetAllSpecialities()
         {
             List<string> specialities = await _consultationService.GetAllSpecialitiesAsync();

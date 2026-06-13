@@ -3,6 +3,7 @@ using HospitalSystem.Infrastructure.DTOs.Appointments;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -15,18 +16,22 @@ namespace HospitalSystem.API.Controllers
 
         public AppointmentsController(IAppointmentService appointmentService) => _appointmentService = appointmentService;
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [AllowAnonymous]
         [HttpGet("count", Name = "AppointmentsCount")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<int>> GetAppointmentsCountAsync() =>
             Ok(await _appointmentService.CountAsync());
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet(Name = "GetAllAppointments")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetAllAppointmentsAsync()
         {
             List<AppointmentDto> appointmentDtos = await _appointmentService.GetAllAppointmentsAsync();
@@ -38,11 +43,13 @@ namespace HospitalSystem.API.Controllers
             return Ok(appointmentDtos);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("todays-appointments", Name = "GetTodaysAppointments")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetTodaysAppointmentsAsync()
         {
             List<AppointmentDto> todaysAppointments = await _appointmentService.GetTodaysAppointmentsAsync();
@@ -54,13 +61,14 @@ namespace HospitalSystem.API.Controllers
             return Ok(todaysAppointments);
         }
 
-
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPost(Name = "AddNewAppointment")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<AddAppointmentDto>> AddNewAppointmentAsync(AddAppointmentDto addAppointmentDto)
         {
             if (!AppointmentValidation.ValidateAddAppointmentDto(addAppointmentDto))
@@ -75,6 +83,7 @@ namespace HospitalSystem.API.Controllers
             return CreatedAtRoute("FindAppointmentById", new { appointmentId = appointmentId }, addAppointmentDto);
         }
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPatch(Name = "UpdateAppointmentDateTime")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -82,6 +91,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> UpdateAppointmentDateTimeAsync(UpdateAppointmentDateTimeDto updateAppointmentDateTimeDto)
         {
             if (!AppointmentValidation.ValidateUpdateAppointmentDateTimeDto(updateAppointmentDateTimeDto))
@@ -99,6 +109,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(result);
         }
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPatch("status", Name = "UpdateAppointmentStatus")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -106,6 +117,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> UpdateAppointmentStatusAsync(UpdateAppointmentStatusDto updateAppointmentStatusDto)
         {
             if (!AppointmentValidation.ValidateUpdateAppointmentStatusDto(updateAppointmentStatusDto))
@@ -123,12 +135,14 @@ namespace HospitalSystem.API.Controllers
             return Ok(result);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("{appointmentId}", Name = "FindAppointmentById")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<FindAppointmentDto>> FindAsync(int appointmentId)
         {
             if (!AppointmentValidation.ValidateAppointmentId(appointmentId))
@@ -142,6 +156,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(appointmentDto);
         }
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPatch("cancel/{appointmentId}", Name = "CancelAppointment")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -149,6 +164,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> CancelAppointmentAsync(int appointmentId)
         {
             if (!AppointmentValidation.ValidateAppointmentId(appointmentId))
@@ -166,6 +182,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(result);
         }
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPatch("reschedule", Name = "RescheduleAppointment")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -173,6 +190,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> RescheduleAppointmentAsync(RescheduleAppointmentDto rescheduleAppointmentDto)
         {
             if (!AppointmentValidation.ValidateRescheduleAppointmentDto(rescheduleAppointmentDto))
@@ -190,12 +208,14 @@ namespace HospitalSystem.API.Controllers
             return Ok(result);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("{appointmentId}/has-medical-record", Name = "HasAppointmentMedicalRecord")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> HasAppointmentMedicalRecordAsync(int appointmentId)
         {
             if (!AppointmentValidation.ValidateAppointmentId(appointmentId))

@@ -4,6 +4,7 @@ using HospitalSystem.Service.Interfaces;
 using HospitalSystem.Service.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -20,10 +21,12 @@ namespace HospitalSystem.API.Controllers
             _authorizationService = authorizationService;
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("count", Name = "GetDoctorsCount")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<int>> GetDoctorsCount()
         {
             int count = await _doctorService.DoctorsCount();
@@ -35,6 +38,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(count);
         }
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [Authorize(Policy = "AddEditDoctors")]
         [HttpPost(Name = "AddNewDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -42,6 +46,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> AddNewDoctor(AddDoctorDto addDoctorDto)
         {
             if (!DoctorValidation.ValidateAddDoctorDto(addDoctorDto))
@@ -64,6 +69,7 @@ namespace HospitalSystem.API.Controllers
             });
         }
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPut(Name = "UpdateDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -71,6 +77,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> UpdateDoctor(UpdateDoctorDto updateDoctorDto)
         {
             AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
@@ -96,6 +103,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(result);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [Authorize(Policy = "AddEditDoctors")]
         [HttpGet("{doctorId}", Name = "FindDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -103,6 +111,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<FindDoctorDto>> Find(int doctorId)
         {
             if (!DoctorValidation.ValidateDoctorId(doctorId))
@@ -116,12 +125,14 @@ namespace HospitalSystem.API.Controllers
             return Ok(doctorDto);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("user/{userId}", Name = "FindDoctorByUserId")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<FindDoctorDto>> FindByUserId(int userId)
         {
             if (!DoctorValidation.ValidateUserId(userId))
@@ -143,6 +154,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(doctorDto);
         }
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [Authorize(Policy = "AddEditDoctors")]
         [HttpDelete("{doctorId}", Name = "DeleteDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -151,6 +163,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> DeleteDoctor(int doctorId)
         {
             if (!DoctorValidation.ValidateDoctorId(doctorId))
@@ -168,12 +181,14 @@ namespace HospitalSystem.API.Controllers
             return Ok(result);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [Authorize(Policy = "AddEditDoctors")]
         [HttpGet(Name = "GetAllDoctors")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<List<DoctorDto>>> GetAllDoctors()
         {
             List<DoctorDto> doctors = await _doctorService.GetAllDoctorsAsync();
@@ -185,6 +200,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(doctors);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("todays-appointments/{doctorId}", Name = "GetTodaysAppointmentsForDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -192,6 +208,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<IEnumerable<AppointmentForDoctorDto>>> GetTodaysAppointmentsForDoctor(int doctorId)
         {
             if (!DoctorValidation.ValidateDoctorId(doctorId))
@@ -219,10 +236,13 @@ namespace HospitalSystem.API.Controllers
             return Ok(appointments);
         }
 
+        [Authorize]
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("patients/{doctorId}", Name = "PatientsCountForDoctor")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<int>> PatientsCountForDoctor(int doctorId)
         {
             if (!DoctorValidation.ValidateDoctorId(doctorId))
@@ -236,11 +256,14 @@ namespace HospitalSystem.API.Controllers
             return Ok(count);
         }
 
+        [Authorize]
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("appointments/{doctorId}", Name = "AppointmentsCountForDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<int>> AppointmentsCountForDoctor(int doctorId)
         {
             if (!DoctorValidation.ValidateDoctorId(doctorId))
@@ -254,11 +277,14 @@ namespace HospitalSystem.API.Controllers
             return Ok(count);
         }
 
+        [Authorize]
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("medicalrecords/{doctorId}", Name = "MedicalRecordsCountForDoctor")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<int>> MedicalRecordsCountForDoctor(int doctorId)
         {
             if (!DoctorValidation.ValidateDoctorId(doctorId))

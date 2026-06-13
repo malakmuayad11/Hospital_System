@@ -4,10 +4,12 @@ using HospitalSystem.Infrastructure.DTOs.UsersTokensDTOs;
 using HospitalSystem.Service.Interfaces;
 using HospitalSystem.Service.Validation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace HospitalSystem.API.Controllers
 {
+    [EnableRateLimiting("AuthLimiter")]
     [Route("api/auth")]
     [ApiController]
     public class AuthenticationController : ControllerBase
@@ -34,6 +36,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
             if (!UsersTokensValidation.ValidateLoginRequestDto(request))
@@ -75,6 +78,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<IActionResult> Refresh([FromBody] RefreshRequestDto request)
         {
             if (!UsersTokensValidation.ValidateRefreshRequestDto(request))
@@ -131,6 +135,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task <IActionResult> Logout([FromBody] LogoutRequestDto request)
         {
             if (!UsersTokensValidation.ValidateLogoutRequestDto(request))

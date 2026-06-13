@@ -3,6 +3,7 @@ using HospitalSystem.Infrastructure.DTOs.MedicalRecords;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -15,6 +16,7 @@ namespace HospitalSystem.API.Controllers
         public MedicalRecordsController(IMedicalRecordService mediicalRecordService)
             => _medicalRecordService = mediicalRecordService;
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [Authorize(Policy = "AddEditMedicalRecords")]
         [HttpPost(Name = "AddNewMedicalRecord")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -22,6 +24,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> AddNewMedicalRecordAsync(AddMedicalRecordDto addMedicalRecordDto)
         {
             if (!MedicalRecordValidation.ValidateAddMedicalRecordDto(addMedicalRecordDto))
@@ -36,12 +39,14 @@ namespace HospitalSystem.API.Controllers
             return CreatedAtRoute("FindMedicalRecordByID", new { medicalRecordId = medicalRecordId}, addMedicalRecordDto);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [Authorize(Policy = "ShowMedicalRecords")]
         [HttpGet(Name = "GetAllMedicalRecords")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<IEnumerable<MedicalRecordDto>>> GetAllMedicalRecordsAsync()
         {
             List<MedicalRecordDto> medicalRecords = await _medicalRecordService.GetAllMedicalRecordsAsync();
@@ -53,6 +58,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(medicalRecords);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [Authorize(Policy = "ShowMedicalRecords")]
         [HttpGet("{medicalRecordId}", Name = "FindMedicalRecordByID")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -60,6 +66,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<MedicalRecordDto>> FindAsync(int medicalRecordId)
         {
             if (!MedicalRecordValidation.ValidateMedicalRecordId(medicalRecordId))
@@ -73,6 +80,7 @@ namespace HospitalSystem.API.Controllers
             return Ok(medicalRecord);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [Authorize(Policy = "ShowMedicalRecords")]
         [HttpGet("appointment/{appointmentId}", Name = "FindMedicalRecordByAppointmentID")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -80,6 +88,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<MedicalRecordDto>> FindByAppointmentIdAsync(int appointmentId)
         {
             if (!MedicalRecordValidation.ValidateAppointmentId(appointmentId))

@@ -3,6 +3,7 @@ using HospitalSystem.Infrastructure.DTOs.People;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HospitalSystem.API.Controllers
 {
@@ -12,14 +13,15 @@ namespace HospitalSystem.API.Controllers
     public class PeopleController : ControllerBase
     {
         private readonly IPersonService _personService;
-
         public PeopleController(IPersonService personService) => this._personService = personService;
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPost(Name = "AddNewPerson")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<AddPersonDto>> AddNewPersonAsync(AddPersonDto addPersonDto)
         {
             if (!PersonValidation.validateAddPersonDto(addPersonDto))
@@ -34,11 +36,13 @@ namespace HospitalSystem.API.Controllers
             return CreatedAtRoute("FindById", new { personId = personId }, addPersonDto);
         }
 
+        [EnableRateLimiting("LightOpsLimiter")]
         [HttpGet("{personId}", Name = "FindById")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType (StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<PersonDto>> FindAsync(int personId)
         {
             if (!PersonValidation.validatePersonId(personId))
@@ -52,12 +56,14 @@ namespace HospitalSystem.API.Controllers
             return Ok(personDto);
         }
 
+        [EnableRateLimiting("CriticalOpsLimiter")]
         [HttpPut(Name = "UpdatePerson")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool?>> updateAsync(UpdatePersonDto updatePersonDto)
         {
             if (!PersonValidation.validateUpdatePersonDto(updatePersonDto))

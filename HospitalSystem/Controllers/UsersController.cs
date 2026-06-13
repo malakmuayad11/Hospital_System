@@ -3,9 +3,11 @@ using HospitalSystem.Infrastructure.DTOs.Users;
 using HospitalSystem.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HospitalSystem.API.Controllers
 {
+    [EnableRateLimiting("CriticalOpsLimiter")]
     [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -25,6 +27,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsersAsync()
         {
             List<UserDto> users = await _userService.GetAllUsersAsync();
@@ -41,6 +44,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<int>> GetUsersCountAsync()
         {
             int usersCount = await _userService.GetUsersCountAsync();
@@ -59,6 +63,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<UserDto>> AddNewUserAsync(AddUserDto addUserDto)
         {
             if (!UserValidation.ValidateAddUserInput(addUserDto))
@@ -80,6 +85,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> UpdateUserAsync(UpdateUserDto updateUserDto)
         {
             if (!UserValidation.ValidateUpdateUserInput(updateUserDto))
@@ -112,6 +118,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> ChangePasswordAsync(ChangePasswordDto changePasswordDto)
         {
             AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
@@ -120,7 +127,7 @@ namespace HospitalSystem.API.Controllers
                 "UserOwnerOrAdmin");
 
             if (!authResult.Succeeded)
-                return Forbid(); // 403
+                return Forbid(); 
 
             if (!UserValidation.ValidateChangePasswordInput(changePasswordDto))
                 return BadRequest("Please validate your input.");
@@ -143,6 +150,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<UserDto>> FindAsync(int userId)
         {
             AuthorizationResult authResult = await _authorizationService.AuthorizeAsync(
@@ -170,6 +178,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<UserDto>> FindAsync(FindUserDto findUserDto)
         {
             if (!UserValidation.ValidateFindUserInput(findUserDto))
@@ -197,6 +206,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> IsUsernameUsedAsync(string username)
         {
             if (!UserValidation.ValidateUsername(username))
@@ -213,6 +223,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> DeleteUserAsync(int userId)
         {
             if (!UserValidation.ValidateUserId(userId))
@@ -238,6 +249,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult> UpdateUserLastLoginDateAsync(int userId)
         {
             if (!UserValidation.ValidateUserId(userId))
@@ -263,6 +275,7 @@ namespace HospitalSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<ActionResult<bool>> AddAsCurrentUserAsync(int userId)
         {
             if (!UserValidation.ValidateUserId(userId))
